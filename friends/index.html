@@ -26,7 +26,8 @@
     
     <script src="/libs/jquery/jquery.min.js"></script>
     
-<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
@@ -307,25 +308,22 @@
         <div class="brand">
             <div class="title center-align">
                 
-                subtitle
+                Macchiato
                 
             </div>
 
             <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: ['从来没有真正的绝境, 只有心灵的迷途','Never really desperate, only the lost of the soul'],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+               <div id="poem_sentence"></div>
+				<div id="poem_info"></div>
+				<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+				<script type="text/javascript">
+				  jinrishici.load(function(result) {
+					var sentence = document.querySelector("#poem_sentence")
+					var info = document.querySelector("#poem_info")
+					sentence.innerHTML = result.data.content
+					info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+				  });
+				</script>
             </div>
         </div>
     </div>
@@ -715,6 +713,7 @@ $(function () {
 
 
     <script src="/libs/materialize/materialize.min.js"></script>
+    <script src=""></script>
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
@@ -769,6 +768,8 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+    <script src="/js/sakura.js"></script>
 
 </body>
 
