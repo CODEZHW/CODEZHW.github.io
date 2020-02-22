@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="多线程进阶-JUC并发编程（2）, 我的个人博客">
-    <meta name="description" content="title: 多线程进阶-JUC并发编程（2）date: 2020-02-22T15:51:51.5author: codezhwtop: truecover: truesummary: 这是一篇关于java多线程的进阶文章，会全面的介绍j">
+    <meta name="description" content="这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -425,12 +425,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                                <span class="chip bg-color">多线程</span>
+                            </a>
+                        
+                            <a href="/tags/juc/">
+                                <span class="chip bg-color">juc</span>
+                            </a>
+                        
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/java/" class="post-category">
+                                java
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -453,7 +474,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.1k
                 </div>
                 
 
@@ -476,8 +497,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>title: 多线程进阶-JUC并发编程（2）<br>date: 2020-02-22T15:51:51.5<br>author: codezhw<br>top: true<br>cover: true<br>summary: 这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。<br>categories: java</p>
-<h1 id="多线程进阶-JUC并发编程（2）"><a href="#多线程进阶-JUC并发编程（2）" class="headerlink" title="多线程进阶-JUC并发编程（2）"></a>多线程进阶-JUC并发编程（2）</h1><h2 id="1、线程池技术"><a href="#1、线程池技术" class="headerlink" title="1、线程池技术"></a>1、线程池技术</h2><p>线程池：三大方法、7大参数、4种拒绝策略<br>程序的运行，本质：占用系统的资源！ 优化资源的使用！=&gt;池化技术<br>线程池、连接池、内存池、对象池///…..  创建、销毁。十分浪费资源<br>池化技术：事先准备好一些资源，有人要用，就来我这里拿，用完之后还给我。</p>
+                <h1 id="多线程进阶-JUC并发编程（2）"><a href="#多线程进阶-JUC并发编程（2）" class="headerlink" title="多线程进阶-JUC并发编程（2）"></a>多线程进阶-JUC并发编程（2）</h1><h2 id="1、线程池技术"><a href="#1、线程池技术" class="headerlink" title="1、线程池技术"></a>1、线程池技术</h2><p>线程池：三大方法、7大参数、4种拒绝策略<br>程序的运行，本质：占用系统的资源！ 优化资源的使用！=&gt;池化技术<br>线程池、连接池、内存池、对象池///…..  创建、销毁。十分浪费资源<br>池化技术：事先准备好一些资源，有人要用，就来我这里拿，用完之后还给我。</p>
 <h3 id="1-1-线程池的好处"><a href="#1-1-线程池的好处" class="headerlink" title="1.1 线程池的好处:"></a>1.1 线程池的好处:</h3><ul>
 <li><p>1、降低资源的消耗</p>
 </li>
@@ -487,7 +507,7 @@
 </li>
 </ul>
 <p>==线程复用、可以控制最大并发数、管理线程==</p>
-<p><img src="/medias/loading.jpg" data-original="https://raw.githubusercontent.com/CODEZHW/t/master/img/20200222171143.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://raw.githubusercontent.com/CODEZHW/t/master/img/20200222171143.png" alt=""></p>
 <p>线程池：三大方法</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
  * Exectors 工具类、三大方法
@@ -567,11 +587,9 @@
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="1-2-线程池四种拒绝策略"><a href="#1-2-线程池四种拒绝策略" class="headerlink" title="1.2 线程池四种拒绝策略"></a>1.2 线程池四种拒绝策略</h3><blockquote>
 <ul>
-<li>new ThreadPoolExecutor.AbortPolicy ()  满人了，还有人进来，不处理这个人，抛出异常。<ul>
+<li>new ThreadPoolExecutor.AbortPolicy ()  满人了，还有人进来，不处理这个人，抛出异常。</li>
 <li>new ThreadPoolExecutor.CallerRunsPolicy () 哪里来的，去哪里（交给谁执行）</li>
 <li>new ThreadPoolExecutor.DiscardPolicy ()  队列满了 不会抛出异常 会放弃任务</li>
-</ul>
-</li>
 <li>new ThreadPoolExecutor.DiscardOldestPolicy () 队列满了，会尝试去和最早的竞争 也不会抛出异常 一个尝试性的过程</li>
 </ul>
 </blockquote>
@@ -657,7 +675,7 @@
 <span class="token comment" spellcheck="true">// 超级多FunctionalInterface </span>
 <span class="token comment" spellcheck="true">// 简化编程模型，在新版本的框架底层大量应用！ </span>
 <span class="token comment" spellcheck="true">// foreach(消费者类的函数式接口)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/medias/loading.jpg" data-original="https://raw.githubusercontent.com/CODEZHW/t/master/img/20200222175528.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://raw.githubusercontent.com/CODEZHW/t/master/img/20200222175528.png" alt=""></p>
 <p>代码测试</p>
 <blockquote>
 <p>Function 函数型接口, 有一个输入参数，有一个输出</p>
@@ -735,7 +753,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://CODEZHW.github.io" rel="external nofollow noreferrer">CODEZHW</a>
+                    <a href="http://CODEZHW.github.io" rel="external nofollow noreferrer">codezhw</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -758,7 +776,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="http://CODEZHW.github.io" target="_blank">CODEZHW</a>
+                    <a href="http://CODEZHW.github.io" target="_blank">codezhw</a>
                     !
                 </span>
             </div>
@@ -782,7 +800,19 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                                    <span class="chip bg-color">多线程</span>
+                                </a>
+                            
+                                <a href="/tags/juc/">
+                                    <span class="chip bg-color">juc</span>
+                                </a>
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1226,7 +1256,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            title: 多线程进阶-JUC并发编程（2）date: 2020-02-22T15:51:51.5author: codezhwtop: truecover: truesummary: 这是一篇关于java多线程的进阶文章，会全面的介绍j
+                            这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。
                         
                     </div>
                     <div class="publish-info">
@@ -1235,13 +1265,33 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            CODEZHW
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/java/" class="post-category">
+                                    java
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">多线程</span>
+                    </a>
+                    
+                    <a href="/tags/juc/">
+                        <span class="chip bg-color">juc</span>
+                    </a>
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1252,7 +1302,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/02/22/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng/">
+                <a href="/2020/02/22/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/">
                     <div class="card-image">
                         
                         
@@ -1441,7 +1491,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">3.4k</span>&nbsp;字
+                class="white-color">3.3k</span>&nbsp;字
             
             
             
@@ -1559,7 +1609,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
     </div>
 </div>
 
-<script src="/js/search.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
     searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
@@ -1579,7 +1629,7 @@ $(function () {
     <script src="/libs/aos/aos.js"></script>
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/matery.js"></script>
 <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
 <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
 
@@ -1635,23 +1685,16 @@ $(function () {
     
 
     
-    <script type="text/javascript" color="0,0,255"
-        pointColor="0,0,255" opacity='0.7'
-        zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
-    
 
     
 
-    
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-    <script src="/js/sakura.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/sakura.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/live2d-widget@3.x/lib/L2Dwidget.min.js"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script><script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
 
