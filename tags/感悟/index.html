@@ -332,7 +332,17 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/bg' + new Date().getDay() + '.jpg)');
+    var mycars = new Array()
+    mycars[0] = "url(https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png)"
+    mycars[1] = "url(https://i.loli.net/2020/02/23/bjCGeLtqBi9EpDx.jpg)"
+    mycars[2] = "url(https://i.loli.net/2020/02/23/M9WhstN8jcfEdRn.png)"
+    mycars[3] = "url(https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png)"
+    mycars[4] = "url(https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png)"
+    mycars[5] = "url(https://i.loli.net/2020/02/23/lFVgpZn7W6vzqK4.png)"
+    mycars[6] = "url(https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png)"
+    
+
+    $('.bg-cover').css('background-image', mycars[new Date().getDay()]);
 </script>
 
 
@@ -352,38 +362,56 @@
             <div class="tag-chips">
                 
                 
-                <a href="/tags/%E6%84%9F%E6%82%9F/" title="感悟: 1">
+                <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="多线程: 2">
                     <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="感悟" style="background-color: #F9EBEA;">感悟
+                             chip-default "
+                            data-tagname="多线程" style="background-color: #F9EBEA;">多线程
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JUC/" title="JUC: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JUC" style="background-color: #F5EEF8;">JUC
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Java/" title="Java: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Java" style="background-color: #D5F5E3;">Java
+                        <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/HashMap/" title="HashMap: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="HashMap" style="background-color: #E8F8F5;">HashMap
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="多线程: 2">
+                <a href="/tags/%E6%BA%90%E7%A0%81/" title="源码: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="多线程" style="background-color: #F5EEF8;">多线程
-                        <span class="tag-length">2</span>
+                            data-tagname="源码" style="background-color: #FEF9E7;">源码
+                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/juc/" title="juc: 2">
+                <a href="/tags/%E6%84%9F%E6%82%9F/" title="感悟: 1">
                     <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="juc" style="background-color: #D5F5E3;">juc
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/java/" title="java: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="java" style="background-color: #E8F8F5;">java
-                        <span class="tag-length">2</span>
+                             chip-active "
+                            data-tagname="感悟" style="background-color: #F8F9F9;">感悟
+                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
@@ -404,7 +432,7 @@
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="我的第一篇博客">
+                            <img src="https://i.loli.net/2020/02/23/FQETKxMR5HPBmSf.jpg" class="responsive-img" alt="我的第一篇博客">
                             
                             <span class="card-title">我的第一篇博客</span>
                         </div>

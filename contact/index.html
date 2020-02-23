@@ -332,7 +332,17 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/bg' + new Date().getDay() + '.jpg)');
+    var mycars = new Array()
+    mycars[0] = "url(https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png)"
+    mycars[1] = "url(https://i.loli.net/2020/02/23/bjCGeLtqBi9EpDx.jpg)"
+    mycars[2] = "url(https://i.loli.net/2020/02/23/M9WhstN8jcfEdRn.png)"
+    mycars[3] = "url(https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png)"
+    mycars[4] = "url(https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png)"
+    mycars[5] = "url(https://i.loli.net/2020/02/23/lFVgpZn7W6vzqK4.png)"
+    mycars[6] = "url(https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png)"
+    
+
+    $('.bg-cover').css('background-image', mycars[new Date().getDay()]);
 </script>
 
 
