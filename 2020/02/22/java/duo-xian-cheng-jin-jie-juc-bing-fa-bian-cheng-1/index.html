@@ -490,7 +490,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="多线程进阶-JUC并发编程（1）"><a href="#多线程进阶-JUC并发编程（1）" class="headerlink" title="多线程进阶-JUC并发编程（1）"></a>多线程进阶-JUC并发编程（1）</h1><h2 id="1、什么是JUC"><a href="#1、什么是JUC" class="headerlink" title="1、什么是JUC"></a>1、什么是JUC</h2><p>​        在 Java 5.0 提供了 java.util.concurrent （简称JUC ）包,在此包中增加了在并发编程中很常用的实用工具类，用于定义类似于线程的自定义子系统，包括线程池、异步 IO 和轻量级任务框架。提供可调的、灵活的线程池。还提供了设计用于多线程上下文中的 Collection 实现等。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://raw.githubusercontent.com/CODEZHW/t/master/img/juc.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/CODEZHW/t/master/img/juc.png" alt=""></p>
 <h2 id="2、线程和进程"><a href="#2、线程和进程" class="headerlink" title="2、线程和进程"></a>2、线程和进程</h2><h3 id="2-1-进程"><a href="#2-1-进程" class="headerlink" title="2.1 进程"></a>2.1 进程</h3><p>进程：一个程序，qq.exe , Music.exe  程序的集合。<br> 一个进程往往可以包含多个线程，至少包含一个！</p>
 <p> Java默认有几个线程?</p>
 <p> 2 个   mian、GC</p>
@@ -643,7 +643,7 @@
 <blockquote>
 <p>这是不加上synchronized执行的结果可以看出在没有锁的情况下，多个线程同时对统一资源进行操作造成的结果混乱。</p>
 </blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://raw.githubusercontent.com/CODEZHW/t/master/img/result.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/CODEZHW/t/master/img/result.png" alt=""></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
  * 买票问题，初步展示JUC版的多线程问题 (lock版本)
  (JUC:java.util.concurrent包)
@@ -1704,10 +1704,6 @@
 <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
 <div class="">
     
-    <div class="title center-align">
-        <i class="fas fa-music"></i>&nbsp;&nbsp;听听音乐
-    </div>
-    
     <div class="row">
         <div class="col l8 offset-l2 m10 offset-m1 s12">
             <div id="aplayer" class="music"></div>
@@ -1722,13 +1718,13 @@ $(function () {
         container: document.getElementById('aplayer'),
         fixed: 'true' === 'true',
         autoplay: 'false' === 'true',
-        theme: '#42b983',
+        theme: '#42b984',
         loop: 'all',
         order: 'list',
-        preload: 'none',
-        volume: Number('0.7'),
-        listFolded: 'false' === 'true',
-        listMaxHeight: '',
+        preload: 'auto',
+        volume: Number('0.5'),
+        listFolded: 'true' === 'true',
+        listMaxHeight: 'false',
         audio: eval([{"name":"五月雨变奏电音","artist":"AnimeVibe","url":"http://static.blinkfox.com/music1.mp3","cover":"http://static.blinkfox.com/music-cover1.png"},{"name":"Take me hand","artist":"DAISHI DANCE,Cecile Corbel","url":"http://static.blinkfox.com/music2.mp3","cover":"http://static.blinkfox.com/music-cover2.png"},{"name":"Shape of You","artist":"J.Fla","url":"http://static.blinkfox.com/music3.mp3","cover":"http://static.blinkfox.com/music-cover3.png"}])
     });
 });
@@ -1744,7 +1740,7 @@ $(function () {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">11.1k</span>&nbsp;字
+                class="white-color">13.1k</span>&nbsp;字
             
             
             
@@ -1947,6 +1943,6 @@ $(function () {
 
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/sakura.js"></script>
 
-<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":700},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 
 </html>

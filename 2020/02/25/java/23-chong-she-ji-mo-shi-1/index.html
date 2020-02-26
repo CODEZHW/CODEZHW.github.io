@@ -459,14 +459,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-25
+                    2020-02-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5k
+                    5.1k
                 </div>
                 
 
@@ -639,7 +639,7 @@
         mb<span class="token punctuation">.</span><span class="token function">name</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/OghYlX4GKxsn329.png" alt="关系依赖图"></p>
+<p><img src="https://i.loli.net/2020/02/25/OghYlX4GKxsn329.png" alt="关系依赖图"></p>
 <p>可以看到，我们想要得到不同品牌的汽车实现类的时候，不用去new一个对象，直接传递参数给CarFactory就可以得到我们想要的汽车。</p>
 <p>简单地说，简单工厂模式通常就是这样，一个工厂类 XxxFactory，里面有一个静态方法，根据我们不同的参数，返回不同的派生自同一个父类（或实现同一接口）的实例对象。</p>
 <blockquote>
@@ -749,7 +749,7 @@
 <p>​    <strong>奔驰</strong><br>​    <strong>宝马</strong><br>​    <strong>摩拜单车拉拉！！</strong></p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/C38NjHY51iZms2K.png" alt="依赖图"></p>
+<p><img src="https://i.loli.net/2020/02/25/C38NjHY51iZms2K.png" alt="依赖图"></p>
 <hr>
 <h3 id="抽象工厂方法模式"><a href="#抽象工厂方法模式" class="headerlink" title="抽象工厂方法模式"></a>抽象工厂方法模式</h3><p><strong>定义：</strong></p>
 <p>抽象工厂模式提供了一个创建一系列相关或相互依赖对象的接口，无需为他们指定具体的实现类</p>
@@ -759,7 +759,7 @@
 <p><strong>缺点：</strong></p>
 <p>规定了所有可能被创建的产品集合，产品族中拓展新的产品困难</p>
 <p>增加了系统的抽象性和理解难度</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/xoZlOYQMvIb4ePB.png" alt="关系类图"></p>
+<p><img src="https://i.loli.net/2020/02/25/xoZlOYQMvIb4ePB.png" alt="关系类图"></p>
 <p>由于代码有点多就不全部展示，只对其中的类做讲解。</p>
 <p>IProductFactory ：所有工厂的总工厂，其中包含要生产的产品。</p>
 <p>Iphone、Router： 手机产品、路由器产品。</p>
@@ -793,12 +793,12 @@
 <ul>
 <li><strong>运行结果</strong></li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/rn6POINJW457FoU.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/02/25/rn6POINJW457FoU.png" alt=""></p>
 <blockquote>
 <p>当然，抽象工厂的问题也是显而易见的，比如我们要加个显示器，就需要修改所有的工厂，给所有的工厂都加上制造显示器的方法。这有点违反了<strong>对修改关闭，对扩展开放</strong>这个设计原则。</p>
 </blockquote>
 <p>关于产品等级结构和产品族</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/kj6qLSlFnVpEbsZ.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/02/25/kj6qLSlFnVpEbsZ.png" alt=""></p>
 <hr>
 <h3 id="工厂方法模式在JDK中的应用"><a href="#工厂方法模式在JDK中的应用" class="headerlink" title="工厂方法模式在JDK中的应用"></a>工厂方法模式在JDK中的应用</h3><ul>
 <li><strong>简单工厂方法</strong></li>
@@ -836,7 +836,7 @@
 <li><strong>抽象工厂方法</strong></li>
 </ul>
 <p>先看一张关系图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/RYNOkEDtBngZHVj.png" alt="Collection中的依赖"></p>
+<p><img src="https://i.loli.net/2020/02/25/RYNOkEDtBngZHVj.png" alt="Collection中的依赖"></p>
 <p>Collection接口中的Iterator<E> iterator();方法，这个方法继承自Iterable()不重要</p>
 <p>可以把Collection看作总的抽象工厂，其中的Iterable()方法等等其他方法都可以看作是Collection的产品。</p>
 <p>Collection工厂把这些产品交给 各自的工厂(ArrayList、HashSet),去实现各自的功能。</p>
@@ -845,7 +845,7 @@
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Itr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>而Itr()就是ArrayList自己实现的内部类，里面定义属于ArrayList的hasNext()、next() 。。。等等这些方法。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/c4yLfsXxE6lhka5.png" alt="Itr内部类"></p>
+<p><img src="https://i.loli.net/2020/02/25/c4yLfsXxE6lhka5.png" alt="Itr内部类"></p>
 <p>用这些方法去遍历ArrayList。</p>
 <p><strong>总的产品Iterator接口里面会定义产品所需功能的细节，然后在交给各个品牌不同的工厂来实现</strong></p>
 <blockquote>
@@ -911,7 +911,6 @@
     <span class="token comment" spellcheck="true">//类初始化时，不加载这个对象 会涉及多线程问题</span>
     <span class="token keyword">private</span> <span class="token keyword">static</span> Singletondemo2 instance<span class="token punctuation">;</span>
 
-
     <span class="token comment" spellcheck="true">//提供了获取该对象的方法，有synchronized，效率会降低</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">synchronized</span> Singletondemo2 <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -920,30 +919,37 @@
         <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><strong>DCL懒汉式</strong></li>
 </ul>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token function">Singletondemo3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 <span class="token comment" spellcheck="true">//类初始化时，立即加载这个对象 不会涉及多线程问题</span>
-<span class="token keyword">private</span> <span class="token keyword">static</span> Singletondemo3 instance<span class="token punctuation">;</span>
+<span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> Singletondemo3 instance<span class="token punctuation">;</span>
 
-<span class="token comment" spellcheck="true">//提供了该</span>
+
 <span class="token keyword">public</span> <span class="token keyword">static</span>  Singletondemo3 <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">//线程竞争这个锁，获得锁的线程进来，去判断是否创建实例。</span>
         <span class="token keyword">synchronized</span><span class="token punctuation">(</span>Singletondemo3<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span>instance <span class="token operator">==</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
-            instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singletondemo3</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            instance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singletondemo3</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 不是一个原子性的操作</span>
+           <span class="token comment" spellcheck="true">/*
+            1、分配内存空间  
+            2、执行构造方法，初始化对象 
+            3、把这个对象指向这个空间 
+            * 123 线程走A没问题
+            * 132 假设一个线程B走132后，再进来一个线程，就不会判断instance ==null 直接返回了
+            *此时的instance 还没完成初始化
+            **/</span>
+
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> instance<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>双重检测锁，将锁的范围更加精细化。</strong></p>
 <p><strong>只有在线程进来后，判断是否创建对象，如果没有就创建，有就返回。</strong></p>
-<p><strong>我们都知道通过反射可以创建，而且反射中的方法可以强制忽略private关键字，这样我们的单例模式还是不安全</strong></p>
-<p><strong>通过序列化与反序列化操作也可以破坏双重校验锁的模式</strong></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singletondemo4</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token function">Singletondemo4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token punctuation">}</span>
@@ -968,8 +974,10 @@
 
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>我们都知道通过反射可以创建，而且反射中的方法可以强制忽略private关键字，这样我们的单例模式还是不安全</strong></p>
+<p><strong>通过序列化与反序列化操作也可以破坏双重校验锁的模式</strong></p>
 <p><strong>我们点进newInstance ( )方法可以看到：</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/NfT5OCywLaJvim3.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/02/25/NfT5OCywLaJvim3.png" alt=""></p>
 <p><strong>如果反射想要创建的对象是枚举类型，就会抛出一样异常，所以我们可以通过枚举来创建单例模式来防止通过反射破坏单例，枚举创建的单例模式线程安全，创建简单，但是无法延时加载</strong></p>
 <ul>
 <li><strong>枚举</strong></li>
@@ -988,7 +996,7 @@ class demo5{
 
         System.out.println ( instance == instance1 );
     }
-}</code></pre><p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/AerbMunQ3xBRmhs.png" alt="枚举的知识"></p>
+}</code></pre><p><img src="https://i.loli.net/2020/02/25/AerbMunQ3xBRmhs.png" alt="枚举的知识"></p>
 <h3 id="单例模式在JDK中的应用"><a href="#单例模式在JDK中的应用" class="headerlink" title="单例模式在JDK中的应用"></a>单例模式在JDK中的应用</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Runtime</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Runtime currentRuntime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Runtime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -1498,30 +1506,29 @@ class demo5{
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/02/25/java/23-chong-she-ji-mo-shi-1/">
+                <a href="/2020/02/26/java/jmm-nei-cun-mo-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png" class="responsive-img" alt="23种设计模式">
+                        <img src="https://i.loli.net/2020/02/23/Bqb6ex9Fu2ACipY.png" class="responsive-img" alt="JVM内存模型和Volatile">
                         
-                        <span class="card-title">23种设计模式</span>
+                        <span class="card-title">JVM内存模型和Volatile</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是一篇介绍设计模式的文章，其中主要介绍了创建型模式下的工厂模式，抽象工厂，建造者模式，原型模式，单例模式。
+                            这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-25
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-26
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1534,12 +1541,11 @@ class demo5{
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">设计模式</span>
+                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">多线程</span>
                     </a>
                     
                 </div>
@@ -1735,10 +1741,6 @@ class demo5{
 <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
 <div class="">
     
-    <div class="title center-align">
-        <i class="fas fa-music"></i>&nbsp;&nbsp;听听音乐
-    </div>
-    
     <div class="row">
         <div class="col l8 offset-l2 m10 offset-m1 s12">
             <div id="aplayer" class="music"></div>
@@ -1753,13 +1755,13 @@ $(function () {
         container: document.getElementById('aplayer'),
         fixed: 'true' === 'true',
         autoplay: 'false' === 'true',
-        theme: '#42b983',
+        theme: '#42b984',
         loop: 'all',
         order: 'list',
-        preload: 'none',
-        volume: Number('0.7'),
-        listFolded: 'false' === 'true',
-        listMaxHeight: '',
+        preload: 'auto',
+        volume: Number('0.5'),
+        listFolded: 'true' === 'true',
+        listMaxHeight: 'false',
         audio: eval([{"name":"五月雨变奏电音","artist":"AnimeVibe","url":"http://static.blinkfox.com/music1.mp3","cover":"http://static.blinkfox.com/music-cover1.png"},{"name":"Take me hand","artist":"DAISHI DANCE,Cecile Corbel","url":"http://static.blinkfox.com/music2.mp3","cover":"http://static.blinkfox.com/music-cover2.png"},{"name":"Shape of You","artist":"J.Fla","url":"http://static.blinkfox.com/music3.mp3","cover":"http://static.blinkfox.com/music-cover3.png"}])
     });
 });
@@ -1775,7 +1777,7 @@ $(function () {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">11.1k</span>&nbsp;字
+                class="white-color">13.1k</span>&nbsp;字
             
             
             
@@ -1978,6 +1980,6 @@ $(function () {
 
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/sakura.js"></script>
 
-<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":700},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 
 </html>
