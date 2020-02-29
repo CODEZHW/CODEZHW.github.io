@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-26
+                    2020-02-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    814
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    3 分
                 </div>
                 
 				
@@ -657,151 +657,6 @@
 <p> 小结和拓展</p>
 </blockquote>
 <p>池的大的大小如何去设置！<br>了解：IO密集型，CPU密集型：（调优）</p>
-<h2 id="2-四大函数式接口"><a href="#2-四大函数式接口" class="headerlink" title="2.四大函数式接口"></a>2.四大函数式接口</h2><p>lambda表达式，链式编程， 函数式接口，stream流式计算</p>
-<blockquote>
-<p>函数式接口： 只有一个方法的接口</p>
-</blockquote>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@FunctionalInterface</span>
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Runnable</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">// 泛型、枚举、反射 </span>
-<span class="token comment" spellcheck="true">// lambda表达式、链式编程、函数式接口、Stream流式计算 </span>
-<span class="token comment" spellcheck="true">// 超级多FunctionalInterface </span>
-<span class="token comment" spellcheck="true">// 简化编程模型，在新版本的框架底层大量应用！ </span>
-<span class="token comment" spellcheck="true">// foreach(消费者类的函数式接口)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://raw.githubusercontent.com/CODEZHW/t/master/img/20200222175528.png" alt=""></p>
-<p>代码测试</p>
-<blockquote>
-<p>Function 函数型接口, 有一个输入参数，有一个输出</p>
-</blockquote>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">demo2</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//工具类： 输出输入的值</span>
-        <span class="token comment" spellcheck="true">//Function function = new Function  &lt;String, String>() {</span>
-        <span class="token comment" spellcheck="true">//    @Override</span>
-        <span class="token comment" spellcheck="true">//    public String apply ( String str ) {</span>
-        <span class="token comment" spellcheck="true">//        return str;</span>
-        <span class="token comment" spellcheck="true">//    }</span>
-        <span class="token comment" spellcheck="true">//};</span>
-        Function function <span class="token operator">=</span> <span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span><span class="token keyword">return</span> str<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> function<span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">(</span> <span class="token string">"ads"</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>Predicate接口： 有一个输入参数， 返回值只能是布尔值。</p>
-</blockquote>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">demo3</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//判断字符是否为控</span>
-        <span class="token comment" spellcheck="true">//Predicate &lt;String> predicate = new Predicate &lt;> ( ) {</span>
-        <span class="token comment" spellcheck="true">//    @Override</span>
-        <span class="token comment" spellcheck="true">//    public boolean test ( String str ) {</span>
-        <span class="token comment" spellcheck="true">//        return str.isEmpty ( );</span>
-        <span class="token comment" spellcheck="true">//    }</span>
-        <span class="token comment" spellcheck="true">//};</span>
-        Predicate <span class="token operator">&lt;</span>String<span class="token operator">></span> predicate <span class="token operator">=</span> str <span class="token operator">-</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">isEmpty</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> predicate<span class="token punctuation">.</span><span class="token function">test</span> <span class="token punctuation">(</span> <span class="token string">"123"</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>Consumer消费型接口，只有输入值，没有返回值</p>
-</blockquote>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//Consumer &lt;String> consumer = new Consumer &lt;> ( ) {</span>
-    <span class="token comment" spellcheck="true">//    @Override</span>
-    <span class="token comment" spellcheck="true">//    public void accept ( String str ) {</span>
-    <span class="token comment" spellcheck="true">//        System.out.println ( str );</span>
-    <span class="token comment" spellcheck="true">//    }</span>
-    <span class="token comment" spellcheck="true">//};</span>
-    <span class="token comment" spellcheck="true">//consumer.accept ( "123 " );</span>
-    Consumer <span class="token operator">&lt;</span>String<span class="token operator">></span> consumer <span class="token operator">=</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> string <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>Supplier 供给接口，没有参数，有返回值</p>
-</blockquote>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//Supplier &lt;String> supplier = new Supplier &lt;String> ( ) {</span>
-<span class="token comment" spellcheck="true">//    @Override</span>
-<span class="token comment" spellcheck="true">//    public String get () {</span>
-<span class="token comment" spellcheck="true">//        System.out.println ( "get string" );</span>
-<span class="token comment" spellcheck="true">//        return "1024";</span>
-<span class="token comment" spellcheck="true">//    }</span>
-<span class="token comment" spellcheck="true">//};</span>
-<span class="token comment" spellcheck="true">//</span>
-<span class="token comment" spellcheck="true">//System.out.println ( supplier.get ( ) );</span>
-Supplier supplier <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token number">1024</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> supplier<span class="token punctuation">.</span><span class="token function">get</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>流式计算</p>
-</blockquote>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> id<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token function">User</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> id<span class="token punctuation">,</span> String name<span class="token punctuation">,</span> <span class="token keyword">int</span> age <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getId</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> id <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> String <span class="token function">getName</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span> <span class="token punctuation">(</span> String name <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getAge</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> age<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setAge</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> age <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">demo5</span> <span class="token punctuation">{</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        User u1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span> <span class="token punctuation">(</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token number">21</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        User u2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span> <span class="token punctuation">(</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token number">22</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        User u3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span> <span class="token punctuation">(</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">,</span> <span class="token number">23</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        User u4 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span> <span class="token punctuation">(</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">"d"</span><span class="token punctuation">,</span> <span class="token number">24</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        User u5 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span> <span class="token punctuation">(</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token string">"e"</span><span class="token punctuation">,</span> <span class="token number">25</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">// 集合就是存储</span>
-        List <span class="token operator">&lt;</span>User<span class="token operator">></span> list <span class="token operator">=</span> Arrays<span class="token punctuation">.</span><span class="token function">asList</span> <span class="token punctuation">(</span> u1<span class="token punctuation">,</span> u2<span class="token punctuation">,</span> u3<span class="token punctuation">,</span> u4<span class="token punctuation">,</span> u5 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//计算交给Stream流</span>
-        <span class="token comment" spellcheck="true">//lambda表达式、链式编程、函数式接口、Stream流式计算</span>
-        list<span class="token punctuation">.</span><span class="token function">stream</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">(</span> u <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-                    <span class="token keyword">return</span> u<span class="token punctuation">.</span><span class="token function">getId</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">(</span> u <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-                    <span class="token keyword">return</span> u<span class="token punctuation">.</span><span class="token function">getAge</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">23</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">(</span> u <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-                    <span class="token keyword">return</span> u<span class="token punctuation">.</span><span class="token function">getName</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">sorted</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span> uu1<span class="token punctuation">,</span> uu2 <span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-                    <span class="token keyword">return</span> uu2<span class="token punctuation">.</span><span class="token function">compareTo</span> <span class="token punctuation">(</span> uu1 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">limit</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">(</span> System<span class="token punctuation">.</span>out<span class="token operator">:</span><span class="token operator">:</span>println <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1394,6 +1249,10 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                         <span class="chip bg-color">多线程</span>
                     </a>
                     
+                    <a href="/tags/JUC/">
+                        <span class="chip bg-color">JUC</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1570,7 +1429,7 @@ $(function () {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">13.1k</span>&nbsp;字
+                class="white-color">14.9k</span>&nbsp;字
             
             
             

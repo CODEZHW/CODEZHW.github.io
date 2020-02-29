@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://codezhw.github.io/"/>
-  <updated>2020-02-26T12:08:20.545Z</updated>
+  <updated>2020-02-27T13:46:45.442Z</updated>
   <id>http://codezhw.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java8新特性:函数式编程以及Stream流式计算</title>
+    <link href="http://codezhw.github.io/2020/02/27/java/java8-xin-te-xing-han-shu-shi-bian-cheng/"/>
+    <id>http://codezhw.github.io/2020/02/27/java/java8-xin-te-xing-han-shu-shi-bian-cheng/</id>
+    <published>2020-02-27T05:30:00.000Z</published>
+    <updated>2020-02-27T13:46:45.442Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Java8新特性-black-heart-函数式接口以及Stream流式计算&quot;&gt;&lt;a href=&quot;#Java8新特性-black-heart-函数式接口以及Stream流式计算&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://CODEZHW.github.io/categories/Java/"/>
+    
+    
+      <category term="函数式接口" scheme="http://CODEZHW.github.io/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/"/>
+    
+      <category term="Stream流式计算" scheme="http://CODEZHW.github.io/tags/Stream%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>JVM内存模型和Volatile</title>
@@ -48,7 +77,7 @@
     <link href="http://codezhw.github.io/2020/02/25/java/23-chong-she-ji-mo-shi-1/"/>
     <id>http://codezhw.github.io/2020/02/25/java/23-chong-she-ji-mo-shi-1/</id>
     <published>2020-02-25T05:43:51.419Z</published>
-    <updated>2020-02-26T08:54:47.606Z</updated>
+    <updated>2020-02-27T12:11:06.044Z</updated>
     
     <summary type="html">
     
@@ -75,7 +104,7 @@
     <link href="http://codezhw.github.io/2020/02/23/java/jdk7hashmap-tan-jiu-shou-xie-hashmap/"/>
     <id>http://codezhw.github.io/2020/02/23/java/jdk7hashmap-tan-jiu-shou-xie-hashmap/</id>
     <published>2020-02-23T07:25:25.955Z</published>
-    <updated>2020-02-26T07:34:37.322Z</updated>
+    <updated>2020-02-29T06:39:32.179Z</updated>
     
     <summary type="html">
     
@@ -104,7 +133,7 @@
     <link href="http://codezhw.github.io/2020/02/22/java/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/"/>
     <id>http://codezhw.github.io/2020/02/22/java/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/</id>
     <published>2020-02-22T09:51:51.500Z</published>
-    <updated>2020-02-26T07:32:52.774Z</updated>
+    <updated>2020-02-27T07:13:21.050Z</updated>
     
     <summary type="html">
     
@@ -133,7 +162,7 @@
     <link href="http://codezhw.github.io/2020/02/22/java/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/"/>
     <id>http://codezhw.github.io/2020/02/22/java/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/</id>
     <published>2020-02-22T07:51:51.500Z</published>
-    <updated>2020-02-25T05:31:41.157Z</updated>
+    <updated>2020-02-29T06:20:22.480Z</updated>
     
     <summary type="html">
     
@@ -152,6 +181,8 @@
     
     
       <category term="多线程" scheme="http://CODEZHW.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="JUC" scheme="http://CODEZHW.github.io/tags/JUC/"/>
     
   </entry>
   

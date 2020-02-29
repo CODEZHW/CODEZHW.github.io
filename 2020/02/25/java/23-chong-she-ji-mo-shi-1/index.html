@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-26
+                    2020-02-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.1k
+                    5.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    18 分
+                    21 分
                 </div>
                 
 				
@@ -1013,6 +1013,131 @@ class demo5{
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们熟知在Spring中Bean的创建也有单例模式，我们等到解读Spring 源码的时候在做分析。</p>
 <hr>
+<h3 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h3><p>概念：</p>
+<p>　　将一个复杂对象的构建与它的表示分离。使得同样构建过程可以创建不同表示</p>
+<p>适用场景：</p>
+<ol>
+<li>一个对象有很多属性的情况下</li>
+<li>想把复杂的对象创建和使用分离</li>
+</ol>
+<p>优点：</p>
+<p>　　封装性好，扩展性好</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//建造者</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Builder</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">abstract</span>   Builder <span class="token function">builderA</span><span class="token punctuation">(</span>String msg<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//汉堡</span>
+    <span class="token keyword">abstract</span>   Builder <span class="token function">builderB</span><span class="token punctuation">(</span>String msg<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//可乐</span>
+    <span class="token keyword">abstract</span>   Builder <span class="token function">builderC</span><span class="token punctuation">(</span>String msg<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//薯条</span>
+    <span class="token keyword">abstract</span>   Builder <span class="token function">builderD</span><span class="token punctuation">(</span>String msg<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//甜点</span>
+
+    <span class="token keyword">abstract</span> Product <span class="token function">getproduct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//产品类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> String builda <span class="token operator">=</span> <span class="token string">"汉堡"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String buildb <span class="token operator">=</span> <span class="token string">"可乐"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String buildc <span class="token operator">=</span> <span class="token string">"薯条"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String buildd <span class="token operator">=</span> <span class="token string">"甜点"</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">toString</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"Product{"</span> <span class="token operator">+</span>
+                <span class="token string">"builda='"</span> <span class="token operator">+</span> builda <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
+                <span class="token string">", buildb='"</span> <span class="token operator">+</span> buildb <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
+                <span class="token string">", buildc='"</span> <span class="token operator">+</span> buildc <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
+                <span class="token string">", buildd='"</span> <span class="token operator">+</span> buildd <span class="token operator">+</span> <span class="token string">'\''</span> <span class="token operator">+</span>
+                <span class="token string">'}'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String <span class="token function">getBuilda</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> builda<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setBuilda</span> <span class="token punctuation">(</span> String builda <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>builda <span class="token operator">=</span> builda<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String <span class="token function">getBuildb</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> buildb<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setBuildb</span> <span class="token punctuation">(</span> String buildb <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>buildb <span class="token operator">=</span> buildb<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String <span class="token function">getBuildc</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> buildc<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setBuildc</span> <span class="token punctuation">(</span> String buildc <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>buildc <span class="token operator">=</span> buildc<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> String <span class="token function">getBuildd</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> buildd<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setBuildd</span> <span class="token punctuation">(</span> String buildd <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>buildd <span class="token operator">=</span> buildd<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//工人（服务员）</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Worker</span>  <span class="token keyword">extends</span> <span class="token class-name">Builder</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token function">Worker</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        product <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Product</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> Product product<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Override</span>
+    Builder <span class="token function">builderA</span> <span class="token punctuation">(</span> String msg <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        product<span class="token punctuation">.</span><span class="token function">setBuilda</span> <span class="token punctuation">(</span> msg <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    Builder <span class="token function">builderB</span> <span class="token punctuation">(</span> String msg <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        product<span class="token punctuation">.</span><span class="token function">setBuildb</span> <span class="token punctuation">(</span> msg <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    Builder <span class="token function">builderC</span> <span class="token punctuation">(</span> String msg <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        product<span class="token punctuation">.</span><span class="token function">setBuildc</span> <span class="token punctuation">(</span> msg <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    Builder <span class="token function">builderD</span> <span class="token punctuation">(</span> String msg <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        product<span class="token punctuation">.</span><span class="token function">setBuildd</span> <span class="token punctuation">(</span> msg <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    Product <span class="token function">getproduct</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> product<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//模拟一个肯德基定套餐业务，默认情况下是：汉堡.可乐.薯条.甜点</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//产品  &lt; -  自己决定细节 &lt; - 工人</span>
+        Product product <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">builderA</span> <span class="token punctuation">(</span> <span class="token string">"全家桶"</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">builderB</span> <span class="token punctuation">(</span> <span class="token string">"鸡翅"</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">builderC</span> <span class="token punctuation">(</span> <span class="token string">"雪碧"</span> <span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">builderD</span> <span class="token punctuation">(</span> <span class="token string">"冰淇淋"</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getProduct</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> product <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="建造者模式在JDK中的应用"><a href="#建造者模式在JDK中的应用" class="headerlink" title="建造者模式在JDK中的应用"></a>建造者模式在JDK中的应用</h3><pre class="line-numbers language-java"><code class="language-java">StringBuilder s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span> <span class="token punctuation">(</span> <span class="token string">"这是"</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span> <span class="token string">"JDK"</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span> <span class="token string">"中的"</span> <span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span> <span class="token string">"建造者模式"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> s <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p><strong>工厂模式注重把这个产品创造出来即可，而建造者更关心创建的细节，当创建一个对象需要使用很多步骤去完成的时候，我们可以考虑建造者模式，当创建一个对象比较简单的时候，我们就可以使用工厂模式。通俗一点来理解，建造者模式更像是专门定做一个东西，terator()作为一个工厂方法，它是可以有不同的厂家，但是呢，它完成的都是遍历的功能，而建造者更像是你买一个戒指，你不仅仅要求它能戴在手上，更加希望你的名字被刻在上面这样。就是关注到产品细节的就可以用建造者模式。</strong></p>
+</blockquote>
 
             </div>
             <hr/>
@@ -1777,7 +1902,7 @@ $(function () {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">13.1k</span>&nbsp;字
+                class="white-color">14.9k</span>&nbsp;字
             
             
             
