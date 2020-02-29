@@ -21,10 +21,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/css/matery.css">
     <!-- <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/css/search.js"></script> -->
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/css/my.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/css/my.css">
     
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/jquery/jquery.min.js"></script>
     
@@ -367,7 +367,6 @@
                     Sakura
                 
             </div>
-
             <div class="description center-align">
                <div id="poem_sentence"></div>
 				<div id="poem_info"></div>
@@ -455,28 +454,6 @@
         
             
             <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('https://i.loli.net/2020/02/23/Bqb6ex9Fu2ACipY.png');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">JVM内存模型和Volatile</div>
-                            <div class="description center-align">
-                                
-                                    这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/2020/02/26/java/jmm-nei-cun-mo-xing/" class="waves-effect waves-light btn" target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
                  style="background-image: url('https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png');">
                 <div class="container">
                     <div class="row">
@@ -519,28 +496,6 @@
                 </div>
             </div>
         
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">多线程进阶-JUC并发编程（2）</div>
-                            <div class="description center-align">
-                                
-                                    这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/" class="waves-effect waves-light btn" target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
     
 </div>
 
@@ -555,19 +510,8 @@
 
         let carouselIntervalId;
         
-        // Loop to call the next cover article picture.
-        let autoCarousel = function() {
-            carouselIntervalId = setInterval(function () {
-                coverSlider.carousel('next');
-            }, 6000);
-        };
-        autoCarousel();
-        
 
         let restartPlay = function () {
-            
-            clearInterval(carouselIntervalId);
-            autoCarousel();
             
         };
 
@@ -627,8 +571,8 @@
 
     
     
-    <div class="col s12" >
-        <div class="post-card" style="background-image: url('https://i.loli.net/2020/02/23/Bqb6ex9Fu2ACipY.png')">
+    <div class="col s12 m6" >
+        <div class="post-card" style="background-image: url('https://i.loli.net/2020/02/23/Vrd9C42Nnup3sTK.jpg')">
             <div class="post-body">
                 <div class="post-categories">
                     
@@ -637,11 +581,15 @@
                         
                     
                 </div>
-                <a href="/2020/02/26/java/jmm-nei-cun-mo-xing/">
-                    <h3 class="post-title">JVM内存模型和Volatile</h3>
+                <a href="/2020/02/27/java/java8-xin-te-xing-han-shu-shi-bian-cheng/">
+                    <h3 class="post-title">Java8新特性:函数式编程以及Stream流式计算</h3>
                 </a>
-                <p class="post-description">这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。</p>
-                <a href="/2020/02/26/java/jmm-nei-cun-mo-xing/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
+                <p class="post-description">
+                    
+                        这是一篇关于Java8新特性，函数式接口以及Stream流式计算的文章，作为新时代的程序必须掌握的JDK8新特性：Lambda表达式、链式编程、函数式接口、Stream流式计算，本文主要介绍了函数式接口以及Stream流式计算, Lambda表达式和链式编程夹带讲解。
+                    
+                </p>
+                <a href="/2020/02/27/java/java8-xin-te-xing-han-shu-shi-bian-cheng/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FF5E3A 0%, #FF2A68 100%)" target="_blank">
                     <i class="icon far fa-eye fa-fw"></i>阅读更多
                 </a>
             </div>
@@ -649,7 +597,7 @@
     </div>
     
     
-    <div class="col s12 m6" data-aos="zoom-in-up">
+    <div class="col s12 m6" >
         <div class="post-card" style="background-image: url('https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png')">
             <div class="post-body">
                 <div class="post-categories">
@@ -659,11 +607,15 @@
                         
                     
                 </div>
-                <a href="/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/">
-                    <h3 class="post-title">多线程进阶-JUC并发编程（1）</h3>
+                <a href="/2020/02/23/java/jdk7hashmap-tan-jiu-shou-xie-hashmap/">
+                    <h3 class="post-title">jdk7HashMap探究&手写HashMap</h3>
                 </a>
-                <p class="post-description">这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。</p>
-                <a href="/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)" target="_blank">
+                <p class="post-description">
+                    
+                        这是一篇关于Java JDK1.7版本HashMap的文章，了解HashMap的优势与缺点，探究底层的实现原理以及底层代码所实现的目的,简单探究了一下HashMap产生死锁的原因,以及手写一个HashMap。
+                    
+                </p>
+                <a href="/2020/02/23/java/jdk7hashmap-tan-jiu-shou-xie-hashmap/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #EF4DB6 0%, #C643FC 100%)" target="_blank">
                     <i class="icon far fa-eye fa-fw"></i>阅读更多
                 </a>
             </div>
@@ -681,55 +633,15 @@
                         
                     
                 </div>
-                <a href="/2020/02/25/java/23-chong-she-ji-mo-shi-1/">
-                    <h3 class="post-title">23种设计模式</h3>
+                <a href="/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/">
+                    <h3 class="post-title">多线程进阶-JUC并发编程（2）</h3>
                 </a>
-                <p class="post-description">这是一篇介绍设计模式的文章，其中主要介绍了创建型模式下的工厂模式，抽象工厂，建造者模式，原型模式，单例模式。</p>
-                <a href="/2020/02/25/java/23-chong-she-ji-mo-shi-1/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #1AD6FD 0%, #1D62F0 100%)" target="_blank">
-                    <i class="icon far fa-eye fa-fw"></i>阅读更多
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="col s12" data-aos="zoom-in-up">
-        <div class="post-card" style="background-image: url('https://i.loli.net/2020/02/23/Vrd9C42Nnup3sTK.jpg')">
-            <div class="post-body">
-                <div class="post-categories">
+                <p class="post-description">
                     
-                        
-                            <a href="/categories/Java/" class="category">Java</a>
-                        
+                        这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。
                     
-                </div>
-                <a href="/2020/02/27/java/java8-xin-te-xing-han-shu-shi-bian-cheng/">
-                    <h3 class="post-title">Java8新特性:函数式编程以及Stream流式计算</h3>
-                </a>
-                <p class="post-description">这是一篇关于Java8新特性，函数式接口以及Stream流式计算的文章，作为新时代的程序必须掌握的JDK8新特性：Lambda表达式、链式编程、函数式接口、Stream流式计算，本文主要介绍了函数式接口以及Stream流式计算, Lambda表达式和链式编程夹带讲解。</p>
-                <a href="/2020/02/27/java/java8-xin-te-xing-han-shu-shi-bian-cheng/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FFCC00 0%, #FF9500 100%)" target="_blank">
-                    <i class="icon far fa-eye fa-fw"></i>阅读更多
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="col s12 m6" data-aos="zoom-in-up">
-        <div class="post-card" style="background-image: url('https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png')">
-            <div class="post-body">
-                <div class="post-categories">
-                    
-                        
-                            <a href="/categories/Java/" class="category">Java</a>
-                        
-                    
-                </div>
-                <a href="/2020/02/23/java/jdk7hashmap-tan-jiu-shou-xie-hashmap/">
-                    <h3 class="post-title">jdk7HashMap探究&手写HashMap</h3>
-                </a>
-                <p class="post-description">这是一篇关于Java JDK1.7版本HashMap的文章，了解HashMap的优势与缺点，探究底层的实现原理以及底层代码所实现的目的,简单探究了一下HashMap产生死锁的原因,以及手写一个HashMap。</p>
-                <a href="/2020/02/23/java/jdk7hashmap-tan-jiu-shou-xie-hashmap/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%)" target="_blank">
+                </p>
+                <a href="/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #1AD6FD 0%, #1D62F0 100%)" target="_blank">
                     <i class="icon far fa-eye fa-fw"></i>阅读更多
                 </a>
             </div>
@@ -750,30 +662,12 @@
                 <a href="/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/">
                     <h3 class="post-title">彻底搞懂Synchronized和Volatile</h3>
                 </a>
-                <p class="post-description">这是详细讲解Java关键字Synchronize和Volatile的文章，会全面介绍Synchronized和Volatile的底层实现以及原理。</p>
-                <a href="/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #C644FC 0%, #5856D6 100%)" target="_blank">
-                    <i class="icon far fa-eye fa-fw"></i>阅读更多
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div class="col s12" data-aos="zoom-in-up">
-        <div class="post-card" style="background-image: url('https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png')">
-            <div class="post-body">
-                <div class="post-categories">
+                <p class="post-description">
                     
-                        
-                            <a href="/categories/Java/" class="category">Java</a>
-                        
+                        这是详细讲解Java关键字Synchronize和Volatile的文章，会全面介绍Synchronized和Volatile的底层实现以及原理。
                     
-                </div>
-                <a href="/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/">
-                    <h3 class="post-title">多线程进阶-JUC并发编程（2）</h3>
-                </a>
-                <p class="post-description">这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。</p>
-                <a href="/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #55EFCB 0%, #5BCAFF 100%)" target="_blank">
+                </p>
+                <a href="/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #FFCC00 0%, #FF9500 100%)" target="_blank">
                     <i class="icon far fa-eye fa-fw"></i>阅读更多
                 </a>
             </div>
