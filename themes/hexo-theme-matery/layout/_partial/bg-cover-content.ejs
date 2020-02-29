@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                <% if (config.subtitle && config.subtitle.length > 0) { %>
+                <%= config.subtitle %>
+                <% } else { %>
+                    Sakura
+                <% } %>
+            </div>
+
+            <div class="description center-align">
+               <div id="poem_sentence"></div>
+				<div id="poem_info"></div>
+				<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+				<script type="text/javascript">
+				  jinrishici.load(function(result) {
+					var sentence = document.querySelector("#poem_sentence")
+					var info = document.querySelector("#poem_info")
+					sentence.innerHTML = result.data.content
+					info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》'
+				  });
+				</script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if (theme.banner.enable) { %>
+<script>
+    // 每天切换 banner 图.  Switch banner image every day.
+    var mycars = new Array()
+    mycars[0] = "url(https://i.loli.net/2020/02/23/FQETKxMR5HPBmSf.jpg)"
+    mycars[1] = "url(https://i.loli.net/2020/02/23/bjCGeLtqBi9EpDx.jpg)"
+    mycars[2] = "url(https://i.loli.net/2020/02/23/M9WhstN8jcfEdRn.png)"
+    mycars[3] = "url(https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png)"
+    mycars[4] = "url(https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png)"
+    mycars[5] = "url(https://i.loli.net/2020/02/23/lFVgpZn7W6vzqK4.png)"
+    mycars[6] = "url(https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png)"
+    
+
+    $('.bg-cover').css('background-image', mycars[new Date().getDay()]);
+</script>
+<% } else { %>
+<script>
+    $('.bg-cover').css('background-image', mycars[new Date().getDay()]);
+</script>
+<% } %>
