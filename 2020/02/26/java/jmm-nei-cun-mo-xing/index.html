@@ -459,21 +459,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-26
+                    2020-02-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    332
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    1 分
                 </div>
                 
 				
@@ -518,107 +518,7 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="2-Volatile"><a href="#2-Volatile" class="headerlink" title="2. Volatile"></a>2. Volatile</h2><blockquote>
-<p> 请你谈谈你对 Volatile 的理解</p>
 </blockquote>
-<p> Volatile 是 Java 虚拟机提供轻量级的同步机制 </p>
-<ul>
-<li><p>1、保证可见性 </p>
-</li>
-<li><p>2、不保证原子性</p>
-</li>
-<li><p>3、禁止指令重排</p>
-</li>
-</ul>
-<p><strong>Valatile定义：</strong></p>
-<blockquote>
-<p><strong>Java语言规范第3版中对volatile的定义如下：Java编程语言允许线程访问共享变量，为了 确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言 提供了volatile，在某些情况下比锁要更加方便。如果一个字段被声明成volatile，Java线程内存</strong><br><strong>模型确保所有线程看到这个变量的值是一致的。</strong></p>
-</blockquote>
-<ul>
-<li><strong>保证可见性</strong></li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JMMDemo</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 不加 volatile 程序就会死循环！    </span>
-    <span class="token comment" spellcheck="true">// 加 volatile 可以保证可见性</span>
-    <span class="token comment" spellcheck="true">// 可见性： 可见性的意思是当一个线程修改一个共享变量时，另外一个线程能读到这个修改的值</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">new</span> <span class="token class-name">Thread</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token punctuation">{</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>num <span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">.</span><span class="token function">sleep</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        num <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> num <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://i.loli.net/2020/02/26/VLwsjHvixOErZn3.png" alt="没有volatile关键字"></p>
-<p><img src="https://i.loli.net/2020/02/26/wNpodxMlj7qPz4h.png" alt="有volatile关键字"></p>
-<p><strong>深入探究一下Volatile 可见性的原因</strong></p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JMMDemo</span> <span class="token punctuation">{</span>
-<span class="token comment" spellcheck="true">// 模拟一个demo去给volatile 类型变量num赋值</span>
-<span class="token comment" spellcheck="true">// 我们通过工具查看 对valatile进行写操作时，CPU做的事情</span>
-    <span class="token keyword">volatile</span>  <span class="token keyword">int</span> num<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        JMMDemo jmmDemo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JMMDemo</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        jmmDemo<span class="token punctuation">.</span>num <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>0x000001bc005902d9: lock add dword ptr</strong></p>
-<p>通过查IA-32架 构软件开发者手册可知，Lock前缀的指令在多核处理器下会引发了两件事情。</p>
-<ul>
-<li><strong>将当前处理器缓存行的数据写回到系统内存。</strong></li>
-<li><strong>这个写回内存的操作会使在其他CPU里缓存了该内存地址的数据无效。</strong></li>
-</ul>
-<p>volatile的两条实现原则：</p>
-<blockquote>
-<p><strong>摘自《Java并发编程的艺术》</strong></p>
-<ul>
-<li>Lock前缀指令会引起处理器缓存回写到内存。Lock前缀指令导致在执行指令期间，声 言处理器的LOCK#信号。在多处理器环境中，LOCK#信号确保在声言该信号期间，处理器可以 独占任何共享内存[2]。是，在最近的处理器里，LOCK＃信号一般不锁总线，而是锁缓存，毕 竟锁总线开销的比较大。对于Intel486和 Pentium处理器，在锁操作时，总是在总线上声言LOCK#信号。但在P6和目前的处理器中，如果 访问的内存区域已经缓存在处理器内部，则不会声言LOCK#信号。相反它会锁定这块内存区 域的缓存并回写到内存，并使用缓存一致性机制来确保修改的原子性，此操作被称为“缓存锁 定”，<strong>缓存一致性机制会阻止同时修改由两个以上处理器缓存的内存区域数据。</strong></li>
-<li>一个处理器的缓存回写到内存会导致其他处理器的缓存无效。IA-32处理器和Intel 64处 理器使用MESI（修改、独占、共享、无效）控制协议去维护内部缓存和其他处理器缓存的一致 性。在多核处理器系统中进行操作的时候，IA-32和Intel 64处理器能嗅探其他处理器访问系统内存和它们的内部缓存。处理器使用嗅探技术保证它的内部缓存、系统内存和其他处理器的 缓存的数据在总线上保持一致。例如，在Pentium和P6 family处理器中，<strong>如果通过嗅探一个处理器来检测其他处理器打算写内存地址，而这个地址当前处于共享状态，那么正在嗅探的处理器将使它的缓存行无效，在下次访问相同内存地址时，强制执行缓存行填充。</strong></li>
-</ul>
-</blockquote>
-<hr>
-<ul>
-<li><strong>不保证原子性（和事务的原子性一个意思）</strong></li>
-</ul>
-<p><strong>原子性 : 不可分割</strong><br><strong>线程A在执行任务的时候，不能被打扰的，也不能被分割。要么同时成功，要么同时失败</strong></p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JMMDemo2</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">add</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        num<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">20</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">new</span> <span class="token class-name">Thread</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    <span class="token function">add</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"A"</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">activeCount</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            Thread<span class="token punctuation">.</span><span class="token function">yield</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">+</span> num <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>volatile的两条语义保证了线程间共享变量的及时可见性，但整个过程并没有保证同步，这是与volatile的使命有关的，创造它的背景就是在某些情况下可以代替synchronized实现可见性的目的，规避synchronized带来的线程挂起、调度的开销。如果volatile也能保证同步，那么它就是个锁，可以完全取代synchronized了。</strong></p>
-<ul>
-<li><strong>防止指令重排</strong></li>
-</ul>
-<p><strong>volatile关键字通过内存屏障来防止指令被重排序。</strong></p>
-<p><strong>为了实现volatile的内存语义，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。然而，对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎不可能，为此，Java内存模型采取保守策略。</strong></p>
-<p><strong>下面是基于保守策略的JMM内存屏障插入策略：</strong></p>
-<ul>
-<li><strong>在每个volatile写操作的前面插入一个StoreStore屏障。</strong></li>
-<li><strong>在每个volatile写操作的后面插入一个StoreLoad屏障。</strong></li>
-<li><strong>在每个volatile读操作的后面插入一个LoadLoad屏障。</strong></li>
-<li><strong>在每个volatile读操作的后面插入一个LoadStore屏障。</strong></li>
-</ul>
 <h2 id="3-指令重排"><a href="#3-指令重排" class="headerlink" title="3. 指令重排"></a>3. 指令重排</h2><p>什么是指令重排： 计算机并不是按照我们写的程序顺序去执行的</p>
 <p>源代码-&gt; 编译器优化的重排-&gt;指令并行也会重排-&gt;内存系统也会重排-&gt;执行</p>
 <p>处理器在进行指令重排的时候，考虑：数据之间的依赖性</p>
@@ -1404,7 +1304,7 @@ $(function () {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">14.9k</span>&nbsp;字
+                class="white-color">17.5k</span>&nbsp;字
             
             
             

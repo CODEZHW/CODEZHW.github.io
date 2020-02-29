@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://codezhw.github.io/"/>
-  <updated>2020-02-27T13:46:45.442Z</updated>
+  <updated>2020-02-29T09:50:35.298Z</updated>
   <id>http://codezhw.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>彻底搞懂Synchronized和Volatile</title>
+    <link href="http://codezhw.github.io/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/"/>
+    <id>http://codezhw.github.io/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/</id>
+    <published>2020-02-29T07:01:02.368Z</published>
+    <updated>2020-02-29T09:50:35.298Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;彻底搞懂Synchronized和Volatile&quot;&gt;&lt;a href=&quot;#彻底搞懂Synchronized和Volatile&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://CODEZHW.github.io/categories/Java/"/>
+    
+    
+      <category term="多线程" scheme="http://CODEZHW.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="JUC" scheme="http://CODEZHW.github.io/tags/JUC/"/>
+    
+      <category term="Synchronize" scheme="http://CODEZHW.github.io/tags/Synchronize/"/>
+    
+      <category term="Volatiie" scheme="http://CODEZHW.github.io/tags/Volatiie/"/>
+    
+  </entry>
   
   <entry>
     <title>Java8新特性:函数式编程以及Stream流式计算</title>
@@ -50,7 +83,7 @@
     <link href="http://codezhw.github.io/2020/02/26/java/jmm-nei-cun-mo-xing/"/>
     <id>http://codezhw.github.io/2020/02/26/java/jmm-nei-cun-mo-xing/</id>
     <published>2020-02-26T07:33:51.500Z</published>
-    <updated>2020-02-26T12:08:20.545Z</updated>
+    <updated>2020-02-29T09:17:12.623Z</updated>
     
     <summary type="html">
     
@@ -130,8 +163,8 @@
   
   <entry>
     <title>多线程进阶-JUC并发编程（2）</title>
-    <link href="http://codezhw.github.io/2020/02/22/java/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/"/>
-    <id>http://codezhw.github.io/2020/02/22/java/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/</id>
+    <link href="http://codezhw.github.io/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/"/>
+    <id>http://codezhw.github.io/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/</id>
     <published>2020-02-22T09:51:51.500Z</published>
     <updated>2020-02-27T07:13:21.050Z</updated>
     
@@ -159,8 +192,8 @@
   
   <entry>
     <title>多线程进阶-JUC并发编程（1）</title>
-    <link href="http://codezhw.github.io/2020/02/22/java/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/"/>
-    <id>http://codezhw.github.io/2020/02/22/java/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/</id>
+    <link href="http://codezhw.github.io/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/"/>
+    <id>http://codezhw.github.io/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/</id>
     <published>2020-02-22T07:51:51.500Z</published>
     <updated>2020-02-29T06:20:22.480Z</updated>
     
