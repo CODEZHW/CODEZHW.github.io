@@ -14,33 +14,30 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>彻底搞懂Synchronized和Volatile | 我的个人博客</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/materialize/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/css/matery.css">
-    <!-- <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/css/search.js"></script> -->
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/css/my.css">
     
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/jquery/jquery.min.js"></script>
     
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
+        <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/cion.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">我的个人博客</span>
                 </a>
@@ -138,7 +135,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/cion.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">我的个人博客</div>
         <div class="logo-desc">
@@ -560,13 +557,13 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们通过JDK自带的工具,将Test1.class文件反编译成汇编查看一下synchronized的实现。</p>
-<p><img src="https://i.loli.net/2020/02/29/ctrXF9B4mgDfV8R.png" alt="代码块"></p>
-<p><img src="https://i.loli.net/2020/02/29/dlvDbLVQiWt9Jnm.png" alt="修饰方法"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/29/ctrXF9B4mgDfV8R.png" alt="代码块"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/29/dlvDbLVQiWt9Jnm.png" alt="修饰方法"></p>
 <p>《Java并发编程的艺术》中给出的解释：</p>
 <blockquote>
 <p><strong>上面class信息中，对于同步块的实现使用了<code>monitorenter</code>和<code>monitorexit</code>指令，而同步方法则 是依靠方法修饰符上的<code>ACC_SYNCHRONIZED</code>来完成的。无论采用哪种方式，其本质是对一 个对象的监视器<code>monitor</code>进行获取，而这个获取过程是排他的，也就是同一时刻只能有一个 线程获取到由synchronized所保护对象的监视器。</strong><br><strong>任意一个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，执行方法的线程必须先获取到该对象的监视器才能进入同步块或者同步方法，而没有获 取到监视器（执行该方法）的线程将会被阻塞在同步块和同步方法的入口处，进入BLOCKED状态。</strong></p>
 </blockquote>
-<p><img src="https://i.loli.net/2020/02/29/F9Zcl8B3EXukUIn.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/29/F9Zcl8B3EXukUIn.png" alt=""></p>
 <p>从图中可以看到，任意线程对Object（Object由synchronized保护）的访问，首先要获得 Object的监视器。如果获取失败，线程进入同步队列，线程状态变为BLOCKED。当访问Object的前驱（获得了锁的线程）释放了锁，则该释放操作唤醒阻塞在同步队列中的线程，使其重新尝试对监视器的获取。</p>
 <p>在<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.11.10" target="_blank" rel="noopener">The Java® Virtual Machine Specification</a>中有关于同步方法和同步代码块的实现原理的介绍，我翻译成中文如下：</p>
 <blockquote>
@@ -667,8 +664,8 @@
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> num <span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://i.loli.net/2020/02/26/VLwsjHvixOErZn3.png" alt="没有volatile关键字"></p>
-<p><img src="https://i.loli.net/2020/02/26/wNpodxMlj7qPz4h.png" alt="有volatile关键字"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/26/VLwsjHvixOErZn3.png" alt="没有volatile关键字"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/26/wNpodxMlj7qPz4h.png" alt="有volatile关键字"></p>
 <p><strong>深入探究一下Volatile 可见性的原因</strong></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JMMDemo</span> <span class="token punctuation">{</span>
 <span class="token comment" spellcheck="true">// 模拟一个demo去给volatile 类型变量num赋值</span>
@@ -1247,7 +1244,7 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/02/gong-ju-lei/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/">
+                <a href="/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/">
                     <div class="card-image">
                         
                         
@@ -1721,6 +1718,6 @@ $(function () {
 
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/sakura.js"></script>
 
-</body>
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
 
 </html>

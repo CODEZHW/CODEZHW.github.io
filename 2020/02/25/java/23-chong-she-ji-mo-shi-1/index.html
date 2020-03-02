@@ -14,33 +14,30 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>23种设计模式 | 我的个人博客</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/materialize/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aos/aos.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/css/matery.css">
-    <!-- <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/css/search.js"></script> -->
-
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/css/my.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/css/my.css">
     
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/jquery/jquery.min.js"></script>
     
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
+        <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="/medias/cion.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">我的个人博客</span>
                 </a>
@@ -138,7 +135,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/cion.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">我的个人博客</div>
         <div class="logo-desc">
@@ -461,7 +458,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-29
+                    2020-03-02
                 </div>
                 
 
@@ -641,7 +638,7 @@
         mb<span class="token punctuation">.</span><span class="token function">name</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://i.loli.net/2020/02/25/OghYlX4GKxsn329.png" alt="关系依赖图"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/OghYlX4GKxsn329.png" alt="关系依赖图"></p>
 <p>可以看到，我们想要得到不同品牌的汽车实现类的时候，不用去new一个对象，直接传递参数给CarFactory就可以得到我们想要的汽车。</p>
 <p>简单地说，简单工厂模式通常就是这样，一个工厂类 XxxFactory，里面有一个静态方法，根据我们不同的参数，返回不同的派生自同一个父类（或实现同一接口）的实例对象。</p>
 <blockquote>
@@ -751,7 +748,7 @@
 <p>​    <strong>奔驰</strong><br>​    <strong>宝马</strong><br>​    <strong>摩拜单车拉拉！！</strong></p>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2020/02/25/C38NjHY51iZms2K.png" alt="依赖图"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/C38NjHY51iZms2K.png" alt="依赖图"></p>
 <hr>
 <h3 id="抽象工厂方法模式"><a href="#抽象工厂方法模式" class="headerlink" title="抽象工厂方法模式"></a>抽象工厂方法模式</h3><p><strong>定义：</strong></p>
 <p>抽象工厂模式提供了一个创建一系列相关或相互依赖对象的接口，无需为他们指定具体的实现类</p>
@@ -761,7 +758,7 @@
 <p><strong>缺点：</strong></p>
 <p>规定了所有可能被创建的产品集合，产品族中拓展新的产品困难</p>
 <p>增加了系统的抽象性和理解难度</p>
-<p><img src="https://i.loli.net/2020/02/25/xoZlOYQMvIb4ePB.png" alt="关系类图"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/xoZlOYQMvIb4ePB.png" alt="关系类图"></p>
 <p>由于代码有点多就不全部展示，只对其中的类做讲解。</p>
 <p>IProductFactory ：所有工厂的总工厂，其中包含要生产的产品。</p>
 <p>Iphone、Router： 手机产品、路由器产品。</p>
@@ -795,12 +792,12 @@
 <ul>
 <li><strong>运行结果</strong></li>
 </ul>
-<p><img src="https://i.loli.net/2020/02/25/rn6POINJW457FoU.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/rn6POINJW457FoU.png" alt=""></p>
 <blockquote>
 <p>当然，抽象工厂的问题也是显而易见的，比如我们要加个显示器，就需要修改所有的工厂，给所有的工厂都加上制造显示器的方法。这有点违反了<strong>对修改关闭，对扩展开放</strong>这个设计原则。</p>
 </blockquote>
 <p>关于产品等级结构和产品族</p>
-<p><img src="https://i.loli.net/2020/02/25/kj6qLSlFnVpEbsZ.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/kj6qLSlFnVpEbsZ.png" alt=""></p>
 <hr>
 <h3 id="工厂方法模式在JDK中的应用"><a href="#工厂方法模式在JDK中的应用" class="headerlink" title="工厂方法模式在JDK中的应用"></a>工厂方法模式在JDK中的应用</h3><ul>
 <li><strong>简单工厂方法</strong></li>
@@ -838,7 +835,7 @@
 <li><strong>抽象工厂方法</strong></li>
 </ul>
 <p>先看一张关系图</p>
-<p><img src="https://i.loli.net/2020/02/25/RYNOkEDtBngZHVj.png" alt="Collection中的依赖"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/RYNOkEDtBngZHVj.png" alt="Collection中的依赖"></p>
 <p>Collection接口中的Iterator<E> iterator();方法，这个方法继承自Iterable()不重要</p>
 <p>可以把Collection看作总的抽象工厂，其中的Iterable()方法等等其他方法都可以看作是Collection的产品。</p>
 <p>Collection工厂把这些产品交给 各自的工厂(ArrayList、HashSet),去实现各自的功能。</p>
@@ -847,7 +844,7 @@
     <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Itr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>而Itr()就是ArrayList自己实现的内部类，里面定义属于ArrayList的hasNext()、next() 。。。等等这些方法。</p>
-<p><img src="https://i.loli.net/2020/02/25/c4yLfsXxE6lhka5.png" alt="Itr内部类"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/c4yLfsXxE6lhka5.png" alt="Itr内部类"></p>
 <p>用这些方法去遍历ArrayList。</p>
 <p><strong>总的产品Iterator接口里面会定义产品所需功能的细节，然后在交给各个品牌不同的工厂来实现</strong></p>
 <blockquote>
@@ -979,7 +976,7 @@
 <p><strong>我们都知道通过反射可以创建，而且反射中的方法可以强制忽略private关键字，这样我们的单例模式还是不安全</strong></p>
 <p><strong>通过序列化与反序列化操作也可以破坏双重校验锁的模式</strong></p>
 <p><strong>我们点进newInstance ( )方法可以看到：</strong></p>
-<p><img src="https://i.loli.net/2020/02/25/NfT5OCywLaJvim3.png" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/NfT5OCywLaJvim3.png" alt=""></p>
 <p><strong>如果反射想要创建的对象是枚举类型，就会抛出一样异常，所以我们可以通过枚举来创建单例模式来防止通过反射破坏单例，枚举创建的单例模式线程安全，创建简单，但是无法延时加载</strong></p>
 <ul>
 <li><strong>枚举</strong></li>
@@ -998,7 +995,7 @@ class demo5{
 
         System.out.println ( instance == instance1 );
     }
-}</code></pre><p><img src="https://i.loli.net/2020/02/25/AerbMunQ3xBRmhs.png" alt="枚举的知识"></p>
+}</code></pre><p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/25/AerbMunQ3xBRmhs.png" alt="枚举的知识"></p>
 <h3 id="单例模式在JDK中的应用"><a href="#单例模式在JDK中的应用" class="headerlink" title="单例模式在JDK中的应用"></a>单例模式在JDK中的应用</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Runtime</span> <span class="token punctuation">{</span>
     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Runtime currentRuntime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Runtime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -2107,6 +2104,6 @@ $(function () {
 
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/sakura.js"></script>
 
-</body>
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
 
 </html>
