@@ -2,7 +2,6 @@
 title: Java8新特性:函数式编程以及Stream流式计算
 date: 2020-02-27T13:30
 author: codezhw
-top: true
 summary: 这是一篇关于Java8新特性，函数式接口以及Stream流式计算的文章，作为新时代的程序必须掌握的JDK8新特性：Lambda表达式、链式编程、函数式接口、Stream流式计算，本文主要介绍了函数式接口以及Stream流式计算, Lambda表达式和链式编程夹带讲解。
 categories: Java
 tags: 

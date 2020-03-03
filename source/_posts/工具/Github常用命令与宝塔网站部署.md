@@ -2,7 +2,7 @@
 title: Github常用命令与网站部署
 date: 2020-03-02T15:51:51.5
 author: codezhw
-summary: 
+summary: 介绍Git常用的命令，创建仓库分支将hexo博客自动生成代码和博客源代码分开管理，以及宝塔服务器部署Java Web项目，部署远程数据库。
 categories: 工具
 tags: 
    - Github

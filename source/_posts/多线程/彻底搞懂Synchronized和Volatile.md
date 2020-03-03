@@ -2,8 +2,6 @@
 title: 彻底搞懂Synchronized和Volatile
 date: 2020-02-29 T15:02:51.5
 author: codezhw
-top: true
-cover: true
 summary: 这是详细讲解Java关键字Synchronize和Volatile的文章，会全面介绍Synchronized和Volatile的底层实现以及原理。
 categories: Java
 tags: 
