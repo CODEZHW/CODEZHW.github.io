@@ -89,6 +89,33 @@
     
     
     <entry>
+      <title>Redis学习（二）：Redis的常用key命令</title>
+      <link href="/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/"/>
+      <url>/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Redis的常用key命令"><a href="#Redis的常用key命令" class="headerlink" title="Redis的常用key命令"></a>Redis的常用key命令</h1><ul><li><strong>常用的key命令:</strong></li></ul><p><strong>DEL key</strong></p><blockquote><p>该命令用于在 key 存在时删除 key。 成功返回1，失败返回0</p></blockquote><p><strong>EXISTS  key</strong></p><blockquote><p>判断key是否存在  存在返回1，不存在返回0</p></blockquote><p><strong>EXPIRE key seconds</strong></p><blockquote><p>给key设置生存时间 单位：秒</p></blockquote><p><strong>TTL key</strong></p><blockquote><p>返回key 剩余的生存时间  </p></blockquote><p><strong>MOVE key db</strong></p><blockquote><p>将当前数据库的 key 移动到给定的数据库 db 当中。 </p></blockquote><p>TYPE key</p><blockquote><p>返回key的数据类型</p></blockquote><p><strong>RENAME key newkey</strong></p><blockquote><p>将key重命名为newkey</p></blockquote><h1 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h1><p>String 类型 Java String</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Redis </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Redis </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>JVM内存模型和Volatile</title>
       <link href="/2020/02/26/java/jmm-nei-cun-mo-xing/"/>
       <url>/2020/02/26/java/jmm-nei-cun-mo-xing/</url>
