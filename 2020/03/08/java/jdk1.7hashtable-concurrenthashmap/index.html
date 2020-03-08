@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="彻底搞懂Synchronized和Volatile, 我的个人博客">
-    <meta name="description" content="这是详细讲解Java关键字Synchronize和Volatile的文章，会全面介绍Synchronized和Volatile的底层实现以及原理。">
+    <meta name="keywords" content="JDK1.7Hashtable&amp;ConcurrentHashMap探究, 我的个人博客">
+    <meta name="description" content="这是一篇关于Java JDK1.7版本,介绍实现Map线程安全的文章，对Hashtable、ConcurrentHashMap进行探究，分析它们实现线程安全的原理，以及二者之间的比较。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>彻底搞懂Synchronized和Volatile | 我的个人博客</title>
+    <title>JDK1.7Hashtable&amp;ConcurrentHashMap探究 | 我的个人博客</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/03/03/a6O4tM3Pc5VkD9y.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">彻底搞懂Synchronized和Volatile</h1>
+                    <h1 class="description center-align post-title">JDK1.7Hashtable&amp;ConcurrentHashMap探究</h1>
                 </div>
             </div>
         </div>
@@ -427,20 +427,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-                                <span class="chip bg-color">多线程</span>
+                            <a href="/tags/HashMap/">
+                                <span class="chip bg-color">HashMap</span>
                             </a>
                         
-                            <a href="/tags/JUC/">
-                                <span class="chip bg-color">JUC</span>
-                            </a>
-                        
-                            <a href="/tags/Synchronize/">
-                                <span class="chip bg-color">Synchronize</span>
-                            </a>
-                        
-                            <a href="/tags/Volatiie/">
-                                <span class="chip bg-color">Volatiie</span>
+                            <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">源码</span>
                             </a>
                         
                     </div>
@@ -464,28 +456,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-02-29
+                    2020-03-08
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-03
+                    2020-03-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4k
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    14 分
+                    4 分
                 </div>
                 
 				
@@ -501,241 +493,93 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="彻底搞懂Synchronized和Volatile"><a href="#彻底搞懂Synchronized和Volatile" class="headerlink" title="彻底搞懂Synchronized和Volatile"></a>彻底搞懂Synchronized和Volatile</h1><h2 id="Synchronize基本介绍"><a href="#Synchronize基本介绍" class="headerlink" title="Synchronize基本介绍"></a>Synchronize基本介绍</h2><blockquote>
-<p>什么是Synchronized？谈谈你对Synchronized的理解</p>
-</blockquote>
-<p><strong>Synchronized，是Java中用于解决<code>并发</code>情况下<code>数据同步</code>访问的一个很重要的关键字。当我们想要保证一个共享资源在同一时间只会被一个线程访问到时，我们可以在代码中使用Synchronized关键字对类或者对象加锁。</strong></p>
-<hr>
-<p><strong>简单理解就是一个<code>锁</code>。</strong></p>
+                <h1 id="JDK1-7Hashtable-amp-ConcurrentHashMap探究"><a href="#JDK1-7Hashtable-amp-ConcurrentHashMap探究" class="headerlink" title="JDK1.7Hashtable&amp;ConcurrentHashMap探究"></a>JDK1.7Hashtable&amp;ConcurrentHashMap探究</h1><p>在JDK1.7HashMap探究&amp;手写HashMap这篇文章中，我们探究了HashMap的底层实现原理，分析了产生死锁的原因。</p>
+<p>HashMap在我们日常生活中使用频繁，不免在多线程的环境下使用，因为HashMap是非同步的，那么就很有可能产生死锁的情况。</p>
+<p>有什么办法能解决这样的问题呢？</p>
+<p>我们来看HashMap文档的注释。</p>
+<pre class="line-numbers language-visual"><code class="language-visual">(The <tt>HashMap</tt>
+* class is roughly equivalent to <tt>Hashtable</tt>, except that it is
+* unsynchronized and permits nulls.) <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这段话的意思是：HashMap大致相当于Hashtable, 除了它是不安全的以及允许为空。</p>
+<p>结论：</p>
 <blockquote>
-<p>Synchronized实现同步的基础是什么？</p>
+<p><strong>如果我们想在多线程环境下使用HashMap，我们可以使用Hashtable来代替它，Hashtable大致相当于HashMap，只是key和value不允许为空。</strong></p>
 </blockquote>
-<p>synchronized实现同步的基础：</p>
-<p>Java中的每一个对象都可以作为锁。具体表现为以下3种形式。</p>
-<ul>
-<li><strong>对于普通同步方法，锁是当前实例对象。</strong></li>
-<li><strong>对于静态同步方法，锁是当前类的Class对象。</strong></li>
-<li><strong>对于同步方法块，锁是Synchonized括号里配置的对象。</strong></li>
-</ul>
-<p>对于普通同步方法和静态同步方法可能会有误解：</p>
-<p>实例对象：<strong>是指我们通过new关键字new出来的那个对象</strong></p>
-<p>Class对象：<strong>是每一个类对应的Class对象。也就是不关你 new 几个xx对象它们都属于同一个Class类的对象。</strong></p>
-<p>可以参考八锁问题深刻理解这个三种方式。</p>
-<hr>
-<blockquote>
-<p>Synchronized的三大特性</p>
-</blockquote>
-<p>这里引用《深入理解Java虚拟机》中的一段话：</p>
-<blockquote>
-<p><strong>synchronized关键字在需要原子性、可见性和有序性这三种特性的时候都可以作为其中一种解决方案，看起来万能的。的确，大部分并发控制操作都能使用synchronized来完成。</strong></p>
-</blockquote>
-<p>可以看到synchronized的三大特性：</p>
-<ul>
-<li><strong>原子性</strong></li>
-<li><strong>可见性</strong></li>
-<li><strong>有序性</strong></li>
-</ul>
-<p>对于这三个特性先给出概念一下再仔细探究</p>
-<p><strong>原子性</strong>：<strong>原子指化学反应不可再分的基本微粒，原子性是指一个操作是不可中断的，要全部执行完成，要不就都不执行。</strong></p>
-<p><strong>可见性：</strong> <strong>可见性是指当多个线程同时访问同一个变量时，一旦又线程改变了这个变量的值，其他线程能够立即看到修改的值。</strong></p>
-<p><strong>有序性：</strong>  <strong>有序性即程序执行的顺序按照代码的先后顺序执行。</strong></p>
-<hr>
-<p>那么我们现在知道了Synchronized可以通过修饰代码块和方法，来确保在同一时刻只有一个线程能够访问代码块里面的内容或者方法。</p>
-<blockquote>
-<p>那这个过程是怎么实现的呢？</p>
-</blockquote>
-<p>这里给出一个案例。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test1</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 对Synchronized Class对象进行加锁</span>
-        <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>Test1<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token punctuation">}</span>
-        <span class="token comment" spellcheck="true">//静态同步方法，对Synchronized Class对象进行加锁</span>
-        <span class="token function">m</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">m</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>我们通过JDK自带的工具,将Test1.class文件反编译成汇编查看一下synchronized的实现。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/29/ctrXF9B4mgDfV8R.png" alt="代码块"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/29/dlvDbLVQiWt9Jnm.png" alt="修饰方法"></p>
-<p>《Java并发编程的艺术》中给出的解释：</p>
-<blockquote>
-<p><strong>上面class信息中，对于同步块的实现使用了<code>monitorenter</code>和<code>monitorexit</code>指令，而同步方法则 是依靠方法修饰符上的<code>ACC_SYNCHRONIZED</code>来完成的。无论采用哪种方式，其本质是对一 个对象的监视器<code>monitor</code>进行获取，而这个获取过程是排他的，也就是同一时刻只能有一个 线程获取到由synchronized所保护对象的监视器。</strong><br><strong>任意一个对象都拥有自己的监视器，当这个对象由同步块或者这个对象的同步方法调用时，执行方法的线程必须先获取到该对象的监视器才能进入同步块或者同步方法，而没有获 取到监视器（执行该方法）的线程将会被阻塞在同步块和同步方法的入口处，进入BLOCKED状态。</strong></p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/29/F9Zcl8B3EXukUIn.png" alt=""></p>
-<p>从图中可以看到，任意线程对Object（Object由synchronized保护）的访问，首先要获得 Object的监视器。如果获取失败，线程进入同步队列，线程状态变为BLOCKED。当访问Object的前驱（获得了锁的线程）释放了锁，则该释放操作唤醒阻塞在同步队列中的线程，使其重新尝试对监视器的获取。</p>
-<p>在<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.11.10" target="_blank" rel="noopener">The Java® Virtual Machine Specification</a>中有关于同步方法和同步代码块的实现原理的介绍，我翻译成中文如下：</p>
-<blockquote>
-<p>方法级的同步是隐式的。同步方法的常量池中会有一个<code>ACC_SYNCHRONIZED</code>标志。当某个线程要访问某个方法的时候，会检查是否有<code>ACC_SYNCHRONIZED</code>，如果有设置，则需要先获得监视器锁，然后开始执行方法，方法执行之后再释放监视器锁。这时如果其他线程来请求执行方法，会因为无法获得监视器锁而被阻断住。值得注意的是，如果在方法执行过程中，发生了异常，并且方法内部并没有处理该异常，那么在异常被抛到方法外面之前监视器锁会被自动释放。</p>
-<p>同步代码块使用<code>monitorenter</code>和<code>monitorexit</code>两个指令实现。可以把执行<code>monitorenter</code>指令理解为加锁，执行<code>monitorexit</code>理解为释放锁。 每个对象维护着一个记录着被锁次数的计数器。未被锁定的对象的该计数器为0，当一个线程获得锁（执行<code>monitorenter</code>）后，该计数器自增变为 1 ，当同一个线程再次获得该对象的锁的时候，计数器再次自增。当同一个线程释放锁（执行<code>monitorexit</code>指令）的时候，计数器再自减。当计数器为0的时候。锁将被释放，其他线程便可以获得锁。</p>
-</blockquote>
-<p>不论是monitorenter、monitorexit、ACC_SYNCHRONIZED、Object.wait()、Object.notify()。这些方法都是基于monitor实现的。monitor是HotSpot虚拟机中采用ObjectMonitor实现，由于水平有限，这里不做介绍。</p>
-<p>现在来对Synchroized的三大特性做出解释：</p>
-<hr>
-<h2 id="Synchroized的三大特性"><a href="#Synchroized的三大特性" class="headerlink" title="Synchroized的三大特性"></a>Synchroized的三大特性</h2><p> <strong>原子性：</strong></p>
-<p>线程是CPU调度的基本单位。CPU有时间片的概念，会根据不同的调度算法进行线程调度。当一个线程获得时间片之后开始执行，在时间片耗尽之后，就会失去CPU使用权。所以在多线程场景下，由于时间片在线程间轮换，就会发生原子性问题。</p>
-<p>在Java中，为了保证原子性，提供了两个高级的字节码指令<code>monitorenter</code>和<code>monitorexit</code>。前面中，介绍过，这两个字节码指令，在Java中对应的关键字就是<code>synchronized</code>。</p>
-<p>通过<code>monitorenter</code>和<code>monitorexit</code>指令，可以保证被<code>synchronized</code>修饰的代码在同一时间只能被一个线程访问，在锁未释放之前，无法被其他线程访问到。因此，在Java中可以使用<code>synchronized</code>来保证方法和代码块内的操作是原子性的。</p>
-<p> <strong>可见性：</strong></p>
-<p>造成不可见性的原因：在Java内存模型中，所有的变量都存在主存中，每条线程拥有自己的工作内存，每一个访问主存的线程都拥有一个主存的拷贝副本，将其放在线程自己的工作内存中，当一个线程对变量进行修改时，先经过工作内存再刷新到主存，另一个持有该变量的线程，再通过自己的工作内存去主存中读取新的数据。</p>
-<p>所以当一个线程修改了数据，对另一个持有该数据的线程来说，这次的更新操作对另一个线程是不可见的。</p>
-<p>Java中这样规定：</p>
-<ul>
-<li><p>线程解锁前,必须把共享变量的最新值刷新到主内存</p>
-</li>
-<li><p>线程加锁时,将清空工作内存中共享变量的值,从而使用共享变量时需要从主内存中重新读取最新的值</p>
-<p><strong>有序性：</strong></p>
-</li>
-</ul>
-<p>除了引入了时间片以外，由于处理器优化和指令重排等，CPU还可能对输入代码进行乱序执行，比如load-&gt;add-&gt;save 有可能被优化成load-&gt;save-&gt;add 。这就是可能存在有序性问题。</p>
-<p>这里需要注意的是，<code>synchronized</code>是无法禁止指令重排和处理器优化的。也就是说，<code>synchronized</code>无法避免上述提到的问题。</p>
-<p>那么，为什么还说<code>synchronized</code>也提供了有序性保证呢？</p>
-<p>这就要再把有序性的概念扩展一下了。Java程序中天然的有序性可以总结为一句话：如果在本线程内观察，所有操作都是天然有序的。如果在一个线程中观察另一个线程，所有操作都是无序的。</p>
-<p>以上这句话也是《深入理解Java虚拟机》中的原句，但是怎么理解呢？周志明并没有详细的解释。这里我简单扩展一下，这其实和<code>as-if-serial语义</code>有关。</p>
-<p><code>as-if-serial</code>语义的意思指：不管怎么重排序（编译器和处理器为了提高并行度），单线程程序的执行结果都不能被改变。编译器和处理器无论如何优化，都必须遵守<code>as-if-serial</code>语义。</p>
-<p>这里不对<code>as-if-serial语义</code>详细展开了，简单说就是，<code>as-if-serial语义</code>保证了单线程中，指令重排是有一定的限制的，而只要编译器和处理器都遵守了这个语义，那么就可以认为单线程程序是按照顺序执行的。当然，实际上还是有重排的，只不过我们无须关心这种重排的干扰。</p>
-<p>所以呢，由于<code>synchronized</code>修饰的代码，同一时间只能被同一线程访问。那么也就是单线程执行的。所以，可以保证其有序性。</p>
-<ul>
-<li>可见性实例</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//资源类</span>
-<span class="token keyword">class</span> <span class="token class-name">H</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
+<h2 id="Hashtable与HashMap的比较"><a href="#Hashtable与HashMap的比较" class="headerlink" title="Hashtable与HashMap的比较"></a>Hashtable与HashMap的比较</h2><p>我们来看一下Hashtable的源码</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Hashtable</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span>
+    <span class="token keyword">extends</span> <span class="token class-name">Dictionary</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span>
+    <span class="token keyword">implements</span> <span class="token class-name">Map</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">,</span> Cloneable<span class="token punctuation">,</span> java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>Serializable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>首先Hashtable继承自Dictionary类，实现了Map、Cloneable以及Serializable接口</p>
+<p>Dictionary 类是一个抽象类，用来存储键/值对，作用和Map类相似。</p>
+<p>但是现在以及过时。</p>
+<p>参数方面基本和HashMap一致。</p>
+<p><strong>构造函数方面：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token function">Hashtable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token number">0.75f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException <span class="token punctuation">{</span>
-        H h <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">H</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">.</span><span class="token function">sleep</span> <span class="token punctuation">(</span> <span class="token number">5</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        h<span class="token punctuation">.</span>num <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">+</span><span class="token string">"-> num的值："</span><span class="token operator">+</span> h<span class="token punctuation">.</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">new</span> <span class="token class-name">Thread</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-            <span class="token keyword">synchronized</span> <span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token punctuation">}</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">+</span><span class="token string">"-> num的值："</span><span class="token operator">+</span> h<span class="token punctuation">.</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            h<span class="token punctuation">.</span>num<span class="token operator">--</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"A"</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">.</span><span class="token function">sleep</span> <span class="token punctuation">(</span> <span class="token number">2</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">+</span><span class="token string">"-> num的值："</span><span class="token operator">+</span> h<span class="token punctuation">.</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>main-&gt; num的值：2<br>A-&gt; num的值：2<br>main-&gt; num的值：1</p>
-<hr>
-<h2 id="Volatile基本介绍"><a href="#Volatile基本介绍" class="headerlink" title="Volatile基本介绍"></a>Volatile基本介绍</h2><blockquote>
-<p> 请你谈谈你对 Volatile 的理解</p>
-</blockquote>
-<p> Volatile 是轻量级的Synchronized，它的实现确保了可见性以及指令重排，不能够实现同步。</p>
-<ul>
-<li><p>1、保证可见性 </p>
-</li>
-<li><p>2、不保证原子性</p>
-</li>
-<li><p>3、禁止指令重排</p>
-</li>
-</ul>
-<p><strong>Valatile定义：</strong></p>
-<blockquote>
-<p><strong>Java语言规范第3版中对volatile的定义如下：Java编程语言允许线程访问共享变量，为了 确保共享变量能被准确和一致地更新，线程应该确保通过排他锁单独获得这个变量。Java语言 提供了volatile，在某些情况下比锁要更加方便。如果一个字段被声明成volatile，Java线程内存</strong><br><strong>模型确保所有线程看到这个变量的值是一致的。</strong></p>
-</blockquote>
-<hr>
-<h2 id="Volatile的三大特性"><a href="#Volatile的三大特性" class="headerlink" title="Volatile的三大特性"></a>Volatile的三大特性</h2><ul>
-<li><strong>保证可见性</strong></li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JMMDemo</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">volatile</span> <span class="token keyword">static</span> <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 不加 volatile 程序就会死循环！    </span>
-    <span class="token comment" spellcheck="true">// 加 volatile 可以保证可见性</span>
-    <span class="token comment" spellcheck="true">// 可见性： 可见性的意思是当一个线程修改一个共享变量时，另外一个线程能读到这个修改的值</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">new</span> <span class="token class-name">Thread</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token punctuation">{</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>num <span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">.</span><span class="token function">sleep</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        num <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> num <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/26/VLwsjHvixOErZn3.png" alt="没有volatile关键字"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/02/26/wNpodxMlj7qPz4h.png" alt="有volatile关键字"></p>
-<p><strong>深入探究一下Volatile 可见性的原因</strong></p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JMMDemo</span> <span class="token punctuation">{</span>
-<span class="token comment" spellcheck="true">// 模拟一个demo去给volatile 类型变量num赋值</span>
-<span class="token comment" spellcheck="true">// 我们通过工具查看 对valatile进行写操作时，CPU做的事情</span>
-    <span class="token keyword">volatile</span>  <span class="token keyword">int</span> num<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        JMMDemo jmmDemo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JMMDemo</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        jmmDemo<span class="token punctuation">.</span>num <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>0x000001bc005902d9: lock add dword ptr</strong></p>
-<p>通过查IA-32架 构软件开发者手册可知，Lock前缀的指令在多核处理器下会引发了两件事情。</p>
-<ul>
-<li><strong>将当前处理器缓存行的数据写回到系统内存。</strong></li>
-<li><strong>这个写回内存的操作会使在其他CPU里缓存了该内存地址的数据无效。</strong></li>
-</ul>
-<p>volatile的两条实现原则：</p>
-<blockquote>
-<p><strong>摘自《Java并发编程的艺术》</strong></p>
-<ul>
-<li>Lock前缀指令会引起处理器缓存回写到内存。Lock前缀指令导致在执行指令期间，声 言处理器的LOCK#信号。在多处理器环境中，LOCK#信号确保在声言该信号期间，处理器可以 独占任何共享内存[2]。是，在最近的处理器里，LOCK＃信号一般不锁总线，而是锁缓存，毕 竟锁总线开销的比较大。对于Intel486和 Pentium处理器，在锁操作时，总是在总线上声言LOCK#信号。但在P6和目前的处理器中，如果 访问的内存区域已经缓存在处理器内部，则不会声言LOCK#信号。相反它会锁定这块内存区 域的缓存并回写到内存，并使用缓存一致性机制来确保修改的原子性，此操作被称为“缓存锁 定”，<strong>缓存一致性机制会阻止同时修改由两个以上处理器缓存的内存区域数据。</strong></li>
-<li>一个处理器的缓存回写到内存会导致其他处理器的缓存无效。IA-32处理器和Intel 64处 理器使用MESI（修改、独占、共享、无效）控制协议去维护内部缓存和其他处理器缓存的一致 性。在多核处理器系统中进行操作的时候，IA-32和Intel 64处理器能嗅探其他处理器访问系统内存和它们的内部缓存。处理器使用嗅探技术保证它的内部缓存、系统内存和其他处理器的 缓存的数据在总线上保持一致。例如，在Pentium和P6 family处理器中，<strong>如果通过嗅探一个处理器来检测其他处理器打算写内存地址，而这个地址当前处于共享状态，那么正在嗅探的处理器将使它的缓存行无效，在下次访问相同内存地址时，强制执行缓存行填充。</strong></li>
-</ul>
-</blockquote>
-<ul>
-<li><strong>不保证原子性（和事务的原子性一个意思）</strong></li>
-</ul>
-<p><strong>原子性 : 不可分割</strong><br><strong>线程A在执行任务的时候，不能被打扰的，也不能被分割。要么同时成功，要么同时失败</strong></p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JMMDemo2</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token function">Hashtable</span><span class="token punctuation">(</span><span class="token keyword">int</span> initialCapacity<span class="token punctuation">,</span> <span class="token keyword">float</span> loadFactor<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>initialCapacity <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">"Illegal Capacity: "</span><span class="token operator">+</span>
+                                               initialCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>loadFactor <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token operator">||</span> Float<span class="token punctuation">.</span><span class="token function">isNaN</span><span class="token punctuation">(</span>loadFactor<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">"Illegal Load: "</span><span class="token operator">+</span>loadFactor<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">add</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        num<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">20</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">new</span> <span class="token class-name">Thread</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">1000</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    <span class="token function">add</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"A"</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">activeCount</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            Thread<span class="token punctuation">.</span><span class="token function">yield</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">+</span> num <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>initialCapacity<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+            initialCapacity <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>loadFactor <span class="token operator">=</span> loadFactor<span class="token punctuation">;</span>
+        table <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Entry</span><span class="token punctuation">[</span>initialCapacity<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        threshold <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>initialCapacity <span class="token operator">*</span> loadFactor<span class="token punctuation">,</span> MAX_ARRAY_SIZE <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">initHashSeedAsNeeded</span><span class="token punctuation">(</span>initialCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>容器的默认初始容量为11，负载因子为0.75。</p>
+<p><strong>计算hash值的方法</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">int</span> <span class="token function">hash</span><span class="token punctuation">(</span>Object k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// hashSeed will be zero if alternative hashing is disabled.</span>
+    <span class="token keyword">return</span> hashSeed <span class="token operator">^</span> k<span class="token punctuation">.</span><span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>直接调用了object的hashCode()方法然后与hashSeed做一次异或运算，这样的操作效率是很低的。</p>
+<p><strong>扩容</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span> newCapacity <span class="token operator">=</span> <span class="token punctuation">(</span>oldCapacity <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>扩容后的新的数组容量 = （原数组容量*2） +1</p>
 <ul>
-<li><strong>防止指令重排</strong></li>
+<li><strong>总结</strong></li>
 </ul>
-<p><strong>volatile关键字通过内存屏障来防止指令被重排序。</strong></p>
-<p><strong>为了实现volatile的内存语义，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。然而，对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎不可能，为此，Java内存模型采取保守策略。</strong></p>
-<p><strong>下面是基于保守策略的JMM内存屏障插入策略：</strong></p>
+<blockquote>
 <ul>
-<li><strong>在每个volatile写操作的前面插入一个StoreStore屏障。</strong></li>
-<li><strong>在每个volatile写操作的后面插入一个StoreLoad屏障。</strong></li>
-<li><strong>在每个volatile读操作的后面插入一个LoadLoad屏障。</strong></li>
-<li><strong>在每个volatile读操作的后面插入一个LoadStore屏障。</strong></li>
+<li><strong>Hashmap中的默认初始容量为16，Hashtable中为11，负载因子都是0.75</strong></li>
+<li><strong>HashMap中允许存储null值，Hashtable中会抛出异常。</strong></li>
+<li><strong>HashMap中计算hash值的方法比较复杂，进行了多次右移运算，再进行运算得到hash值，Hashtable中比较简单，直接用hashcode()方法得到进行运算。</strong></li>
+<li><strong>HashMap的扩容为原数组的两倍，Hashtable是两倍+1</strong></li>
 </ul>
-<p><strong>volatile的两条语义保证了线程间共享变量的及时可见性，但整个过程并没有保证同步，这是与volatile的使命有关的，创造它的背景就是在某些情况下可以代替synchronized实现可见性的目的，规避synchronized带来的线程挂起、调度的开销。如果volatile也能保证同步，那么它就是个锁，可以完全取代synchronized了。</strong></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p><strong>Java中实现多线程共享变量的可见性方法有synchronize 和 volatile 。</strong></p>
-</li>
-<li><p><strong>synchronize:可以用在方法或者代码块上,能保证可见性,也能保证原子性。</strong></p>
-</li>
-<li><p><strong>volatitle:用在变量上,只保证可见性,不保证原子性,不加锁,比synchronize轻量级,不会造成线程阻塞.volatitle读相当于加锁,volatitle写相当于解锁。</strong></p>
-</li>
-</ul>
+</blockquote>
+<h2 id="Hashtable的并发核心思想"><a href="#Hashtable的并发核心思想" class="headerlink" title="Hashtable的并发核心思想"></a><strong>Hashtable的并发核心思想</strong></h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">synchronized</span> V <span class="token function">put</span><span class="token punctuation">(</span>K key<span class="token punctuation">,</span> V value<span class="token punctuation">)</span> 
+<span class="token keyword">public</span> <span class="token keyword">synchronized</span> V <span class="token function">remove</span><span class="token punctuation">(</span>Object key<span class="token punctuation">)</span> 
+<span class="token keyword">public</span> <span class="token keyword">synchronized</span> V <span class="token function">get</span><span class="token punctuation">(</span>Object key<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可以看到这些关键操作都加上了synchronized关键字，我们都知道synchronized是重量级锁，系统检查到锁是重量级锁之后，会把等待想要获得锁的线程进行<strong>阻塞</strong>，被阻塞的线程不会消耗cup。但是阻塞或者唤醒一个线程时，都需要操作系统来帮忙，这就需要从<strong>用户态</strong>转换到<strong>内核态</strong>，而转换状态是需要消耗很多时间的，有可能比用户执行代码的时间还要长。</p>
+<p>而且可以发现一个问题：</p>
+<p>假设我们在多线程环境下对一个hashtable进行操作，我们put()一个数据进入下标为5的位置，同时想要对下标为3的数据进行读取操作，这在Hashtable中不能实现的，因为这些方法都加上了synchronized关键字，在同一时刻只能有一个线程进行操作，其他线程处于等待阻塞状态。</p>
+<p><strong>这样的做法实现了并发安全性，却大大的降低了我们的效率。</strong></p>
+<h2 id="Collections-synchronizedMap"><a href="#Collections-synchronizedMap" class="headerlink" title="Collections.synchronizedMap"></a>Collections.synchronizedMap</h2><p>JDK在Collections对象中提供了大量可以实现集合并发安全的方法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/08/NrQ1kFUWuJBocjT.png" alt=""></p>
+<p>在HashMap文档中我们得知利用Collections.synchronizedMap方法传入一个HashMap实例去得到一个并发安全的map。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> Map<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token function">synchronizedMap</span><span class="token punctuation">(</span>Map<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> m<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">SynchronizedMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//SynchronizedMap是一个静态内部类</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">SynchronizedMap</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span>
+        <span class="token keyword">implements</span> <span class="token class-name">Map</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">,</span> Serializable<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//省略</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/08/piw8R2BhcAtxJCq.png" alt="synchronizedMap"></p>
+<p><strong>它里面的大多数操作也都是加入synchronized关键字，基本上和Hashtable的原理一样，所以它的效率也是很低的。</strong></p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p><strong>问题：</strong></p>
+<blockquote>
+<p><strong>HashTable容器在竞争激烈的并发环境下表现出效率低下的原因是所有访问HashTable的线程都必须竞争同一把锁，假如容器里有多把锁，每一把锁用于锁容器其中一部分数据，那么当多线程访问容器里不同数据段的数据时，线程间就不会存在锁竞争，从而可以有效提高并 发访问效率，这就是ConcurrentHashMap所使用的锁分段技术</strong></p>
+</blockquote>
+<p>在 JDK1.5中 Java提供了 java.util.concurrent.ConcurrentHashMap 类，首先将数据分成一段一段地存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。</p>
+<p>先暂时放在这里。</p>
 
             </div>
             <hr/>
@@ -761,7 +605,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://CODEZHW.github.io/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/">http://CODEZHW.github.io/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/</a>
+                    <a href="http://CODEZHW.github.io/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/">http://CODEZHW.github.io/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -799,20 +643,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-                                    <span class="chip bg-color">多线程</span>
+                                <a href="/tags/HashMap/">
+                                    <span class="chip bg-color">HashMap</span>
                                 </a>
                             
-                                <a href="/tags/JUC/">
-                                    <span class="chip bg-color">JUC</span>
-                                </a>
-                            
-                                <a href="/tags/Synchronize/">
-                                    <span class="chip bg-color">Synchronize</span>
-                                </a>
-                            
-                                <a href="/tags/Volatiie/">
-                                    <span class="chip bg-color">Volatiie</span>
+                                <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">源码</span>
                                 </a>
                             
                         </div>
@@ -1241,9 +1077,64 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/11.jpg" class="responsive-img" alt="JDK1.7Hashtable&ConcurrentHashMap探究">
+                        
+                        <span class="card-title">JDK1.7Hashtable&ConcurrentHashMap探究</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            这是一篇关于Java JDK1.7版本,介绍实现Map线程安全的文章，对Hashtable、ConcurrentHashMap进行探究，分析它们实现线程安全的原理，以及二者之间的比较。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/HashMap/">
+                        <span class="chip bg-color">HashMap</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">源码</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/">
                     <div class="card-image">
@@ -1261,9 +1152,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1285,70 +1176,6 @@
                     
                     <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
                         <span class="chip bg-color">服务器</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg" class="responsive-img" alt="Redis学习（二）：Redis的常用key命令">
-                        
-                        <span class="card-title">Redis学习（二）：Redis的常用key命令</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            Redis的常用key命令
-常用的key命令:
-
-DEL key
-
-该命令用于在 key 存在时删除 key。 成功返回1，失败返回0
-
-EXISTS  key
-
-判断key是否存在  存在返回1，不存在返回0
-
-EXPIRE key se
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-27
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Redis/" class="post-category">
-                                    Redis
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Redis/">
-                        <span class="chip bg-color">Redis</span>
-                    </a>
-                    
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
                     </a>
                     
                 </div>

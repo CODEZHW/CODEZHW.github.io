@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="jdk7HashMap探究&amp;手写HashMap, 我的个人博客">
+    <meta name="keywords" content="JDK1.7HashMap探究&amp;手写HashMap, 我的个人博客">
     <meta name="description" content="这是一篇关于Java JDK1.7版本HashMap的文章，了解HashMap的优势与缺点，探究底层的实现原理以及底层代码所实现的目的,简单探究了一下HashMap产生死锁的原因,以及手写一个HashMap。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>jdk7HashMap探究&amp;手写HashMap | 我的个人博客</title>
+    <title>JDK1.7HashMap探究&amp;手写HashMap | 我的个人博客</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">jdk7HashMap探究&amp;手写HashMap</h1>
+                    <h1 class="description center-align post-title">JDK1.7HashMap探究&amp;手写HashMap</h1>
                 </div>
             </div>
         </div>
@@ -463,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-03
+                    2020-03-08
                 </div>
                 
 
@@ -493,7 +493,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="jdk1-7HashMap探究-amp-手写HashMap"><a href="#jdk1-7HashMap探究-amp-手写HashMap" class="headerlink" title="jdk1.7HashMap探究&amp;手写HashMap"></a>jdk1.7HashMap探究&amp;手写HashMap</h1><h2 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h2><blockquote>
+                <h1 id="JDK1-7HashMap探究-amp-手写HashMap"><a href="#JDK1-7HashMap探究-amp-手写HashMap" class="headerlink" title="JDK1.7HashMap探究&amp;手写HashMap"></a>JDK1.7HashMap探究&amp;手写HashMap</h1><h2 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h2><blockquote>
 <p>什么是HashMap?</p>
 </blockquote>
 <p>简单来说，HashMap是用哈希表（直接一点可以说数组加单链表）的Map实现类。</p>
@@ -577,18 +577,18 @@
     <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="put-方法"><a href="#put-方法" class="headerlink" title="put()方法"></a>put()方法</h3><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> V <span class="token function">put</span><span class="token punctuation">(</span>K key<span class="token punctuation">,</span> V value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//初始化容器 1</span>
+    <span class="token comment" spellcheck="true">//1.初始化容器</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>table <span class="token operator">==</span> EMPTY_TABLE<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token function">inflateTable</span><span class="token punctuation">(</span>threshold<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token operator">==</span> null<span class="token punctuation">)</span>
         <span class="token comment" spellcheck="true">//可以存入一个 key==null 的值</span>
         <span class="token keyword">return</span> <span class="token function">putForNullKey</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//算出hash值 2</span>
+    <span class="token comment" spellcheck="true">//2.算出hash值 </span>
     <span class="token keyword">int</span> hash <span class="token operator">=</span> <span class="token function">hash</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//通过hash值算出这个key，对于的数组下标 3</span>
+    <span class="token comment" spellcheck="true">//3.通过hash值算出这个key，对于的数组下标 </span>
     <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token function">indexFor</span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> table<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//遍历这个结点的链表 4</span>
+    <span class="token comment" spellcheck="true">//4.遍历这个结点的链表 </span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span>Entry<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> e <span class="token operator">=</span> table<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span> e <span class="token operator">!=</span> null<span class="token punctuation">;</span> e <span class="token operator">=</span> e<span class="token punctuation">.</span>next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         Object k<span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>hash <span class="token operator">==</span> hash <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>k <span class="token operator">=</span> e<span class="token punctuation">.</span>key<span class="token punctuation">)</span> <span class="token operator">==</span> key <span class="token operator">||</span> key<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -600,7 +600,7 @@
     <span class="token punctuation">}</span>
 
     modCount<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 5</span>
+    <span class="token comment" spellcheck="true">// 5.增加节点</span>
     <span class="token function">addEntry</span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> null<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -618,10 +618,10 @@
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    <strong>int capacity = roundUpToPowerOf2(toSize);是很重要的操作，在下面会介绍</strong></p>
 <blockquote>
-<p>取数组下标</p>
+<p>取数组下标的方法</p>
 </blockquote>
-<p>对于一个任意的数 N ，我们想要得到 范围：0 ~M的方法（M为数组容量）：</p>
-<p>对于任意值n : n % m 就会得到范围为0~m的数，这个值就可以作为数组的下标。</p>
+<p>对于一个任意的数 N ，我们想要得到 范围：<strong>0 ~M-1</strong> 的方法（M为数组容量）：</p>
+<p>对于任意值n : n % m 就会得到范围为 0~m-1 的数，这个值就可以作为数组的下标。</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//取地下标的方法</span>
 <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">indexFor</span><span class="token punctuation">(</span><span class="token keyword">int</span> h<span class="token punctuation">,</span> <span class="token keyword">int</span> length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// assert Integer.bitCount(length) == 1 : "length must be a non-zero power of 2";</span>
@@ -630,12 +630,12 @@
 <p>在HashMap中则是通过  <strong>h &amp; (length-1)</strong>  将 key的hash值 与 数组长度-1进行与操作。</p>
 <p> 而这个数组的长度永远都是2的整数幂，那2的整数幂-1 的二进制的最后几位都是1</p>
 <p>比如：16-1 = 15  （15的二进制：0000 1111）</p>
-<p>这样的操作保证了二进制的最后几位都是1。</p>
+<p>这样的操作保证<strong>h &amp; (length-1)</strong>后得到的结果在0~length-1这个范围之内。</p>
 <p>举例：</p>
 <p> <strong>h : xxxx 1010 （假设的一个hash值）</strong></p>
-<p> <strong>l :  0000 1111（length - 1）</strong></p>
+<p> <strong>l :  0000 1111（16- 1）</strong></p>
 <p> <strong>r:  0000 1010   （结果，就是这个key对应的数组下标）</strong></p>
-<p><strong>这样对于任意一个hash值，他在与(length-1)做与运算后的结果范围永远在： 0~length之间，这样就可以得到了数组的下标</strong></p>
+<p><strong>这样对于任意一个hash值，他在与(length-1)做与运算后的结果范围永远在： 0~15之间，这样得到的下标就会在容器的长度范围之内</strong></p>
 <p><strong>相比于%得到数组下标，这样做的好处在于位运算的效率比较高。</strong></p>
 <blockquote>
 <p><strong>可以发现一个问题：在做与运算操作的时候，hash值的高位没有参与运算，那么不同的hash值，如果低位相同，通过运算得到的数组下标可能一样，这样散列性就很差。</strong></p>
@@ -693,7 +693,7 @@
         bucketIndex <span class="token operator">=</span> <span class="token function">indexFor</span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> table<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-    <span class="token comment" spellcheck="true">//table[i]==null 创建头结点, !=null 创建新节点并将其执行原头结点，然后将链表整体后移（即添加链表的方式在头部添加，不在尾部添加）。</span>
+    <span class="token comment" spellcheck="true">//table[i]==null 创建头结点, !=null 创建新节点并将其执行原头结点，然后将链表整体后移（即添加链表的方式是头部添加，不是尾部添加）。</span>
     <span class="token function">createEntry</span><span class="token punctuation">(</span>hash<span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> bucketIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">createEntry</span><span class="token punctuation">(</span><span class="token keyword">int</span> hash<span class="token punctuation">,</span> K key<span class="token punctuation">,</span> V value<span class="token punctuation">,</span> <span class="token keyword">int</span> bucketIndex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -910,7 +910,6 @@
 <p>可如果 HashMap 只是这样，那<strong>不叫做设计缺陷, 也不叫BUG</strong> 。</p>
 <p>没有增加并发处理的数据结构在高并发使用时出现错读错写不能叫问题，更别说设计缺陷了。</p>
 <p>总的来说阅读JDK1.7源码，能提高我们阅读源码的能力，可以理解java开发者们的设计思路，所以还是很有意思的。</p>
-<p>那么,我们1.8见…</p>
 
             </div>
             <hr/>
@@ -936,7 +935,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://CODEZHW.github.io/2020/02/23/java/jdk7hashmap-tan-jiu-shou-xie-hashmap/">http://CODEZHW.github.io/2020/02/23/java/jdk7hashmap-tan-jiu-shou-xie-hashmap/</a>
+                    <a href="http://CODEZHW.github.io/2020/02/23/java/jdk1.7hashmap-tan-jiu-shou-xie-hashmap/">http://CODEZHW.github.io/2020/02/23/java/jdk1.7hashmap-tan-jiu-shou-xie-hashmap/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1679,7 +1678,7 @@ $(function () {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">18.5k</span>&nbsp;字
+                class="white-color">20.3k</span>&nbsp;字
             
             
             
