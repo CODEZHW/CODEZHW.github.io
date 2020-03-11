@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://codezhw.club/"/>
-  <updated>2020-03-08T12:13:14.743Z</updated>
+  <updated>2020-03-10T12:03:33.649Z</updated>
   <id>https://codezhw.club/</id>
   
   <author>
@@ -15,6 +15,91 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OutOfMemoryError异常</title>
+    <link href="https://codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/"/>
+    <id>https://codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/</id>
+    <published>2020-03-10T09:20:32.038Z</published>
+    <updated>2020-03-10T12:03:33.649Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;OutOfMemoryError异常&quot;&gt;&lt;a href=&quot;#OutOfMemoryError异常&quot; class=&quot;headerlink&quot; title=&quot;OutOfMemoryError异常&quot;&gt;&lt;/a&gt;OutOfMemoryError异常&lt;/h1&gt;&lt;h2
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JVM" scheme="https://codezhw.club/categories/JVM/"/>
+    
+    
+      <category term="Java" scheme="https://codezhw.club/tags/Java/"/>
+    
+      <category term="读书笔记" scheme="https://codezhw.club/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java中的内存区域</title>
+    <link href="https://codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/"/>
+    <id>https://codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/</id>
+    <published>2020-03-10T02:29:20.153Z</published>
+    <updated>2020-03-10T14:21:21.965Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Java中的内存区域&quot;&gt;&lt;a href=&quot;#Java中的内存区域&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JVM" scheme="https://codezhw.club/categories/JVM/"/>
+    
+    
+      <category term="Java" scheme="https://codezhw.club/tags/Java/"/>
+    
+      <category term="读书笔记" scheme="https://codezhw.club/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>if..else表达式优化策略</title>
+    <link href="https://codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/"/>
+    <id>https://codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/</id>
+    <published>2020-03-09T12:23:00.000Z</published>
+    <updated>2020-03-10T02:31:18.060Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;前情提要&quot;&gt;&lt;a href=&quot;#前情提要&quot; class=&quot;headerlink&quot; title=&quot;前情提要&quot;&gt;&lt;/a&gt;前情提要&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;if…else&lt;/strong&gt; 是所有高级编程语言都有的必备功能。但现实中的代码往往存在着过多的
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="https://codezhw.club/categories/Java/"/>
+    
+    
+      <category term="优化" scheme="https://codezhw.club/tags/%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>JDK1.7Hashtable&amp;ConcurrentHashMap探究</title>
@@ -194,10 +279,10 @@
   
   <entry>
     <title>23种设计模式</title>
-    <link href="https://codezhw.club/2020/02/25/java/23-chong-she-ji-mo-shi-1/"/>
-    <id>https://codezhw.club/2020/02/25/java/23-chong-she-ji-mo-shi-1/</id>
+    <link href="https://codezhw.club/2020/02/25/she-ji-mo-shi/23-chong-she-ji-mo-shi-1/"/>
+    <id>https://codezhw.club/2020/02/25/she-ji-mo-shi/23-chong-she-ji-mo-shi-1/</id>
     <published>2020-02-25T05:43:51.419Z</published>
-    <updated>2020-03-08T10:44:51.383Z</updated>
+    <updated>2020-03-10T02:29:12.774Z</updated>
     
     <summary type="html">
     
@@ -212,10 +297,10 @@
     </summary>
     
     
-      <category term="Java" scheme="https://codezhw.club/categories/Java/"/>
+      <category term="设计模式" scheme="https://codezhw.club/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="设计模式" scheme="https://codezhw.club/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="Java" scheme="https://codezhw.club/tags/Java/"/>
     
   </entry>
   
