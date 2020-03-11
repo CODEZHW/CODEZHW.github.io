@@ -125,6 +125,9 @@ indexbtn:
   icon: fab fa-github-alt
   url: https://github.com/CODEZHW
 
+
+
+
 # The configurations of the second line of home banner
 # icon/button will not show up if you leave the corresponding socialLink empty
 # 首页 banner 中的第二行个人信息配置，留空即不启用
@@ -254,15 +257,14 @@ mySkills:
 # If you don't want to display this `Gallery` content, you can deactivate or delete this configuration.
 # 在“关于”页面配置"我的相册"图片，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
 myGallery:
-  enable: true
+  enable: false
   data:
-  -  https://i.loli.net/2020/02/23/FQETKxMR5HPBmSf.jpg
-  -  https://i.loli.net/2020/02/23/bjCGeLtqBi9EpDx.jpg
-  -  https://i.loli.net/2020/02/23/M9WhstN8jcfEdRn.png
-  -  https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png
-  -  https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png
-  -  https://i.loli.net/2020/02/23/lFVgpZn7W6vzqK4.png
-  -  https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png
+  # -  https://i.loli.net/2020/02/23/FQETKxMR5HPBmSf.jpg
+  # -  https://i.loli.net/2020/02/23/bjCGeLtqBi9EpDx.jpg
+  # -  https://i.loli.net/2020/02/23/M9WhstN8jcfEdRn.png
+  # -  https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png
+  # -  https://i.loli.net/2020/02/23/lFVgpZn7W6vzqK4.png
+  # -  https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png
 
 # Whether to display post-calender in the `archive` page
 # 设置在归档页面中是否显示'文章日历'控件
@@ -360,6 +362,8 @@ baiduAnalytics:
 
 # 百度搜索资源平台提交链接
 baiduPush: true
+
+
 
 # The used front-end library can be replaced with the corresponding CDN address as needed,
 # If the specific version is not specified below, you can use the latest version.

@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://CODEZHW.github.io
+
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -93,10 +93,27 @@ theme: hexo-theme-matery
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: 
-    github: https://github.com/CODEZHW/CODEZHW.github.io.git
-    coding: https://e.coding.net/blog_zhw/blog_zhwblog_zhw.git
+  - type: git
+    repo: 
+      github: https://github.com/CODEZHW/CODEZHW.github.io.git
+      coding: https://e.coding.net/blog_zhw/blog_zhwblog_zhw.git
+
+  - type: baidu_url_submitter 
+
+
+url: https://codezhw.club 
+
+
+
+
+baidu_url_submit:
+  count: 100               # 提交最新的多少个链接  
+  host: https://codezhw.club    # 在百度站长平台中添加域名
+  token: JpSgarl8iBiMel8l      # 秘钥
+  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里
+
+
+#更改好这三处即可，退出保存
 
 postInfo:
   date: true
