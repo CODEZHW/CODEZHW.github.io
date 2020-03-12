@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://www.codezhw.club/"/>
+  <link href="codezhw.club/"/>
   <updated>2020-03-11T07:31:02.639Z</updated>
-  <id>https://www.codezhw.club/</id>
+  <id>codezhw.club/</id>
   
   <author>
     <name>CODEZHW</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>OutOfMemoryError异常</title>
-    <link href="https://www.codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/"/>
-    <id>https://www.codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/</id>
+    <link href="codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/"/>
+    <id>codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/</id>
     <published>2020-03-10T07:23:00.000Z</published>
     <updated>2020-03-11T07:31:02.639Z</updated>
     
@@ -36,19 +36,19 @@
     </summary>
     
     
-      <category term="JVM" scheme="https://www.codezhw.club/categories/JVM/"/>
+      <category term="JVM" scheme="codezhw.club/categories/JVM/"/>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/tags/Java/"/>
+      <category term="Java" scheme="codezhw.club/tags/Java/"/>
     
-      <category term="读书笔记" scheme="https://www.codezhw.club/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="codezhw.club/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>Java中的内存区域</title>
-    <link href="https://www.codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/"/>
-    <id>https://www.codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/</id>
+    <link href="codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/"/>
+    <id>codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/</id>
     <published>2020-03-10T05:23:00.000Z</published>
     <updated>2020-03-11T08:57:05.123Z</updated>
     
@@ -65,19 +65,19 @@
     </summary>
     
     
-      <category term="JVM" scheme="https://www.codezhw.club/categories/JVM/"/>
+      <category term="JVM" scheme="codezhw.club/categories/JVM/"/>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/tags/Java/"/>
+      <category term="Java" scheme="codezhw.club/tags/Java/"/>
     
-      <category term="读书笔记" scheme="https://www.codezhw.club/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+      <category term="读书笔记" scheme="codezhw.club/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>if..else表达式优化策略</title>
-    <link href="https://www.codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/"/>
-    <id>https://www.codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/</id>
+    <link href="codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/"/>
+    <id>codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/</id>
     <published>2020-03-09T12:23:00.000Z</published>
     <updated>2020-03-11T06:50:08.252Z</updated>
     
@@ -94,17 +94,17 @@
     </summary>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/categories/Java/"/>
+      <category term="Java" scheme="codezhw.club/categories/Java/"/>
     
     
-      <category term="优化" scheme="https://www.codezhw.club/tags/%E4%BC%98%E5%8C%96/"/>
+      <category term="优化" scheme="codezhw.club/tags/%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>JDK1.7Hashtable&amp;ConcurrentHashMap探究</title>
-    <link href="https://www.codezhw.club/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/"/>
-    <id>https://www.codezhw.club/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/</id>
+    <link href="codezhw.club/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/"/>
+    <id>codezhw.club/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/</id>
     <published>2020-03-07T16:00:00.000Z</published>
     <updated>2020-03-11T07:31:24.431Z</updated>
     
@@ -121,19 +121,19 @@
     </summary>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/categories/Java/"/>
+      <category term="Java" scheme="codezhw.club/categories/Java/"/>
     
     
-      <category term="HashMap" scheme="https://www.codezhw.club/tags/HashMap/"/>
+      <category term="HashMap" scheme="codezhw.club/tags/HashMap/"/>
     
-      <category term="源码" scheme="https://www.codezhw.club/tags/%E6%BA%90%E7%A0%81/"/>
+      <category term="源码" scheme="codezhw.club/tags/%E6%BA%90%E7%A0%81/"/>
     
   </entry>
   
   <entry>
     <title>Github常用命令与网站部署</title>
-    <link href="https://www.codezhw.club/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/"/>
-    <id>https://www.codezhw.club/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/</id>
+    <link href="codezhw.club/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/"/>
+    <id>codezhw.club/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/</id>
     <published>2020-03-02T07:51:51.500Z</published>
     <updated>2020-03-03T08:36:58.504Z</updated>
     
@@ -150,19 +150,19 @@
     </summary>
     
     
-      <category term="工具" scheme="https://www.codezhw.club/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="codezhw.club/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="Github" scheme="https://www.codezhw.club/tags/Github/"/>
+      <category term="Github" scheme="codezhw.club/tags/Github/"/>
     
-      <category term="服务器" scheme="https://www.codezhw.club/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <category term="服务器" scheme="codezhw.club/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
   </entry>
   
   <entry>
     <title>彻底搞懂Synchronized和Volatile</title>
-    <link href="https://www.codezhw.club/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/"/>
-    <id>https://www.codezhw.club/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/</id>
+    <link href="codezhw.club/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/"/>
+    <id>codezhw.club/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/</id>
     <published>2020-02-29T07:01:02.368Z</published>
     <updated>2020-03-03T08:36:58.502Z</updated>
     
@@ -179,23 +179,23 @@
     </summary>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/categories/Java/"/>
+      <category term="Java" scheme="codezhw.club/categories/Java/"/>
     
     
-      <category term="多线程" scheme="https://www.codezhw.club/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+      <category term="多线程" scheme="codezhw.club/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
-      <category term="JUC" scheme="https://www.codezhw.club/tags/JUC/"/>
+      <category term="JUC" scheme="codezhw.club/tags/JUC/"/>
     
-      <category term="Synchronize" scheme="https://www.codezhw.club/tags/Synchronize/"/>
+      <category term="Synchronize" scheme="codezhw.club/tags/Synchronize/"/>
     
-      <category term="Volatiie" scheme="https://www.codezhw.club/tags/Volatiie/"/>
+      <category term="Volatiie" scheme="codezhw.club/tags/Volatiie/"/>
     
   </entry>
   
   <entry>
     <title>Redis学习（二）：Redis的常用key命令</title>
-    <link href="https://www.codezhw.club/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/"/>
-    <id>https://www.codezhw.club/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/</id>
+    <link href="codezhw.club/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/"/>
+    <id>codezhw.club/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/</id>
     <published>2020-02-27T05:30:00.000Z</published>
     <updated>2020-03-11T06:50:08.254Z</updated>
     
@@ -212,19 +212,19 @@
     </summary>
     
     
-      <category term="Redis" scheme="https://www.codezhw.club/categories/Redis/"/>
+      <category term="Redis" scheme="codezhw.club/categories/Redis/"/>
     
     
-      <category term="Redis" scheme="https://www.codezhw.club/tags/Redis/"/>
+      <category term="Redis" scheme="codezhw.club/tags/Redis/"/>
     
-      <category term="Linux" scheme="https://www.codezhw.club/tags/Linux/"/>
+      <category term="Linux" scheme="codezhw.club/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>JVM内存模型和Volatile</title>
-    <link href="https://www.codezhw.club/2020/02/26/java/jmm-nei-cun-mo-xing/"/>
-    <id>https://www.codezhw.club/2020/02/26/java/jmm-nei-cun-mo-xing/</id>
+    <link href="codezhw.club/2020/02/26/java/jmm-nei-cun-mo-xing/"/>
+    <id>codezhw.club/2020/02/26/java/jmm-nei-cun-mo-xing/</id>
     <published>2020-02-26T07:33:51.500Z</published>
     <updated>2020-03-11T07:23:27.436Z</updated>
     
@@ -241,17 +241,17 @@
     </summary>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/categories/Java/"/>
+      <category term="Java" scheme="codezhw.club/categories/Java/"/>
     
     
-      <category term="多线程" scheme="https://www.codezhw.club/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+      <category term="多线程" scheme="codezhw.club/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>23种设计模式</title>
-    <link href="https://www.codezhw.club/2020/02/25/she-ji-mo-shi/23-chong-she-ji-mo-shi-1/"/>
-    <id>https://www.codezhw.club/2020/02/25/she-ji-mo-shi/23-chong-she-ji-mo-shi-1/</id>
+    <link href="codezhw.club/2020/02/25/she-ji-mo-shi/23-chong-she-ji-mo-shi-1/"/>
+    <id>codezhw.club/2020/02/25/she-ji-mo-shi/23-chong-she-ji-mo-shi-1/</id>
     <published>2020-02-25T05:46:00.000Z</published>
     <updated>2020-03-11T07:31:41.100Z</updated>
     
@@ -268,17 +268,17 @@
     </summary>
     
     
-      <category term="设计模式" scheme="https://www.codezhw.club/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="设计模式" scheme="codezhw.club/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/tags/Java/"/>
+      <category term="Java" scheme="codezhw.club/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>JDK1.7HashMap探究&amp;手写HashMap</title>
-    <link href="https://www.codezhw.club/2020/02/23/java/jdk1.7hashmap-tan-jiu-shou-xie-hashmap/"/>
-    <id>https://www.codezhw.club/2020/02/23/java/jdk1.7hashmap-tan-jiu-shou-xie-hashmap/</id>
+    <link href="codezhw.club/2020/02/23/java/jdk1.7hashmap-tan-jiu-shou-xie-hashmap/"/>
+    <id>codezhw.club/2020/02/23/java/jdk1.7hashmap-tan-jiu-shou-xie-hashmap/</id>
     <published>2020-02-23T07:33:51.500Z</published>
     <updated>2020-03-11T07:30:49.491Z</updated>
     
@@ -295,19 +295,19 @@
     </summary>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/categories/Java/"/>
+      <category term="Java" scheme="codezhw.club/categories/Java/"/>
     
     
-      <category term="HashMap" scheme="https://www.codezhw.club/tags/HashMap/"/>
+      <category term="HashMap" scheme="codezhw.club/tags/HashMap/"/>
     
-      <category term="源码" scheme="https://www.codezhw.club/tags/%E6%BA%90%E7%A0%81/"/>
+      <category term="源码" scheme="codezhw.club/tags/%E6%BA%90%E7%A0%81/"/>
     
   </entry>
   
   <entry>
     <title>多线程进阶-JUC并发编程（2）</title>
-    <link href="https://www.codezhw.club/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/"/>
-    <id>https://www.codezhw.club/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/</id>
+    <link href="codezhw.club/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/"/>
+    <id>codezhw.club/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-2/</id>
     <published>2020-02-22T09:51:51.500Z</published>
     <updated>2020-03-03T08:36:58.500Z</updated>
     
@@ -324,19 +324,19 @@
     </summary>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/categories/Java/"/>
+      <category term="Java" scheme="codezhw.club/categories/Java/"/>
     
     
-      <category term="多线程" scheme="https://www.codezhw.club/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+      <category term="多线程" scheme="codezhw.club/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
-      <category term="JUC" scheme="https://www.codezhw.club/tags/JUC/"/>
+      <category term="JUC" scheme="codezhw.club/tags/JUC/"/>
     
   </entry>
   
   <entry>
     <title>多线程进阶-JUC并发编程（1）</title>
-    <link href="https://www.codezhw.club/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/"/>
-    <id>https://www.codezhw.club/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/</id>
+    <link href="codezhw.club/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/"/>
+    <id>codezhw.club/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/</id>
     <published>2020-02-22T07:51:51.500Z</published>
     <updated>2020-03-03T08:36:58.497Z</updated>
     
@@ -353,19 +353,19 @@
     </summary>
     
     
-      <category term="Java" scheme="https://www.codezhw.club/categories/Java/"/>
+      <category term="Java" scheme="codezhw.club/categories/Java/"/>
     
     
-      <category term="多线程" scheme="https://www.codezhw.club/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+      <category term="多线程" scheme="codezhw.club/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
-      <category term="JUC" scheme="https://www.codezhw.club/tags/JUC/"/>
+      <category term="JUC" scheme="codezhw.club/tags/JUC/"/>
     
   </entry>
   
   <entry>
     <title>我的第一篇博客</title>
-    <link href="https://www.codezhw.club/2020/02/21/sui-bi/wo-de-di-yi-pian-bo-ke/"/>
-    <id>https://www.codezhw.club/2020/02/21/sui-bi/wo-de-di-yi-pian-bo-ke/</id>
+    <link href="codezhw.club/2020/02/21/sui-bi/wo-de-di-yi-pian-bo-ke/"/>
+    <id>codezhw.club/2020/02/21/sui-bi/wo-de-di-yi-pian-bo-ke/</id>
     <published>2020-02-21T15:39:25.233Z</published>
     <updated>2020-02-24T13:14:20.806Z</updated>
     
@@ -382,17 +382,17 @@
     </summary>
     
     
-      <category term="随笔" scheme="https://www.codezhw.club/categories/%E9%9A%8F%E7%AC%94/"/>
+      <category term="随笔" scheme="codezhw.club/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-      <category term="感悟" scheme="https://www.codezhw.club/tags/%E6%84%9F%E6%82%9F/"/>
+      <category term="感悟" scheme="codezhw.club/tags/%E6%84%9F%E6%82%9F/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://www.codezhw.club/2020/02/20/hello-world/"/>
-    <id>https://www.codezhw.club/2020/02/20/hello-world/</id>
+    <link href="codezhw.club/2020/02/20/hello-world/"/>
+    <id>codezhw.club/2020/02/20/hello-world/</id>
     <published>2020-02-20T12:38:25.953Z</published>
     <updated>2020-02-20T12:38:25.953Z</updated>
     
