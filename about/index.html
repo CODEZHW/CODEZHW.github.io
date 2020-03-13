@@ -595,7 +595,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"JVM","value":2},{"name":"Java","value":7},{"name":"Redis","value":1},{"name":"设计模式","value":1},{"name":"工具","value":1},{"name":"随笔","value":1}],
+                data: [{"name":"Java","value":7},{"name":"JVM","value":2},{"name":"Redis","value":1},{"name":"工具","value":1},{"name":"设计模式","value":1},{"name":"随笔","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -619,7 +619,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["多线程","Java","JUC","读书笔记","HashMap","源码","优化","Redis","Linux","Synchronize"]
+                data: ["多线程","Java","JUC","HashMap","源码","读书笔记","优化","Redis","Linux","Github"]
             }
         ],
         yAxis: [
@@ -672,12 +672,12 @@
         
         <div class="col s12 m6 l4" data-aos="fade-up">
             <div class="info center-align">
-                <a href="http://github.com/blinkfox/hexo-theme-matery" class="icon"
+                <a href="https://github.com/blinkfox/hexo-theme-matery" class="icon"
                    style="background: linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)" target="_blank">
                     <i class="fas fa-file-alt"></i>
                 </a>
                 <div class="info-title">
-                    <a href="http://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>
+                    <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>
                 </div>
                 <div class="info-desc">This is a Hexo blog theme with 'Material Design' and responsive design.</div>
             </div>
@@ -800,14 +800,6 @@
         <div class="tag-chips center-align">
             
             
-            
-            
-            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                <span class="chip center-align waves-effect waves-light chip-default">读书笔记</span>
-            </a>
-            
-            
-            
             <a href="/tags/HashMap/">
                 <span class="chip center-align waves-effect waves-light chip-default">HashMap</span>
             </a>
@@ -816,6 +808,14 @@
             
             <a href="/tags/%E6%BA%90%E7%A0%81/">
                 <span class="chip center-align waves-effect waves-light chip-default">源码</span>
+            </a>
+            
+            
+            
+            
+            
+            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                <span class="chip center-align waves-effect waves-light chip-default">读书笔记</span>
             </a>
             
             
@@ -850,18 +850,6 @@
             
             
             
-            <a href="/tags/Synchronize/">
-                <span class="chip center-align waves-effect waves-light chip-default">Synchronize</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Volatiie/">
-                <span class="chip center-align waves-effect waves-light chip-default">Volatiie</span>
-            </a>
-            
-            
-            
             <a href="/tags/Github/">
                 <span class="chip center-align waves-effect waves-light chip-default">Github</span>
             </a>
@@ -870,6 +858,18 @@
             
             <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
                 <span class="chip center-align waves-effect waves-light chip-default">服务器</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Synchronize/">
+                <span class="chip center-align waves-effect waves-light chip-default">Synchronize</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Volatiie/">
+                <span class="chip center-align waves-effect waves-light chip-default">Volatiie</span>
             </a>
             
             
@@ -923,7 +923,7 @@ $(function () {
         volume: Number('0.5'),
         listFolded: 'true' === 'true',
         listMaxHeight: 'false',
-        audio: eval([{"name":"五月雨变奏电音","artist":"AnimeVibe","url":"http://static.blinkfox.com/music1.mp3","cover":"http://static.blinkfox.com/music-cover1.png"},{"name":"Take me hand","artist":"DAISHI DANCE,Cecile Corbel","url":"http://static.blinkfox.com/music2.mp3","cover":"http://static.blinkfox.com/music-cover2.png"},{"name":"Shape of You","artist":"J.Fla","url":"http://static.blinkfox.com/music3.mp3","cover":"http://static.blinkfox.com/music-cover3.png"}])
+        audio: eval([{"name":"五月雨变奏电音","artist":"AnimeVibe","url":"https://static.blinkfox.com/music1.mp3","cover":"https://static.blinkfox.com/music-cover1.png"},{"name":"Take me hand","artist":"DAISHI DANCE,Cecile Corbel","url":"https://static.blinkfox.com/music2.mp3","cover":"https://static.blinkfox.com/music-cover2.png"},{"name":"Shape of You","artist":"J.Fla","url":"https://static.blinkfox.com/music3.mp3","cover":"https://static.blinkfox.com/music-cover3.png"}])
     });
 });
 </script>
@@ -1096,7 +1096,7 @@ $(function () {
         if (curProtocol === 'https') {
             bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
         }else{
-            bp.src = 'http://zz.bdstatic.com/linksubmit/push.js'
+            // bp.src = 'http://zz.bdstatic.com/linksubmit/push.js'
         }
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(bp, s);
