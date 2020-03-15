@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Github常用命令与网站部署, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="介绍Git常用的命令，创建仓库分支将hexo博客自动生成代码和博客源代码分开管理，以及宝塔服务器部署Java Web项目，部署远程数据库。">
+    <meta name="keywords" content="Nginx介绍与安装, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="这是关于nginx简介与安装的文章。由于部署github或者gitee访问速度都不太理想，所以打算把我的hexo博客部署到阿里云服务器中，所以学习一下nginx。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Github常用命令与网站部署 | 我的个人博客</title>
+    <title>Nginx介绍与安装 | 我的个人博客</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/02/23/KflGV2myxi1b97v.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Github常用命令与网站部署</h1>
+                    <h1 class="description center-align post-title">Nginx介绍与安装</h1>
                 </div>
             </div>
         </div>
@@ -427,12 +427,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-                                <span class="chip bg-color">服务器</span>
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
-                            <a href="/tags/Github/">
-                                <span class="chip bg-color">Github</span>
+                            <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                                <span class="chip bg-color">服务器</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                工具
+                            <a href="/categories/Nginx/" class="post-category">
+                                Nginx
                             </a>
                         
                     </div>
@@ -456,28 +456,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-02
+                    2020-03-15
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-03
+                    2020-03-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    826
+                    758
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 				
@@ -493,68 +493,95 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Github常用命令与网站部署"><a href="#Github常用命令与网站部署" class="headerlink" title="Github常用命令与网站部署"></a>Github常用命令与网站部署</h1><h2 id="Github常用命令"><a href="#Github常用命令" class="headerlink" title="Github常用命令"></a>Github常用命令</h2><p><strong>git init 新建一个空的仓库</strong><br><strong>git status 查看状态</strong><br><strong>git add . 添加文件</strong><br><strong>git commit -m ‘注释’ 提交添加的文件并备注说明</strong><br><strong>git remote add origin #连接你的Github仓库 连接远程仓库</strong><br><strong>git push -u origin master 将本地仓库文件推送到远程仓库</strong><br><strong>git log 查看变更日志</strong><br><strong>git reset –hard 版本号前六位 回归到指定版本</strong><br><strong>git branch 查看分支</strong><br><strong>git branch newname 创建一个叫newname的分支</strong><br><strong>git checkout newname 切换到叫newname的分支上</strong><br><strong>git merge newname 把newname分支合并到当前分支上</strong><br><strong>git pull origin master 将master分支上的内容拉到本地上</strong></p>
-<h2 id="使用Git向Github-提交代码"><a href="#使用Git向Github-提交代码" class="headerlink" title="使用Git向Github 提交代码"></a>使用Git向Github 提交代码</h2><blockquote>
-<p><strong>第一次使用</strong></p>
-</blockquote>
-<p><strong>第一步：</strong>在Github创建一个仓库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/wjiUV7frSpBd5cH.png" alt="创建仓库"></p>
-<p><strong>第二步：</strong>进入本地项目文件夹。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>初始化代码仓库，会在文件夹下生成一个.git文件。</p>
-<p><strong>第三步：</strong>添加文件到版本库（只是先放在了缓存区里缓冲区）</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> add.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>第四步：</strong>把添加的文件提交到版本库</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> commit -m <span class="token string">"first commit"</span> <span class="token comment" spellcheck="true"># 可以自定义提交信息</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>第五步：</strong>将本地库与远程库关联</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> remote add origin <span class="token comment" spellcheck="true">#后面跟上你的仓库地址</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>第六步：</strong>推送代码</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> push -u origin master // 推送代码<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h1 id="Nginx介绍与安装"><a href="#Nginx介绍与安装" class="headerlink" title="Nginx介绍与安装"></a>Nginx介绍与安装</h1><h2 id="Nginx的介绍"><a href="#Nginx的介绍" class="headerlink" title="Nginx的介绍"></a>Nginx的介绍</h2><ul>
+<li><strong>什么是Nginx</strong></li>
+</ul>
+<p><strong>Nginx是一个http服务器。是一个使用c语言开发的高性能的http服务器及反向代理服务器。Nginx是一款高性能的http 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器。由俄罗斯的程序设计师Igor Sysoev所开发，官方测试nginx能够支支撑5万并发链接，并且cpu、内存等资源消耗却非常低，运行非常稳定。</strong></p>
+<ul>
+<li><strong>Nginx的应用场景</strong></li>
+</ul>
+<ol>
+<li>HTTP服务器，Nginx是一个http服务可以独立提供http服务。可以做网页静态服务器。（这也正是我所需要的）</li>
+<li>反向代理，就是客户访问服务器的时候，不直接访问我们的服务器而是经过一个代理服务器，去访问我们的服务器。从客户端的角度，客户不知道我服务器的信息，是通过代理服务器去进行访问。<code>隐藏了我们的服务器，正向代理隐藏了我们的客户端。</code></li>
+<li>负载均衡，一句话：nginx会给你分配服务器压力小的去访问，对于我来说用不上。</li>
+</ol>
+<ul>
+<li><p>Nginx与Tomcat和Apache的区别</p>
+<p>1.相同点：都是web服务器，严格来说apache和nginx叫做http server,tomcat是application server。</p>
+<p>2.tomcat是一个轻量级的web服务器，作为Java应用的容（jsp,servlet），可以处理动态资源和静态资源，在高并发环境下处理能力有限，并发处理不如nginx。所以可以tomcat和nginx结合使用，tomcat处理动态资源，nginx处理静态资源，并负责并发处理。</p>
+<p>3.nignx相较于apache更加轻量，内存占用更少，但稳定性不如apache，不能处理动态资源。</p>
+</li>
+</ul>
+<h2 id="阿里云centos7安装nginx"><a href="#阿里云centos7安装nginx" class="headerlink" title="阿里云centos7安装nginx"></a>阿里云centos7安装nginx</h2><ul>
+<li><p><strong>1.安装依赖</strong></p>
+<pre class="line-numbers language-bash"><code class="language-bash">yum -y <span class="token function">install</span> gcc zlib zlib-devel pcre-devel openssl openssl-devel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+</ul>
+<p>​    </p>
+<ul>
+<li><strong>2.下载并解压nginx</strong></li>
+</ul>
+<pre class="line-numbers language-bash"><code class="language-bash">
+<span class="token comment" spellcheck="true"># 进入local目录</span>
+<span class="token function">cd</span> /usr/local
+
+<span class="token comment" spellcheck="true"># 下载1.16版本的ngxin 可以自己去选择版本</span>
+<span class="token function">wget</span> http://nginx.org/download/nginx-1.16.0.tar.gz
+
+<span class="token comment" spellcheck="true"># 解压</span>
+<span class="token function">tar</span> -xzf nginx-1.16.0.tar.gz
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>就会在<code>/usr/local/</code> 目录下看到这两个文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/15/NeFWaH9m6UMVTJx.jpg" alt=""></p>
+<ul>
+<li><strong>3.安装nginx</strong></li>
+</ul>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 进入解压的目录</span>
+<span class="token function">cd</span> /usr/local/nginx-1.16.0
+
+<span class="token comment" spellcheck="true"># 执行配置文件</span>
+./configure
+
+<span class="token comment" spellcheck="true"># 编译并安装（nginx是C语言写的）</span>
+<span class="token function">make</span>
+<span class="token function">make</span> install<span class="token punctuation">(</span>或者make <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> install<span class="token punctuation">)</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  安装成功以后再<code>/usr/local/</code>目录下会生成一个nginx文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/15/eplGjozFk8RLXTU.jpg" alt=""></p>
+<p>进入nginx目录会看到</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/15/lEBuCed7nr1OcHN.jpg" alt=""></p>
+<ul>
+<li><strong>4.启动nginx</strong></li>
+</ul>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 进入nginx目录</span>
+<span class="token function">cd</span> /usr/local/nginx/sbin
+
+<span class="token comment" spellcheck="true"># 启动</span>
+./nginx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>5.查看是否启动成功</strong></li>
+</ul>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># 查看nginx进程</span>
+<span class="token function">ps</span> -ef <span class="token operator">|</span><span class="token function">grep</span> nginx
+
+<span class="token comment" spellcheck="true"># 关闭nginx(在sbin目录下 也可以将其加入环境变量)</span>
+./nginx -s stop
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/15/JSe6mEcBW87lrfY.jpg" alt=""></p>
+<ul>
+<li><strong>6.排错以及查看结果</strong></li>
+</ul>
 <blockquote>
-<p><strong>以后使用</strong></p>
+<p><strong>nginx进程正常启动网页打不开问题</strong></p>
 </blockquote>
-<p><strong>进入要提交代码的文件</strong>执行一下命令：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> pull origin master  <span class="token comment" spellcheck="true">#拉取远程仓库到本地</span>
-<span class="token function">git</span> add <span class="token keyword">.</span>
-<span class="token function">git</span> commit -m <span class="token string">'描述内容'</span>
-<span class="token function">git</span> push origin master  <span class="token comment" spellcheck="true"># 推送到GitHub仓库</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="Hexo博客创建分支管理"><a href="#Hexo博客创建分支管理" class="headerlink" title="Hexo博客创建分支管理"></a>Hexo博客创建分支管理</h2><p>我们的Hexo博客部署在Github通过hexo clean | hexo g | hexo d 这一系列流程将我们的静态博客提交到Github仓库中。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/it1WmZXD5lofQs8.png" alt="我的博客仓库"></p>
-<p>这是我的Hexo博客，可以看到我们提交的是经过hexo生成的代码文件。</p>
-<p>这和我们的博客源码文件不一样，如果哪天你更换电脑，或者误删了博客文件，会很不好管理，所以我们通过创建分支（branch）来管理我们的博客源码。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> <span class="token comment" spellcheck="true">###进入你的hexo博客文件</span>
-<span class="token function">git</span> init  <span class="token comment" spellcheck="true">#初始化过了后就不必初始化</span>
-<span class="token function">git</span> add <span class="token keyword">.</span> <span class="token comment" spellcheck="true">#将必要的文件依次添加</span>
-<span class="token function">git</span> commit -m <span class="token string">"提交hexo 配置文件"</span>
-<span class="token function">git</span> branch hexo  <span class="token comment" spellcheck="true">#新建hexo分支</span>
-<span class="token function">git</span> checkout hexo  <span class="token comment" spellcheck="true">#切换到hexo分支上 git switch hexo也可以</span>
-<span class="token function">git</span> remote add origin <span class="token comment" spellcheck="true">#本地与远程对接</span>
-<span class="token function">git</span> push origin hexo  <span class="token comment" spellcheck="true">#push到github项目文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/E8v9nY4xIdMi7HV.png" alt="hexo分支"></p>
-<p>这样就保存了我们的源代码的文件了。</p>
-<h2 id="宝塔将Java-Web项目部署到Tomcat服务器"><a href="#宝塔将Java-Web项目部署到Tomcat服务器" class="headerlink" title="宝塔将Java Web项目部署到Tomcat服务器"></a>宝塔将Java Web项目部署到Tomcat服务器</h2><p><strong>准备前提：</strong></p>
-<ul>
-<li>一台服务器</li>
-<li>一个Java Web项目</li>
-</ul>
-<ul>
-<li>宝塔服务器运维面板（傻瓜式安装）</li>
-</ul>
-<p>宝塔服务器：</p>
-<p><a href="https://www.bt.cn/?btwaf=97644413" target="_blank" rel="noopener">https://www.bt.cn/?btwaf=97644413</a></p>
-<p><strong>进入官网按步骤操作后进入宝塔面板</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/zmWCPj7l1vTnRAs.png" alt=""></p>
-<p>安装这两个主要的软件（没有数据库连接可以不用，也可以用nignx）,去软件商店中安装想要的软件。</p>
-<p><strong>将Java Web项目打成war包</strong></p>
-<p><strong>点击-&gt; <code>文件</code>-&gt;<code>www</code>-&gt;<code>server</code>&gt;<code>tomcat</code>-&gt;<code>webapps</code></strong></p>
-<p><strong>将war包放到webapps目录中</strong></p>
-<p><strong>重启tomcat服务器</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/7kWTsO2YvyAB8aq.png" alt="重启tomcat"></p>
-<p><strong>数据库配置</strong></p>
-<p><strong>创建宝塔服务器数据库，密码会自动生成。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/6EiRU2m7BpTcCjP.png" alt="创建数据库"></p>
-<p><strong>连接数据库的xx.properties文件改为宝塔服务器的数据库。</strong></p>
-<p><strong>最后就可以通过：<code>服务器域名：端口号/项目文件名/</code>  访问了。</strong></p>
+<p>nginx默认端口是：<code>80</code></p>
+<p>通过指令：<code>firewall-cmd --list-all</code>查看防火墙80端口是否打开，阿里云服务器开发80端口的安全组。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/15/lSfwo5qQ2dXyGbz.jpg" alt=""></p>
+<p>最后通过服务器公网IP或者虚拟机IP地址就可以访问到我们的nginx网页了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/15/8TIJulhE1Wiy43t.jpg" alt=""></p>
 
             </div>
             <hr/>
@@ -580,7 +607,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/">https://codezhw.club/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/</a>
+                    <a href="https://codezhw.club/2020/03/15/nginx/nginx-jie-shao-yu-an-zhuang/">https://codezhw.club/2020/03/15/nginx/nginx-jie-shao-yu-an-zhuang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -618,12 +645,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-                                    <span class="chip bg-color">服务器</span>
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
-                                <a href="/tags/Github/">
-                                    <span class="chip bg-color">Github</span>
+                                <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                                    <span class="chip bg-color">服务器</span>
                                 </a>
                             
                         </div>
@@ -1052,50 +1079,52 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/">
+                <a href="/2020/03/15/nginx/nginx-jie-shao-yu-an-zhuang/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/11.jpg" class="responsive-img" alt="JDK1.7Hashtable&ConcurrentHashMap探究">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/7.jpg" class="responsive-img" alt="Nginx介绍与安装">
                         
-                        <span class="card-title">JDK1.7Hashtable&ConcurrentHashMap探究</span>
+                        <span class="card-title">Nginx介绍与安装</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是一篇关于Java JDK1.7版本,介绍实现Map线程安全的文章，对Hashtable、ConcurrentHashMap进行探究，分析它们实现线程安全的原理，以及二者之间的比较。
+                            这是关于nginx简介与安装的文章。由于部署github或者gitee访问速度都不太理想，所以打算把我的hexo博客部署到阿里云服务器中，所以学习一下nginx。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-15
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
+                            <a href="/categories/Nginx/" class="post-category">
+                                    Nginx
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/HashMap/">
-                        <span class="chip bg-color">HashMap</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
                     </a>
                     
-                    <a href="/tags/%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">源码</span>
+                    <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="chip bg-color">服务器</span>
                     </a>
                     
                 </div>
@@ -1109,31 +1138,34 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/02/29/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/">
+                <a href="/2020/03/13/leetcode/di-yi-zhou/">
                     <div class="card-image">
                         
                         
-                        <img src="https://i.loli.net/2020/03/03/a6O4tM3Pc5VkD9y.jpg" class="responsive-img" alt="彻底搞懂Synchronized和Volatile">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/23.jpg" class="responsive-img" alt="LeetCode刷题">
                         
-                        <span class="card-title">彻底搞懂Synchronized和Volatile</span>
+                        <span class="card-title">LeetCode刷题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是详细讲解Java关键字Synchronize和Volatile的文章，会全面介绍Synchronized和Volatile的底层实现以及原理。
+                            第一周题目：121. 买卖股票的最佳时机给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。
+注意你不能在买入股票前卖出股票。
+示例
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-13
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
@@ -1143,20 +1175,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-                        <span class="chip bg-color">多线程</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/JUC/">
-                        <span class="chip bg-color">JUC</span>
-                    </a>
-                    
-                    <a href="/tags/Synchronize/">
-                        <span class="chip bg-color">Synchronize</span>
-                    </a>
-                    
-                    <a href="/tags/Volatiie/">
-                        <span class="chip bg-color">Volatiie</span>
+                    <a href="/tags/LeetCode/">
+                        <span class="chip bg-color">LeetCode</span>
                     </a>
                     
                 </div>
