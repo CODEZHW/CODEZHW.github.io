@@ -21,7 +21,7 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/animate/animate.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/css/matery.css">
@@ -308,7 +308,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com//CODEZHW/blogimage/raw/master/img/HazKfwlDtGPyqQx.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-86a5cd1bb6bc11a5d835f705e90b8b33_720w.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -466,21 +466,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-15
+                    2020-03-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    282
+                    738
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 				
@@ -509,6 +509,7 @@
 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><strong>解题思路：</strong></p>
 <p><strong>代码：</strong></p>
+<hr>
 <h2 id="题目：-206-反转链表"><a href="#题目：-206-反转链表" class="headerlink" title="题目： 206. 反转链表"></a>题目： <a href="https://leetcode-cn.com/problems/reverse-linked-list/" target="_blank" rel="noopener">206. 反转链表</a></h2><p>反转一个单链表。</p>
 <p><strong>示例:</strong></p>
 <pre class="line-numbers language-bash"><code class="language-bash">输入: 1-<span class="token operator">></span>2-<span class="token operator">></span>3-<span class="token operator">></span>4-<span class="token operator">></span>5-<span class="token operator">></span>NULL
@@ -528,6 +529,70 @@
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> pre<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="题目：面试题-01-06-字符串压缩"><a href="#题目：面试题-01-06-字符串压缩" class="headerlink" title="题目：面试题 01.06. 字符串压缩"></a>题目：<a href="https://leetcode-cn.com/problems/compress-string-lcci/" target="_blank" rel="noopener">面试题 01.06. 字符串压缩</a></h2><p>字符串压缩。利用字符重复出现的次数，编写一种方法，实现基本的字符串压缩功能。比如，字符串aabcccccaaa会变为a2b1c5a3。若“压缩”后的字符串没有变短，则返回原先的字符串。你可以假设字符串中只包含大小写英文字母（a至z）。</p>
+<p><strong>示例1:</strong></p>
+<pre class="line-numbers language-bash"><code class="language-bash"> 输入：<span class="token string">"aabcccccaaa"</span>
+ 输出：<span class="token string">"a2b1c5a3"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>示例2:</strong></p>
+<pre class="line-numbers language-bash"><code class="language-bash"> 输入：<span class="token string">"abbccd"</span>
+ 输出：<span class="token string">"abbccd"</span>
+ 解释：<span class="token string">"abbccd"</span>压缩后为<span class="token string">"a1b2c2d1"</span>，比原字符串长度更长。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>解题思路：</strong></p>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">compressString</span> <span class="token punctuation">(</span> String S <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    StringBuffer stringBuffer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> chars <span class="token operator">=</span> S<span class="token punctuation">.</span><span class="token function">toCharArray</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> S<span class="token punctuation">.</span><span class="token function">length</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;</span> S<span class="token punctuation">.</span><span class="token function">length</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>chars<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">^</span> chars<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            j<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        stringBuffer<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span> chars<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stringBuffer<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span> j<span class="token operator">-</span>i <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        i <span class="token operator">=</span> j<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> stringBuffer<span class="token punctuation">.</span><span class="token function">length</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">>=</span> S<span class="token punctuation">.</span><span class="token function">length</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token operator">?</span> S <span class="token operator">:</span> stringBuffer<span class="token punctuation">.</span><span class="token function">toString</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="题目：169-多数元素"><a href="#题目：169-多数元素" class="headerlink" title="题目：169. 多数元素"></a>题目：<a href="https://leetcode-cn.com/problems/majority-element/" target="_blank" rel="noopener">169. 多数元素</a></h2><p>给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p>示例 1:</p>
+<p>输入: [3,2,3]<br>输出: 3<br>示例 2:</p>
+<p>输入: [2,2,1,1,1,2,2]<br>输出: 2</p>
+<p><strong>解题思路：</strong></p>
+<p><strong>代码:</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">majorityElement</span> <span class="token punctuation">(</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    HashMap <span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Integer<span class="token operator">></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span> <span class="token operator">&lt;</span><span class="token operator">></span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> max <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> num <span class="token operator">:</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>map<span class="token punctuation">.</span><span class="token function">containsKey</span> <span class="token punctuation">(</span> num <span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            map<span class="token punctuation">.</span><span class="token function">put</span> <span class="token punctuation">(</span> num<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            map<span class="token punctuation">.</span><span class="token function">put</span> <span class="token punctuation">(</span> num<span class="token punctuation">,</span> map<span class="token punctuation">.</span><span class="token function">get</span> <span class="token punctuation">(</span> num <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>max <span class="token operator">></span> map<span class="token punctuation">.</span><span class="token function">get</span> <span class="token punctuation">(</span> num <span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            max <span class="token operator">=</span> max<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            max <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">get</span> <span class="token punctuation">(</span> num <span class="token punctuation">)</span><span class="token punctuation">;</span>
+            res <span class="token operator">=</span> num<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<hr>
+<h2 id="题目：面试题40-最小的k个数"><a href="#题目：面试题40-最小的k个数" class="headerlink" title="题目：面试题40. 最小的k个数"></a>题目：<a href="https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/" target="_blank" rel="noopener">面试题40. 最小的k个数</a></h2><p>输入整数数组 <code>arr</code> ，找出其中最小的 <code>k</code> 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。</p>
+<p>示例 1：</p>
+<p>输入：arr = [3,2,1], k = 2<br>输出：[1,2] 或者 [2,1]<br>示例 2：</p>
+<p>输入：arr = [0,1,2,1], k = 1<br>输出：[0]</p>
+<p><strong>解题思路：</strong></p>
+<p><strong>代码：</strong></p>
 
             </div>
             <hr/>
@@ -1033,7 +1098,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/6.jpg" class="responsive-img" alt="Nginx介绍与安装">
+                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-e160d60fd3803317fc1939eaf3f1a2bc_720w.jpg" class="responsive-img" alt="Nginx介绍与安装">
                         
                         <span class="card-title">Nginx介绍与安装</span>
                     </div>
@@ -1086,7 +1151,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/20.jpg" class="responsive-img" alt="OutOfMemoryError异常">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/23.jpg" class="responsive-img" alt="OutOfMemoryError异常">
                         
                         <span class="card-title">OutOfMemoryError异常</span>
                     </div>
@@ -1272,6 +1337,15 @@
     }
 
     
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
 </style>
 <div class="">
     
@@ -1288,6 +1362,7 @@
                    preload='auto'
                    volume='0.1'
                    list-folded='true'
+                   lrcType=''
         >
         </meting-js>
     </div>
@@ -1306,7 +1381,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">24.1k</span>&nbsp;字
+                class="white-color">24.5k</span>&nbsp;字
             
             
             
@@ -1443,7 +1518,7 @@ $(function () {
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/materialize/materialize.min.js"></script>
     <script src=""></script>
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aos/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/matery.js"></script>
@@ -1510,7 +1585,6 @@ $(function () {
     <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/instantpage/instantpage.js" type="module"></script>
     
 
-    <script src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/js/sakura.js"></script>
 <script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
 
 </html>
