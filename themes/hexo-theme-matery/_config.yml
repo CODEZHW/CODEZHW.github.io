@@ -68,24 +68,29 @@ cover:
 dream:
   enable: true
   showTitle: true
-  title: 我的梦想
-  text: 不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
+  title: 寄语
+  text: 人生，是一列向前行驶的单行车，每一天都是一个新起点。回顾，是检点走过的道路，憧憬美好的前程；不是为了沉浸一段美景，回味咀嚼，百般缠绵；也不是空想一段坦途，驻足遐思，千种慕羡。只有不懈追求，向今天要成果，才是苦乐人生的新感受；只有努力前行，才是丰富生活的真感觉。因此，我们必须告别昨天。
 
 # Whether to display the musics.
 # 是否在首页显示音乐.
 music:
   enable: true
-  showTitle: false
-  title: 听听音乐
-  fixed: true # 开启吸底模式
-  autoplay: false # 是否自动播放
-  theme: '#42b984'
-  loop: 'all' # 音频循环播放, 可选值: 'all', 'one', 'none'
-  order: 'list' # 音频循环顺序, 可选值: 'list', 'random'
-  preload: 'auto' # 预加载，可选值: 'none', 'metadata', 'auto'
-  volume: 0.5 # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
-  listFolded: true # 列表默认折叠
-  listMaxHeight: false #列表最大高度
+  title:     	    #非吸底模式有效
+    enable: true
+    show: 听听音乐
+  autoHide: true
+  server: netease   #require music platform: netease, tencent, kugou, xiami, baidu
+  type: playlist    #require song, playlist, album, search, artist
+  id: 3204160461     #require song id / playlist id / album id / search keyword
+  fixed: true      # 开启吸底模式
+  autoplay: false   # 是否自动播放
+  theme: '#42b983'
+  loop: 'all'       # 音频循环播放, 可选值: 'all', 'one', 'none'
+  order: 'random'   # 音频循环顺序, 可选值: 'list', 'random'
+  preload: 'auto'   # 预加载，可选值: 'none', 'metadata', 'auto'
+  volume: 0.1       # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
+  listFolded: true  # 列表默认折叠
+  lrctype: 1
 
 # Whether to display the videos.
 # 是否在首页显示视频.
@@ -215,7 +220,7 @@ myProjects:
     hexo-theme-matery:
       icon: fas fa-file-alt
       iconBackground: 'linear-gradient(to bottom right, #66BB6A 0%, #81C784 100%)'
-      url: http://github.com/blinkfox/hexo-theme-matery
+      url: https://github.com/blinkfox/hexo-theme-matery
       desc: This is a Hexo blog theme with 'Material Design' and responsive design.
     Fenix:
         icon: fas fa-database
@@ -372,10 +377,9 @@ libs:
   css:
     fontAwesome: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css # V5.11.1
     materialize: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/materialize/materialize.min.css # 1.0.0
-    aos: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aos/aos.css
+    aos: https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css
     animate: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/animate/animate.min.css # V3.5.1
     lightgallery: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/lightGallery/css/lightgallery.min.css # V1.6.11
-    aplayer: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aplayer/APlayer.min.css
     dplayer: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/dplayer/DPlayer.min.css
     gitalk: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/gitalk/gitalk.css
     jqcloud: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/jqcloud/jqcloud.css
@@ -384,12 +388,11 @@ libs:
     jquery: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/jquery/jquery.min.js
     materialize: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/materialize/materialize.min.js # 1.0.0
     masonry: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/masonry/masonry.pkgd.min.js # v4.0.0
-    aos: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aos/aos.js
+    aos: https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js
     scrollProgress: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/scrollprogress/scrollProgress.min.js
     lightgallery: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/lightGallery/js/lightgallery-all.min.js # V1.6.11
     clicklove: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/others/clicklove.js
     busuanzi: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/others/busuanzi.pure.mini.js
-    aplayer: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/aplayer/APlayer.min.js
     dplayer: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/dplayer/DPlayer.min.js
     crypto: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/cryptojs/crypto-js.min.js
     echarts: https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/echarts/echarts.min.js
@@ -406,56 +409,54 @@ libs:
 # The post featured images that needs to be displayed when there is no image.
 # 无文章特色图片时需要显示的文章特色图片.
 featureImages:
-  -  https://i.loli.net/2020/02/23/FQETKxMR5HPBmSf.jpg
-  -  https://i.loli.net/2020/02/23/bjCGeLtqBi9EpDx.jpg
-  -  https://i.loli.net/2020/02/23/M9WhstN8jcfEdRn.png
-  -  https://i.loli.net/2020/02/23/13oVCDRfWPYm8Q5.png
-  -  https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png
-  -  https://i.loli.net/2020/02/23/lFVgpZn7W6vzqK4.png
-  -  https://i.loli.net/2020/02/23/EuvBLKmQT2y6eJs.png
-  -  https://i.loli.net/2020/02/23/KflGV2myxi1b97v.png
-  -  https://i.loli.net/2020/02/23/Vrd9C42Nnup3sTK.jpg
-  -  https://i.loli.net/2020/02/23/FxjB2wUunS3H6a7.png
-  -  https://i.loli.net/2020/02/23/Bqb6ex9Fu2ACipY.png
-  -  https://i.loli.net/2020/02/23/XDPmRClfnFoE15r.png
-  -  https://i.loli.net/2020/02/23/jTgLGJ2Vz3E91dF.png
-  -  https://i.loli.net/2020/02/23/UWa1dixNrHw6LGh.png
-  -  https://i.loli.net/2020/02/23/u1Ab5LqPUYFjBVH.png
-  -  https://i.loli.net/2020/02/23/5KhxmIqYUwPZE3d.png
-  -  https://i.loli.net/2020/03/03/pcTNz6UDXkQ8Cb5.jpg
-  -  https://i.loli.net/2020/03/03/OHCLrFubBj3fWgI.jpg
-  -  https://i.loli.net/2020/03/03/SIGWRwpEiNM943j.jpg
-  -  https://i.loli.net/2020/03/03/a6O4tM3Pc5VkD9y.jpg
-  -  https://i.loli.net/2020/03/03/GBmeoONE2cjDqpK.jpg
-  -  https://i.loli.net/2020/03/03/THrp8iKQhvlUmno.jpg
-  -  https://i.loli.net/2020/03/03/GBmeoONE2cjDqpK.jpg
-  -  https://i.loli.net/2020/03/03/HazKfwlDtGPyqQx.jpg
-  -  https://i.loli.net/2020/03/03/mvVJg1jysQWukZ7.jpg
-  -  https://i.loli.net/2020/03/03/THrp8iKQhvlUmno.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/2.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/3.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/4.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/5.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/6.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/7.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/9.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/12.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/10.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/11.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/13.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/14.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/15.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/16.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/17.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/18.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/19.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/20.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/21.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/22.jpg
-  - https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/23.jpg
-
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/SIGWRwpEiNM943j.jpg
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/bjCGeLtqBi9EpDx.jpg
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/HazKfwlDtGPyqQx.jpg
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/a6O4tM3Pc5VkD9y.jpg
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/GBmeoONE2cjDqpK.jpg
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/OHCLrFubBj3fWgI.jpg
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/THrp8iKQhvlUmno.jpg
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/pcTNz6UDXkQ8Cb5.jpg
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/u1Ab5LqPUYFjBVH.png
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/jTgLGJ2Vz3E91dF.png
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/XDPmRClfnFoE15r.png
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/lFVgpZn7W6vzqK4.png
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/13oVCDRfWPYm8Q5.png
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/5KhxmIqYUwPZE3d.png
+  # -  https://gitee.com//CODEZHW/blogimage/raw/master/img/KflGV2myxi1b97v.webp
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/2.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/3.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/4.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/5.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/6.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/7.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/9.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/12.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/10.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/11.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/13.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/14.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/15.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/16.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/17.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/18.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/19.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/20.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/21.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/22.jpg
+  -  https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/23.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-254b8fbc986f41c3312766df6cffe716_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-4708824e29ab0cf675d2fee9d99fb936_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-a3624313c813f9628b68fe5574faffb0_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-86a5cd1bb6bc11a5d835f705e90b8b33_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-e160d60fd3803317fc1939eaf3f1a2bc_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-254b8fbc986f41c3312766df6cffe716_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-4708824e29ab0cf675d2fee9d99fb936_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-a3624313c813f9628b68fe5574faffb0_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-86a5cd1bb6bc11a5d835f705e90b8b33_720w.jpg
+  -  https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-e160d60fd3803317fc1939eaf3f1a2bc_720w.jpg
    
 
 # default configs that the default policy for every articles/posts
@@ -526,7 +527,7 @@ addthis:
   pubid:  # 前往https://www.addthis.com/获取
 
 # 打字效果副标题.
-# 如果有符号 ‘ ，请在 ’ 前面加上 \
+# 如果有符号 ‘ ，请在 ’ 前面加上 /
 subtitle:
   enable: true
   loop: true # 是否循环
@@ -552,9 +553,9 @@ banner:
 
 #ICP备案信息尾部显示
 icp:
-  enable: false
-  url: # 备案链接
-  text: # 备案信息
+  enable: true
+  url: https://icp.chinaz.com/
+  text: 黔ICP备20001465号
 
 
 jsDelivr:

@@ -2,7 +2,6 @@
 title: JVM内存模型和Volatile
 date: 2020-02-26 15:33:51.5
 author: codezhw
-
 summary: 这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。
 categories: Java
 tags: 
@@ -58,8 +57,6 @@ public class JMMDemo {
 ## 2. Volatile
 
 
-
->  
 
 ## 3. 指令重排
 

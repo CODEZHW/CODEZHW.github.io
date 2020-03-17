@@ -1,6 +1,6 @@
 ---
 title: JDK1.7Hashtable&ConcurrentHashMap探究
-date: 2020年3月8日 13:26
+date: 2020-03-08 
 author: codezhw
 
 summary: 这是一篇关于Java JDK1.7版本,介绍实现Map线程安全的文章，对Hashtable、ConcurrentHashMap进行探究，分析它们实现线程安全的原理，以及二者之间的比较。

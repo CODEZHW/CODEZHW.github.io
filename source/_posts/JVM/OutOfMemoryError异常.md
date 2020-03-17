@@ -1,6 +1,6 @@
 ---
 title: OutOfMemoryError异常
-date: 2020-03-010T15:23
+date: 2020-03-10T15:23
 author: codezhw
 summary: 这是阅读《深入理解Java虚拟机:JVM高级特性与最佳实践(第3版)》的读书笔记，记录学习过程以及一些自己的理解。
 categories: JVM

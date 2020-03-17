@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 我的个人博客
+title: 🇨 🇴 🇩 🇪 🇿🇭🇼
 subtitle: ''
-description: 从来没有真正的绝境，只有心灵的迷途
-keywords:
-author: CODEZHW
+description: 专注于Web,分享生活,分享知识  #网站描述
+keywords: [Java, Sql, Redis, Spring, Spring MVC, Mybatis,JVM等] 
+author: CODE🇿🇭🇼
 language: zh-CN
 timezone: 
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-
+url: https://codezhw.club
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -91,19 +91,13 @@ ignore:
 theme: hexo-theme-matery
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
+## Docs: https://hexo.io/docs/deployment.htzhw981215ml
 deploy:
   - type: git
-    repo: 
-      github: https://github.com/CODEZHW/CODEZHW.github.io.git
-      coding: https://e.coding.net/blog_zhw/blog_zhwblog_zhw.git
+    repo: git@39.97.228.138:/home/git/hexoBlog.git
+    branch: master
 
   - type: baidu_url_submitter 
-
-
-url: https://codezhw.club 
-
-
 
 
 baidu_url_submit:
