@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="if..else表达式优化策略, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="前情提要if…else 是所有高级编程语言都有的必备功能。但现实中的代码往往存在着过多的 if…else。如果我们日常工作中需要进行以一个逻辑比较复杂的判断，写完后会嵌套好几层if..else，这样代码的可读性和可维护性非常差，下面介绍几种">
+    <meta name="keywords" content="Java字符串与Integer缓存, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="Java字符串’s1==s2‘与’s1.equals(s2)‘有什么区别吗？这是一个老生常谈的问题，这次从自己的角度去分析这个问题加深一下理解，顺便谈一谈Integer缓存问题。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>if..else表达式优化策略 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
+    <title>Java字符串与Integer缓存 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">if..else表达式优化策略</h1>
+                    <h1 class="description center-align post-title">Java字符串与Integer缓存</h1>
                 </div>
             </div>
         </div>
@@ -427,8 +427,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%BC%98%E5%8C%96/">
-                                <span class="chip bg-color">优化</span>
+                            <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">源码</span>
                             </a>
                         
                     </div>
@@ -452,7 +452,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-09
+                    2020-03-17
                 </div>
                 
 
@@ -466,14 +466,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    936
+                    545
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    2 分
                 </div>
                 
 				
@@ -489,144 +489,66 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p><strong>if…else</strong> 是所有高级编程语言都有的必备功能。但现实中的代码往往存在着过多的 if…else。如果我们日常工作中需要进行以一个逻辑比较复杂的判断，写完后会嵌套好几层if..else，这样代码的可读性和可维护性非常差，下面介绍几种优化if..else的策略，提高我们代码的可读性和简洁程。</p>
-<h1 id="1-取反条件，提前return"><a href="#1-取反条件，提前return" class="headerlink" title="1. 取反条件，提前return"></a>1. 取反条件，提前return</h1><p>这是我们日常中经常遇到，但是又容易忽略的情况。</p>
-<ul>
-<li>优化前：</li>
+                <h1 id="Java字符串"><a href="#Java字符串" class="headerlink" title="Java字符串"></a>Java字符串</h1><ul>
+<li>S1==S2和S1.equals(S2)有什么区别吗？</li>
 </ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
-    <span class="token keyword">return</span> xxx <span class="token punctuation">;</span>
+<p>我们都知道在Java语义中，<code>==</code>判断的对象的内存地址是否相等。（暂时不去探究JVM怎么解析==这个语法的以及JVM怎么把“”之间的内容解析成字符串）</p>
+<p>那现在问题来了：</p>
+<pre class="line-numbers language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span> <span class="token punctuation">(</span> <span class="token string">"123"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+String s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span> <span class="token punctuation">(</span> <span class="token string">"123"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+var s3 <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
+var s4 <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
+
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"s1: 内存地址 => "</span> <span class="token operator">+</span> System<span class="token punctuation">.</span><span class="token function">identityHashCode</span> <span class="token punctuation">(</span> s1 <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"  s1: 内存地址 => "</span> <span class="token operator">+</span> System<span class="token punctuation">.</span><span class="token function">identityHashCode</span> <span class="token punctuation">(</span> s2 <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"  s1 == s2 : "</span> <span class="token operator">+</span> <span class="token punctuation">(</span>s1 <span class="token operator">==</span> s2<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"s3: 内存地址 => "</span> <span class="token operator">+</span> System<span class="token punctuation">.</span><span class="token function">identityHashCode</span> <span class="token punctuation">(</span> s3 <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"  s4: 内存地址 => "</span> <span class="token operator">+</span> System<span class="token punctuation">.</span><span class="token function">identityHashCode</span> <span class="token punctuation">(</span> s4 <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"  s3 == s4 : "</span> <span class="token operator">+</span> <span class="token punctuation">(</span>s3 <span class="token operator">==</span> s4<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>我们不能通过s.hashcode()方法得到对象的内存地址，因为String重写了这个方法，它返回对象的hash值。</strong></p>
+<p>你觉得结果会是怎样呢？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200317205955.png" alt="结果"></p>
+<p>很容易验证我们心中所想：</p>
+<ul>
+<li><strong>s1 != s2 因为他们是通过new关键字创建出来的，存储在Java堆中对象的内存地址不相等。</strong></li>
+<li><strong>s3 == s3 因为JVM解析“”将里面的内容存放在字符串常量池中，因为是同一个字符串位于常量池中，所以他们的引用相同，内存地址也就相同</strong></li>
+</ul>
+<p><strong>Java在JDK1.7之后将字符串常量池放入堆中。</strong></p>
+<h1 id="Integer缓存"><a href="#Integer缓存" class="headerlink" title="Integer缓存"></a>Integer缓存</h1><pre class="line-numbers language-java"><code class="language-java">Integer integer1 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+Integer integer2 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span>integer1 <span class="token operator">==</span> integer2 <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Integer integer3 <span class="token operator">=</span> <span class="token number">128</span><span class="token punctuation">;</span>
+Integer integer4 <span class="token operator">=</span> <span class="token number">129</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span>integer3 <span class="token operator">==</span> integer4 <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>结果：true</p>
+<p>​     false</p>
+<p>Integer integer1 = 1;</p>
+<p>会通过自动装箱的机制：</p>
+<p>Integer integer1 = 1; 相当于 Integer integer1 = Integer.valueOf(1);</p>
+<p>我们来看valueOf()的源码</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> Integer <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> IntegerCache<span class="token punctuation">.</span>low <span class="token operator">&amp;&amp;</span> i <span class="token operator">&lt;=</span> IntegerCache<span class="token punctuation">.</span>high<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> IntegerCache<span class="token punctuation">.</span>cache<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">-</span>IntegerCache<span class="token punctuation">.</span>low<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后：</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">if</span>（<span class="token operator">!</span>condition）<span class="token punctuation">{</span>
-    <span class="token keyword">return</span> xxx<span class="token punctuation">;</span>
+<p>可以看到当i的范围在i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.hig之间时，会在</p>
+<p>IntegerCache.cache[]数组中去寻找。</p>
+<p>IntegerCache.low = -128；</p>
+<p>IntegerCache.hig = +127；</p>
+<p>cache[]中存储的也是-128~+127</p>
+<pre class="line-numbers language-java"><code class="language-java">
+<span class="token comment" spellcheck="true">//IntegerCache 静态代码块中的一段 high = 127 low = -128</span>
+<span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token punctuation">(</span>high <span class="token operator">-</span> low<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// Use the archived cache if it exists and is large enough</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>archivedCache <span class="token operator">==</span> null <span class="token operator">||</span> size <span class="token operator">></span> archivedCache<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Integer<span class="token punctuation">[</span><span class="token punctuation">]</span> c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span>size<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> j <span class="token operator">=</span> low<span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> c<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        c<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    archivedCache <span class="token operator">=</span> c<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="2-条件三目运算符"><a href="#2-条件三目运算符" class="headerlink" title="2. 条件三目运算符"></a>2. 条件三目运算符</h1><p>这在Java基础中学过，但是缺很少运用到实际中。</p>
-<ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span>  num <span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    num <span class="token operator">=</span> <span class="token number">80</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
-    num <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span> num <span class="token operator">=</span> condition <span class="token operator">?</span> <span class="token number">80</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="3-数组优化（表驱动法）"><a href="#3-数组优化（表驱动法）" class="headerlink" title="3. 数组优化（表驱动法）"></a>3. 数组优化（表驱动法）</h1><p>这里举例我们想要得到一年各个月份的天数。</p>
-<ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span> <span class="token function">getDays</span><span class="token punctuation">(</span><span class="token keyword">int</span> month<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">29</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">6</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">7</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">8</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">11</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">12</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span> monthDays<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">29</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">getDays</span><span class="token punctuation">(</span><span class="token keyword">int</span> month<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">return</span> monthDays<span class="token punctuation">[</span><span class="token operator">--</span>month<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="4-表驱动法："><a href="#4-表驱动法：" class="headerlink" title="4.表驱动法："></a>4.表驱动法：</h1><p><strong>表驱动法</strong>，又称之为表驱动、表驱动方法。表驱动方法是一种使你可以在表中查找信息，而不必用很多的逻辑语句（if或Case）来把它们找出来的方法。以下的demo，把map抽象成表，在map中查找信息，而省去不必要的逻辑语句。</p>
-<ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">dosomething1</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">dosomething2</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>value3<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">dosomething3</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java">Map<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token punctuation">,</span> Function<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> action<span class="token operator">></span> actionMappings <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 这里泛型 ? 是为方便演示，实际可替换为你需要的类型</span>
-
-<span class="token comment" spellcheck="true">// 初始化</span>
-actionMappings<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>value1<span class="token punctuation">,</span> <span class="token punctuation">(</span>someParams<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token function">dosomething1</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-actionMappings<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>value2<span class="token punctuation">,</span> <span class="token punctuation">(</span>someParams<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token function">dosomething2</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-actionMappings<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>value3<span class="token punctuation">,</span> <span class="token punctuation">(</span>someParams<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token function">dosomething3</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// 省略多余逻辑语句</span>
-actionMappings<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这里非常的精髓，将我们的HashMap ,Function&lt;T, R&gt; 和Lambda 结合起来。</p>
-<h1 id="5-优化逻辑结构，让正常流程走主干"><a href="#5-优化逻辑结构，让正常流程走主干" class="headerlink" title="5.优化逻辑结构，让正常流程走主干"></a>5.优化逻辑结构，让正常流程走主干</h1><ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getAdjustedCapital</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_capital <span class="token operator">&lt;=</span> <span class="token number">0.0</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_intRate <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> _duration <span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>_income <span class="token operator">/</span> _duration<span class="token punctuation">)</span> <span class="token operator">*</span>ADJ_FACTOR<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getAdjustedCapital</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_capital <span class="token operator">&lt;=</span> <span class="token number">0.0</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_intRate <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token operator">||</span> _duration <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>_income <span class="token operator">/</span> _duration<span class="token punctuation">)</span> <span class="token operator">*</span>ADJ_FACTOR<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-
-
-<span class="token comment" spellcheck="true">//再优化</span>
-<span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getAdjustedCapital</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_capital <span class="token operator">&lt;=</span> <span class="token number">0.0</span> <span class="token operator">||</span>_intRate <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token operator">||</span> _duration <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>_income <span class="token operator">/</span> _duration<span class="token punctuation">)</span> <span class="token operator">*</span>ADJ_FACTOR<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>感觉这里的思想和取反条件，提前return差不多。</p>
-<h1 id="6-Optional"><a href="#6-Optional" class="headerlink" title="6. Optional"></a>6. Optional</h1><p>Java 代码中的一部分 if…else 是由非空检查导致的。因此，降低这部分带来的 if…else 也就能降低整体的 if…else 的个数。</p>
-<ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java">String str <span class="token operator">=</span> <span class="token string">"Hello World!"</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>str <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java">Optional<span class="token operator">&lt;</span>String<span class="token operator">></span> strOptional <span class="token operator">=</span> Optional<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-strOptional<span class="token punctuation">.</span><span class="token function">ifPresentOrElse</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>out<span class="token operator">:</span><span class="token operator">:</span>println<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Null"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="7"><a href="#7" class="headerlink" title="7."></a>7.</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Java 8 为我们提供了强大的能力，它的新特性是划时代的（Java 8 之后的版本中新特性都不够亮眼），包括 Lambda 表达式和 Stream 流，我们通过它们可以写出简洁又高效的代码。</p>
-<p>但是我们需要注意不能过度可以的去使用这些方法，过度不恰当的使用可能会造成我们代码的混乱，不可读性，甚至低效。</p>
-<p>函数式编程出现的目的可不仅仅是为了减少冗余代码，它是为了解放生产力——言外之意就是说，代码复杂点没关系，只要可用可靠。编程的目标不是产生尽可能少的代码，而是产生易于维护的、高性能的系统。</p>
+cache <span class="token operator">=</span> archivedCache<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>由此可见，当Integer对象的值在-128~+127之间，它不会创建对象会从Integer缓存中提取。当Integer超过这个范围时会直接创建对象。</p>
 
             </div>
             <hr/>
@@ -652,7 +574,7 @@ strOptional<span class="token punctuation">.</span><span class="token function">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/">https://codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/</a>
+                    <a href="https://codezhw.club/2020/03/17/java/java-zi-fu-chuan-yu-integer-huan-cun/">https://codezhw.club/2020/03/17/java/java-zi-fu-chuan-yu-integer-huan-cun/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -690,8 +612,8 @@ strOptional<span class="token punctuation">.</span><span class="token function">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%BC%98%E5%8C%96/">
-                                    <span class="chip bg-color">优化</span>
+                                <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">源码</span>
                                 </a>
                             
                         </div>
@@ -1120,81 +1042,29 @@ strOptional<span class="token punctuation">.</span><span class="token function">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/">
+                <a href="/2020/03/17/java/java-zi-fu-chuan-yu-integer-huan-cun/">
                     <div class="card-image">
                         
                         
-                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-254b8fbc986f41c3312766df6cffe716_720w.jpg" class="responsive-img" alt="Java中的内存区域">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/19.jpg" class="responsive-img" alt="Java字符串与Integer缓存">
                         
-                        <span class="card-title">Java中的内存区域</span>
+                        <span class="card-title">Java字符串与Integer缓存</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是阅读《深入理解Java虚拟机:JVM高级特性与最佳实践(第3版)》的读书笔记，记录学习过程以及一些自己的理解。
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-10
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/JVM/" class="post-category">
-                                    JVM
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">读书笔记</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg" class="responsive-img" alt="JDK1.7Hashtable&ConcurrentHashMap探究">
-                        
-                        <span class="card-title">JDK1.7Hashtable&ConcurrentHashMap探究</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            这是一篇关于Java JDK1.7版本,介绍实现Map线程安全的文章，对Hashtable、ConcurrentHashMap进行探究，分析它们实现线程安全的原理，以及二者之间的比较。
+                            Java字符串’s1==s2‘与’s1.equals(s2)‘有什么区别吗？这是一个老生常谈的问题，这次从自己的角度去分析这个问题加深一下理解，顺便谈一谈Integer缓存问题。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-17
                             </span>
                         <span class="publish-author">
                             
@@ -1208,15 +1078,65 @@ strOptional<span class="token punctuation">.</span><span class="token function">
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/HashMap/">
-                        <span class="chip bg-color">HashMap</span>
-                    </a>
-                    
                     <a href="/tags/%E6%BA%90%E7%A0%81/">
                         <span class="chip bg-color">源码</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/15/nginx/nginx-jie-shao-yu-an-zhuang/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-e160d60fd3803317fc1939eaf3f1a2bc_720w.jpg" class="responsive-img" alt="Nginx介绍与安装">
+                        
+                        <span class="card-title">Nginx介绍与安装</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            这是关于nginx简介与安装的文章。由于部署github或者gitee访问速度都不太理想，所以打算把我的hexo博客部署到阿里云服务器中，所以学习一下nginx。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Nginx/" class="post-category">
+                                    Nginx
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                        <span class="chip bg-color">服务器</span>
                     </a>
                     
                 </div>
