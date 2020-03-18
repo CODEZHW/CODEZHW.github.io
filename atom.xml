@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://codezhw.club/"/>
-  <updated>2020-03-17T14:53:01.896Z</updated>
+  <updated>2020-03-18T12:49:25.914Z</updated>
   <id>https://codezhw.club/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>经典的垃圾收集器</title>
+    <link href="https://codezhw.club/2020/03/18/jvm/jing-dian-de-la-ji-shou-ji-qi/"/>
+    <id>https://codezhw.club/2020/03/18/jvm/jing-dian-de-la-ji-shou-ji-qi/</id>
+    <published>2020-03-18T08:53:32.454Z</published>
+    <updated>2020-03-18T12:49:25.914Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;经典的垃圾收集器&quot;&gt;&lt;a href=&quot;#经典的垃圾收集器&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JVM" scheme="https://codezhw.club/categories/JVM/"/>
+    
+    
+      <category term="Java" scheme="https://codezhw.club/tags/Java/"/>
+    
+      <category term="读书笔记" scheme="https://codezhw.club/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java的垃圾收集</title>
+    <link href="https://codezhw.club/2020/03/18/jvm/java-de-la-ji-shou-ji/"/>
+    <id>https://codezhw.club/2020/03/18/jvm/java-de-la-ji-shou-ji/</id>
+    <published>2020-03-18T05:17:00.000Z</published>
+    <updated>2020-03-18T13:09:36.349Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;Java的垃圾收集&quot;&gt;&lt;a href=&quot;#Java的垃圾收集&quot; class=&quot;headerlink&quot; title=&quot;Java的垃圾收集&quot;&gt;&lt;/a&gt;Java的垃圾收集&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="JVM" scheme="https://codezhw.club/categories/JVM/"/>
+    
+    
+      <category term="Java" scheme="https://codezhw.club/tags/Java/"/>
+    
+      <category term="读书笔记" scheme="https://codezhw.club/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Java字符串与Integer缓存</title>
@@ -106,7 +164,7 @@
     <link href="https://codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/"/>
     <id>https://codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/</id>
     <published>2020-03-10T07:23:00.000Z</published>
-    <updated>2020-03-17T14:53:01.883Z</updated>
+    <updated>2020-03-18T05:19:02.206Z</updated>
     
     <summary type="html">
     
@@ -135,7 +193,7 @@
     <link href="https://codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/"/>
     <id>https://codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/</id>
     <published>2020-03-10T05:23:00.000Z</published>
-    <updated>2020-03-17T14:53:01.880Z</updated>
+    <updated>2020-03-18T07:26:44.522Z</updated>
     
     <summary type="html">
     

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java字符串与Integer缓存, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="Java字符串’s1==s2‘与’s1.equals(s2)‘有什么区别吗？这是一个老生常谈的问题，这次从自己的角度去分析这个问题加深一下理解，顺便谈一谈Integer缓存问题。">
+    <meta name="keywords" content="经典的垃圾收集器, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="这是阅读《深入理解Java虚拟机:JVM高级特性与最佳实践(第3版)》的读书笔记，记录学习过程以及一些自己的理解。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Java字符串与Integer缓存 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
+    <title>经典的垃圾收集器 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java字符串与Integer缓存</h1>
+                    <h1 class="description center-align post-title">经典的垃圾收集器</h1>
                 </div>
             </div>
         </div>
@@ -427,8 +427,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%BA%90%E7%A0%81/">
-                                <span class="chip bg-color">源码</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">读书笔记</span>
                             </a>
                         
                     </div>
@@ -439,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Java/" class="post-category">
-                                Java
+                            <a href="/categories/JVM/" class="post-category">
+                                JVM
                             </a>
                         
                     </div>
@@ -452,28 +456,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-17
+                    2020-03-18
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-17
+                    2020-03-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    545
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    6 分
                 </div>
                 
 				
@@ -489,66 +493,34 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Java字符串"><a href="#Java字符串" class="headerlink" title="Java字符串"></a>Java字符串</h1><ul>
-<li>S1==S2和S1.equals(S2)有什么区别吗？</li>
-</ul>
-<p>我们都知道在Java语义中，<code>==</code>判断的对象的内存地址是否相等。（暂时不去探究JVM怎么解析==这个语法的以及JVM怎么把“”之间的内容解析成字符串）</p>
-<p>那现在问题来了：</p>
-<pre class="line-numbers language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span> <span class="token punctuation">(</span> <span class="token string">"123"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-String s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span> <span class="token punctuation">(</span> <span class="token string">"123"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-var s3 <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
-var s4 <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">;</span>
-
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"s1: 内存地址 => "</span> <span class="token operator">+</span> System<span class="token punctuation">.</span><span class="token function">identityHashCode</span> <span class="token punctuation">(</span> s1 <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"  s1: 内存地址 => "</span> <span class="token operator">+</span> System<span class="token punctuation">.</span><span class="token function">identityHashCode</span> <span class="token punctuation">(</span> s2 <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"  s1 == s2 : "</span> <span class="token operator">+</span> <span class="token punctuation">(</span>s1 <span class="token operator">==</span> s2<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"s3: 内存地址 => "</span> <span class="token operator">+</span> System<span class="token punctuation">.</span><span class="token function">identityHashCode</span> <span class="token punctuation">(</span> s3 <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"  s4: 内存地址 => "</span> <span class="token operator">+</span> System<span class="token punctuation">.</span><span class="token function">identityHashCode</span> <span class="token punctuation">(</span> s4 <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"  s3 == s4 : "</span> <span class="token operator">+</span> <span class="token punctuation">(</span>s3 <span class="token operator">==</span> s4<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>我们不能通过s.hashcode()方法得到对象的内存地址，因为String重写了这个方法，它返回对象的hash值。</strong></p>
-<p>你觉得结果会是怎样呢？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200317205955.png" alt="结果"></p>
-<p>很容易验证我们心中所想：</p>
+                <h1 id="经典的垃圾收集器"><a href="#经典的垃圾收集器" class="headerlink" title="经典的垃圾收集器"></a>经典的垃圾收集器</h1><blockquote>
+<p><strong>如果说收集算法是内存回收的方法论，那垃圾收集器就是内存回收的实践者。</strong></p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200318165553.png" alt=""></p>
+<p><strong>图展示了七种作用于不同分代的收集器，如果两个收集器之间存在连线，就说明它们可以搭配使用。</strong></p>
+<p><strong>在JDK8中将<code>Serial+CMS</code>、<code>MSC+ParNew</code>这两种组合废弃，在JDK9中彻底取消。</strong></p>
+<p><strong>图中收集器所处的区域，则表示它是属于新生代收集器抑或是老年代收集器。</strong></p>
+<p><strong>接下来将逐一介绍这些收集器的目标、特性、原理和使用场景，并重点分析CMS和G1这两款相对复杂而又广泛使用的收集器，深入了解它们的部分运作细节。</strong></p>
+<h2 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h2><p>Serial收集器是最基础、历史最悠久的收集器，从名字可以猜出，这个收集器是一个单线程工作的收集器，但它的<code>单线程</code>的意义并不仅仅是说明它只会使用一个处理器或一条收集线程去完成垃圾收集工作，更重要的是强调在它进行垃圾收集时，必须暂停其他所有工作线程，直到它收集结束。</p>
+<p>这样的作法看上去不可理喻，但实际上它依然是HotSpot虚拟机运行在客户端模式下的<code>默认新生代收集器</code>，有着优于其他收集器的地方，那就是简单而高效。</p>
+<p>对于单核处理器或处理器核心数较少的环境来说，Serial收集器由于没有线程交互的开销，专心做垃圾收集自然可以获得最高的单线程收集效率。</p>
+<p><strong>在用户桌面的应用场景以及近年来流行的部分微服务应用中，分配给虚拟机管理的内存一般来说并不会特别大，收集几十兆甚至一两百兆的新生代（仅仅是指新生代使用的内存，桌面应用甚少超过这个容量），垃圾收集的停顿时间完全可以控制在十几、几十毫秒，最多一百多毫秒以内，只要不是频繁发生收集，这点停顿时间对许多用户来说是完全可以接受的。</strong></p>
+<p>所以，Serial收集器对于运行在客户端模式下的虚拟机来说是一个很好的选择。</p>
+<h2 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h2><p>ParNew收集器实质上是Serial收集器的多线程并行版本，除了同时使用多条线程进行垃圾收集之外，其余的行为包括Serial收集器可用的所有控制参数、收集算法、Stop TheWorld、对象分配规则、回收策略等都与Serial收集器完全一致，在实现上这两种收集器也共用了相当多的代码。</p>
+<p>ParNew收集器除了支持多线程并行收集之外，其他与Serial收集器相比并没有太多创新之处，但它却是不少运行在服务端模式下的HotSpot虚拟机，尤其是JDK 7之前的遗留系统中首选的新生代收集器，其中有一个与功能、性能无关但其实很重要的原因是：除了Serial收集器外，目前只有它能与CMS收集器配合工作。</p>
+<h2 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h2><p>Parallel Scavenge收集器也是一款新生代收集器，它同样是基于标记-复制算法实现的收集器，也是能够并行收集的多线程收集器……Parallel Scavenge的诸多特性从表面上看和ParNew非常相似，那它有什么特别之处呢？</p>
+<p>Parallel Scavenge收集器的特点是它的关注点与其他收集器不同，CMS等收集器的关注点是尽可能地缩短垃圾收集时用户线程的停顿时间，而Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量（Throughput）。所谓吞吐量就是处理器用于<strong>运行用户代码的时间与处理器总消耗时间的比值。</strong><br>$$<br>吞吐量 = 运行用户代码时间 / （运行用户代码时间 + 运行垃圾收集时间）<br>$$</p>
+<h2 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h2><p>Serial Old是Serial收集器的老年代版本，它同样是一个单线程收集器，使用标记-整理算法。这个收集器的主要意义也是供客户端模式下的HotSpot虚拟机使用。如果在服务端模式下，它也可能有两种用途：一种是在JDK 5以及之前的版本中与Parallel Scavenge收集器搭配使用，另外一种就是作为CMS收集器发生失败时的后备预案，在并发收集发生Concurrent ModeFailure时使用。这两点都将在后面的内容中继续讲解。</p>
+<h2 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h2><p>Parallel Old是Parallel Scavenge收集器的老年代版本，支持多线程并发收集，基于标记-整理算法实现。这个收集器是直到JDK 6时才开始提供的，在此之前，新生代的Parallel Scavenge收集器一直处于相当尴尬的状态，原因是如果新生代选择了Parallel Scavenge收集器，老年代除了Serial Old（PS MarkSweep）收集器以外别无选择，其他表现良好的老年代收集器，如CMS无法与它配合工作。由于老年代Serial Old收集器在服务端应用性能上的“拖累”，使用ParallelScavenge收集器也未必能在整体上获得吞吐量最大化的效果。同样，由于单线程的老年代收集中无法充分利用服务器多处理器的并行处理能力，在老年代内存空间很大而且硬件规格比较高级的运行环境中，这种组合的总吞吐量甚至不一定比ParNew加CMS的组合来得优秀。</p>
+<p>直到Parallel Old收集器出现后，“吞吐量优先”收集器终于有了比较名副其实的搭配组合，在注重吞吐量或者处理器资源较为稀缺的场合，都可以优先考虑Parallel Scavenge加Parallel Old收集器这个组合。</p>
+<h2 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h2><p>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。目前很大一部分的Java应用集中在互联网网站或者基于浏览器的B/S系统的服务端上，这类应用通常都会较为关注服务的响应速度，希望系统停顿时间尽可能短，以给用户带来良好的交互体验。CMS收集器就非常符合这类应用的需求。</p>
+<p>上就可以看出CMS收集器是基于标记-清除算法实现的，它的运作过程相对于前面几种收集器来说要更复杂一些，整个过程分为四个步骤，包括：</p>
 <ul>
-<li><strong>s1 != s2 因为他们是通过new关键字创建出来的，存储在Java堆中对象的内存地址不相等。</strong></li>
-<li><strong>s3 == s3 因为JVM解析“”将里面的内容存放在字符串常量池中，因为是同一个字符串位于常量池中，所以他们的引用相同，内存地址也就相同</strong></li>
+<li>初始标记（CMS initial mark）</li>
+<li>并发标记（CMS concurrent mark）</li>
+<li>重新标记（CMS remark）</li>
+<li>并发清除（CMS concurrent sweep）</li>
 </ul>
-<p><strong>Java在JDK1.7之后将字符串常量池放入堆中。</strong></p>
-<h1 id="Integer缓存"><a href="#Integer缓存" class="headerlink" title="Integer缓存"></a>Integer缓存</h1><pre class="line-numbers language-java"><code class="language-java">Integer integer1 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-Integer integer2 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span>integer1 <span class="token operator">==</span> integer2 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-Integer integer3 <span class="token operator">=</span> <span class="token number">128</span><span class="token punctuation">;</span>
-Integer integer4 <span class="token operator">=</span> <span class="token number">129</span><span class="token punctuation">;</span>
-System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span>integer3 <span class="token operator">==</span> integer4 <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>结果：true</p>
-<p>​     false</p>
-<p>Integer integer1 = 1;</p>
-<p>会通过自动装箱的机制：</p>
-<p>Integer integer1 = 1; 相当于 Integer integer1 = Integer.valueOf(1);</p>
-<p>我们来看valueOf()的源码</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> Integer <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> IntegerCache<span class="token punctuation">.</span>low <span class="token operator">&amp;&amp;</span> i <span class="token operator">&lt;=</span> IntegerCache<span class="token punctuation">.</span>high<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> IntegerCache<span class="token punctuation">.</span>cache<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">-</span>IntegerCache<span class="token punctuation">.</span>low<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看到当i的范围在i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.hig之间时，会在</p>
-<p>IntegerCache.cache[]数组中去寻找。</p>
-<p>IntegerCache.low = -128；</p>
-<p>IntegerCache.hig = +127；</p>
-<p>cache[]中存储的也是-128~+127</p>
-<pre class="line-numbers language-java"><code class="language-java">
-<span class="token comment" spellcheck="true">//IntegerCache 静态代码块中的一段 high = 127 low = -128</span>
-<span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token punctuation">(</span>high <span class="token operator">-</span> low<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// Use the archived cache if it exists and is large enough</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>archivedCache <span class="token operator">==</span> null <span class="token operator">||</span> size <span class="token operator">></span> archivedCache<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    Integer<span class="token punctuation">[</span><span class="token punctuation">]</span> c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span>size<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> j <span class="token operator">=</span> low<span class="token punctuation">;</span>
-    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> c<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        c<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    archivedCache <span class="token operator">=</span> c<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-cache <span class="token operator">=</span> archivedCache<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>由此可见，当Integer对象的值在-128~+127之间，它不会创建对象会从Integer缓存中提取。当Integer超过这个范围时会直接创建对象。</p>
 
             </div>
             <hr/>
@@ -574,7 +546,7 @@ cache <span class="token operator">=</span> archivedCache<span class="token punc
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/03/17/java/java-zi-fu-chuan-yu-integer-huan-cun/">https://codezhw.club/2020/03/17/java/java-zi-fu-chuan-yu-integer-huan-cun/</a>
+                    <a href="https://codezhw.club/2020/03/18/jvm/jing-dian-de-la-ji-shou-ji-qi/">https://codezhw.club/2020/03/18/jvm/jing-dian-de-la-ji-shou-ji-qi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -612,8 +584,12 @@ cache <span class="token operator">=</span> archivedCache<span class="token punc
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%BA%90%E7%A0%81/">
-                                    <span class="chip bg-color">源码</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">读书笔记</span>
                                 </a>
                             
                         </div>
@@ -1042,17 +1018,18 @@ cache <span class="token operator">=</span> archivedCache<span class="token punc
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/18/jvm/java-de-la-ji-shou-ji/">
+                <a href="/2020/03/18/jvm/jing-dian-de-la-ji-shou-ji-qi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg" class="responsive-img" alt="Java的垃圾收集">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg" class="responsive-img" alt="经典的垃圾收集器">
                         
-                        <span class="card-title">Java的垃圾收集</span>
+                        <span class="card-title">经典的垃圾收集器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1062,9 +1039,9 @@ cache <span class="token operator">=</span> archivedCache<span class="token punc
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-18
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1077,6 +1054,7 @@ cache <span class="token operator">=</span> archivedCache<span class="token punc
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1099,31 +1077,31 @@ cache <span class="token operator">=</span> archivedCache<span class="token punc
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/15/nginx/nginx-jie-shao-yu-an-zhuang/">
+                <a href="/2020/03/18/jvm/java-de-la-ji-shou-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-e160d60fd3803317fc1939eaf3f1a2bc_720w.jpg" class="responsive-img" alt="Nginx介绍与安装">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg" class="responsive-img" alt="Java的垃圾收集">
                         
-                        <span class="card-title">Nginx介绍与安装</span>
+                        <span class="card-title">Java的垃圾收集</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是关于nginx简介与安装的文章。由于部署github或者gitee访问速度都不太理想，所以打算把我的hexo博客部署到阿里云服务器中，所以学习一下nginx。
+                            这是阅读《深入理解Java虚拟机:JVM高级特性与最佳实践(第3版)》的读书笔记，记录学习过程以及一些自己的理解。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Nginx/" class="post-category">
-                                    Nginx
+                            <a href="/categories/JVM/" class="post-category">
+                                    JVM
                                 </a>
                             
                             
@@ -1133,12 +1111,12 @@ cache <span class="token operator">=</span> archivedCache<span class="token punc
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-                        <span class="chip bg-color">服务器</span>
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
                     </a>
                     
                 </div>
