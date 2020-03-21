@@ -46,7 +46,7 @@ public class HeapOom {
 
 可以看到成功抛出了内存溢出异常，位于Java中的堆空间。
 
----
+
 
 
 
@@ -80,7 +80,7 @@ public class StacksOf {
 
 ![结果](https://i.loli.net/2020/03/10/khv1WmFPRSZrKpU.png)
 
----
+
 
 
 
