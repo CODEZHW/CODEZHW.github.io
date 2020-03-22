@@ -4,8 +4,19 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="Redis学习（二）：Redis的常用key命令, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="Redis的常用key命令
+常用的key命令:
+
+DEL key
+
+该命令用于在 key 存在时删除 key。 成功返回1，失败返回0
+
+EXISTS  key
+
+判断key是否存在  存在返回1，不存在返回0
+
+EXPIRE key se">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +24,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Hello World | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
+    <title>Redis学习（二）：Redis的常用key命令 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +316,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-254b8fbc986f41c3312766df6cffe716_720w.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Redis学习（二）：Redis的常用key命令</h1>
                 </div>
             </div>
         </div>
@@ -425,12 +436,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/Redis/">
+                                <span class="chip bg-color">Redis</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Redis/" class="post-category">
+                                Redis
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -439,21 +467,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-02-20
+                    2020-02-27
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-02-20
+                    2020-03-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    134
                 </div>
                 
 
@@ -476,15 +504,38 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+                <h1 id="Redis的常用key命令"><a href="#Redis的常用key命令" class="headerlink" title="Redis的常用key命令"></a>Redis的常用key命令</h1><ul>
+<li><strong>常用的key命令:</strong></li>
+</ul>
+<p><strong>DEL key</strong></p>
+<blockquote>
+<p>该命令用于在 key 存在时删除 key。 成功返回1，失败返回0</p>
+</blockquote>
+<p><strong>EXISTS  key</strong></p>
+<blockquote>
+<p>判断key是否存在  存在返回1，不存在返回0</p>
+</blockquote>
+<p><strong>EXPIRE key seconds</strong></p>
+<blockquote>
+<p>给key设置生存时间 单位：秒</p>
+</blockquote>
+<p><strong>TTL key</strong></p>
+<blockquote>
+<p>返回key 剩余的生存时间  </p>
+</blockquote>
+<p><strong>MOVE key db</strong></p>
+<blockquote>
+<p>将当前数据库的 key 移动到给定的数据库 db 当中。 </p>
+</blockquote>
+<p>TYPE key</p>
+<blockquote>
+<p>返回key的数据类型</p>
+</blockquote>
+<p><strong>RENAME key newkey</strong></p>
+<blockquote>
+<p>将key重命名为newkey</p>
+</blockquote>
+<h1 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h1><p>String 类型 Java String</p>
 
             </div>
             <hr/>
@@ -500,7 +551,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club" rel="external nofollow noreferrer">CODE🇿🇭🇼</a>
+                    <a href="https://codezhw.club" rel="external nofollow noreferrer">codezhw</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -510,7 +561,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/02/20/hello-world/">https://codezhw.club/2020/02/20/hello-world/</a>
+                    <a href="https://codezhw.club/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/">https://codezhw.club/2020/02/27/redis/redis-de-chang-yong-key-ming-ling/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -523,7 +574,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="https://codezhw.club" target="_blank">CODE🇿🇭🇼</a>
+                    <a href="https://codezhw.club" target="_blank">codezhw</a>
                     !
                 </span>
             </div>
@@ -547,7 +598,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/Redis/">
+                                    <span class="chip bg-color">Redis</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -974,39 +1033,53 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/02/20/hello-world/">
+                <a href="/2020/02/27/java/java8-xin-te-xing-han-shu-shi-bian-cheng/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/22.jpg" class="responsive-img" alt="Hello World">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/15.jpg" class="responsive-img" alt="Java8新特性:函数式编程以及Stream流式计算">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">Java8新特性:函数式编程以及Stream流式计算</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            这是一篇关于Java8新特性，函数式接口以及Stream流式计算的文章，作为新时代的程序必须掌握的JDK8新特性：Lambda表达式、链式编程、函数式接口、Stream流式计算，本文主要介绍了函数式接口以及Stream流式计算, Lambda表达式和链式编程夹带讲解。
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-20
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-27
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            CODE🇿🇭🇼
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/">
+                        <span class="chip bg-color">函数式接口</span>
+                    </a>
+                    
+                    <a href="/tags/Stream%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/">
+                        <span class="chip bg-color">Stream流式计算</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1014,37 +1087,48 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/02/20/hello-world/">
+                <a href="/2020/02/26/java/jmm-nei-cun-mo-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/22.jpg" class="responsive-img" alt="Hello World">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/2.jpg" class="responsive-img" alt="JVM内存模型和Volatile">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">JVM内存模型和Volatile</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                            这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-26
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            CODE🇿🇭🇼
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">多线程</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1236,7 +1320,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">73</span>&nbsp;字
+                class="white-color">34.7k</span>&nbsp;字
             
             
             
