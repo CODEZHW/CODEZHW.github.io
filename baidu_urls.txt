@@ -7,7 +7,6 @@ https://codezhw.club/2020/03/15/nginx/nginx-jie-shao-yu-an-zhuang/
 https://codezhw.club/2020/03/13/leetcode/di-yi-zhou/
 https://codezhw.club/2020/03/11/sui-bi/wo-de-di-yi-pian-bo-ke/
 https://codezhw.club/2020/03/11/duo-xian-cheng/che-di-gao-dong-synchronized-he-volatile/
-https://codezhw.club/2020/03/11/hello-world/
 https://codezhw.club/2020/03/10/jvm/outofmemoryerror-yi-chang/
 https://codezhw.club/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/
 https://codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/
