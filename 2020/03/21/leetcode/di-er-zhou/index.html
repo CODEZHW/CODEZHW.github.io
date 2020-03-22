@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-21
+                    2020-03-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    876
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 				
@@ -591,6 +591,91 @@
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> num <span class="token operator">==</span> tmp<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="题目：945-使数组唯一的最小增量"><a href="#题目：945-使数组唯一的最小增量" class="headerlink" title="题目：945. 使数组唯一的最小增量"></a>题目：<a href="https://leetcode-cn.com/problems/minimum-increment-to-make-array-unique/" target="_blank" rel="noopener">945. 使数组唯一的最小增量</a></h2><p>给定整数数组 A，每次 <em>move</em> 操作将会选择任意 <code>A[i]</code>，并将其递增 <code>1</code>。</p>
+<p>返回使 <code>A</code> 中的每个值都是唯一的最少操作次数。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入：[1,2,2]
+输出：1
+解释：经过一次 move 操作，数组将变为 [1, 2, 3]。</code></pre><p><strong>示例 2:</strong></p>
+<pre><code>输入：[3,2,1,2,1,7]
+输出：6
+解释：经过 6 次 move 操作，数组将变为 [3, 4, 1, 2, 5, 7]。
+可以看出 5 次或 5 次以下的 move 操作是不能让数组的每个值唯一的。</code></pre><p><strong>解题思路：</strong></p>
+<ul>
+<li>第一种：<ul>
+<li>第一眼的想法是利用HashSet去判断数组每个元素是否重复。</li>
+<li>如果不重复就添加；重复就将这个值++。然后再去判断是否重复，一直到不重复为止，然后将这个元素添加。</li>
+<li>可惜，因为0 &lt;= A.length &lt;= 40000，0 &lt;= A[i] &lt; 40000这样作法会超时。</li>
+</ul>
+</li>
+<li>第二种：<ul>
+<li>先将数组排序，然后循环遍历数组</li>
+<li>如果当前元素大于上一个元素，保持不变；</li>
+<li>如果当前元素小于等于上一个元素，就需要增加当前元素，直到大于上一个元素。</li>
+<li>具体作法是数组是从小到大排序的，所以可以维护一个变量curmax=Math.max[当前元素,curmax]。</li>
+<li>然后去遍历数组对于每一个小于等于curmax的元素，都将其赋值为curmax+1</li>
+<li>然后更新curmax。</li>
+</ul>
+</li>
+</ul>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">minIncrementForUnique</span> <span class="token punctuation">(</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> A <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+
+    <span class="token comment" spellcheck="true">/* 可惜超时了 1.0 &lt;= A.length &lt;= 40000; 2.0 &lt;= A[i] &lt; 40000 限制条件
+    HashSet &lt;Integer> set = new HashSet &lt;> ( );
+    int count = 0;
+    a:for (int i : A) {
+        if (!set.contains ( i )) {
+            set.add ( i );
+        } else {
+            while (set.contains ( i )) {
+                i++;
+                count++;
+                if (!set.contains ( i )) {
+                    set.add ( i );
+                    continue a;
+                }
+            }
+        }
+    }*/</span>
+
+    Arrays<span class="token punctuation">.</span><span class="token function">sort</span> <span class="token punctuation">(</span> A <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> curmax <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> A<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>A<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> curmax<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> ai <span class="token operator">=</span> curmax <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            res <span class="token operator">+=</span> <span class="token punctuation">(</span>ai <span class="token operator">-</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            A<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> ai<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        curmax <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span> <span class="token punctuation">(</span> curmax<span class="token punctuation">,</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="题目：557-反转字符串中的单词-III"><a href="#题目：557-反转字符串中的单词-III" class="headerlink" title="题目：557. 反转字符串中的单词 III"></a>题目：<a href="https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/" target="_blank" rel="noopener">557. 反转字符串中的单词 III</a></h2><p>给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: &quot;Let&#39;s take LeetCode contest&quot;
+输出: &quot;s&#39;teL ekat edoCteeL tsetnoc&quot; </code></pre><p><strong>解题思路：</strong></p>
+<ul>
+<li><p>用String.split()去分割字符串</p>
+</li>
+<li><p>遍历字符串用StringBUilder.reverse()去反转</p>
+</li>
+</ul>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">reverseWords</span><span class="token punctuation">(</span>String s<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    StringBuilder res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> s1 <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">split</span> <span class="token punctuation">(</span> <span class="token string">" "</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>String s2 <span class="token operator">:</span> s1<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        StringBuilder stringBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stringBuilder<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span> s2 <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stringBuilder<span class="token punctuation">.</span><span class="token function">reverse</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        res<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span> stringBuilder<span class="token punctuation">.</span><span class="token function">toString</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        res<span class="token punctuation">.</span><span class="token function">append</span> <span class="token punctuation">(</span> <span class="token string">" "</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">toString</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1088,11 +1173,66 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/21/jvm/lei-wen-jian-jie-gou/">
+                <a href="/2020/03/21/leetcode/di-er-zhou/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/22.jpg" class="responsive-img" alt="LeetCode刷题：第二周">
+                        
+                        <span class="card-title">LeetCode刷题：第二周</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            第二周题目：482. 密钥格式化给定一个密钥字符串S，只包含字母，数字以及 ‘-‘（破折号）。N 个 ‘-‘ 将字符串分成了 N+1 组。给定一个数字 K，重新格式化字符串，除了第一个分组以外，每个分组要包含 K 个字符，第一个分组至少要包
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/LeetCode/">
+                        <span class="chip bg-color">LeetCode</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/20/jvm/lei-wen-jian-jie-gou/">
                     <div class="card-image">
                         
                         
@@ -1108,61 +1248,8 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-21
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/JVM/" class="post-category">
-                                    JVM
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">读书笔记</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/18/jvm/java-de-la-ji-shou-ji/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg" class="responsive-img" alt="Java的垃圾收集">
-                        
-                        <span class="card-title">Java的垃圾收集</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            这是阅读《深入理解Java虚拟机:JVM高级特性与最佳实践(第3版)》的读书笔记，记录学习过程以及一些自己的理解。
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-20
                             </span>
                         <span class="publish-author">
                             
@@ -1379,7 +1466,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">34.7k</span>&nbsp;字
+                class="white-color">35.3k</span>&nbsp;字
             
             
             

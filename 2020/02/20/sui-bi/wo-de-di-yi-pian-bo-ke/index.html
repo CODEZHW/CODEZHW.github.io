@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="类的文件结构, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="这是阅读《深入理解Java虚拟机:JVM高级特性与最佳实践(第3版)》的读书笔记，记录学习过程以及一些自己的理解。">
+    <meta name="keywords" content="我的第一篇博客, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="我的第一个博客​    经过两天的学习东拼西凑，我的博客总算建成了，希望在接下来的日子里，能够坚持记录学习技术的过程，记录自己的感想，对源码的理解。希望在将来回头来再看学习的经过的时候，能够对技术有更深一步的理解。
+关于博客的建设，以后一边">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>类的文件结构 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
+    <title>我的第一篇博客 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">类的文件结构</h1>
+                    <h1 class="description center-align post-title">我的第一篇博客</h1>
                 </div>
             </div>
         </div>
@@ -427,12 +428,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
-                            </a>
-                        
-                            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                                <span class="chip bg-color">读书笔记</span>
+                            <a href="/tags/%E6%84%9F%E6%82%9F/">
+                                <span class="chip bg-color">感悟</span>
                             </a>
                         
                     </div>
@@ -443,8 +440,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/JVM/" class="post-category">
-                                JVM
+                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                随笔
                             </a>
                         
                     </div>
@@ -456,7 +453,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-21
+                    2020-02-20
                 </div>
                 
 
@@ -470,7 +467,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    238
+                    113
                 </div>
                 
 
@@ -493,12 +490,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="类的文件结构"><a href="#类的文件结构" class="headerlink" title="类的文件结构"></a>类的文件结构</h1><p>我们都知道Java的优点特性：<strong>可移植性</strong>。</p>
-<p>Java程序在诞生之初的宣传口号： <code>一次编写，到处运行</code>。希望能够冲破操作系统平台的束缚，因为各种不同的软件结构体系，各种不同的操作系统，所以<code>平台无关性</code>理想实现只能在操作系统以上的应用层。</p>
-<p>这就有了Java虚拟机，这些虚拟机可以载入和执行同一种<code>平台无关</code>、<code>语言无关</code>的字节码文件，从而实现一次编写，到处运行。</p>
-<p>各种不同平台的Java虚拟机，以及所有平台都统一支持的程序存储格式——<code>字节码（ByteCode）</code>是构成平台无关性的基石。</p>
-<p>Java虚拟机不与包括Java语言在内的任何程序语言绑定，它只与<code>Class文件</code>这种特定的二进制文件格式所关联。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200320171324.png" alt=""></p>
+                <h2 id="我的第一个博客"><a href="#我的第一个博客" class="headerlink" title="我的第一个博客"></a>我的第一个博客</h2><p>​    经过两天的学习东拼西凑，我的博客总算建成了，希望在接下来的日子里，能够坚持记录学习技术的过程，记录自己的感想，对源码的理解。希望在将来回头来再看学习的经过的时候，能够对技术有更深一步的理解。</p>
+<p>关于博客的建设，以后一边写博客一边优化吧。</p>
 
             </div>
             <hr/>
@@ -524,7 +517,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/03/21/jvm/lei-wen-jian-jie-gou/">https://codezhw.club/2020/03/21/jvm/lei-wen-jian-jie-gou/</a>
+                    <a href="https://codezhw.club/2020/02/20/sui-bi/wo-de-di-yi-pian-bo-ke/">https://codezhw.club/2020/02/20/sui-bi/wo-de-di-yi-pian-bo-ke/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -562,12 +555,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
-                                </a>
-                            
-                                <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                                    <span class="chip bg-color">读书笔记</span>
+                                <a href="/tags/%E6%84%9F%E6%82%9F/">
+                                    <span class="chip bg-color">感悟</span>
                                 </a>
                             
                         </div>
@@ -1000,31 +989,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/21/jvm/jing-dian-de-la-ji-shou-ji-qi/">
+                <a href="/2020/02/22/duo-xian-cheng/duo-xian-cheng-jin-jie-juc-bing-fa-bian-cheng-1/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/1.jpg" class="responsive-img" alt="经典的垃圾收集器">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/5.jpg" class="responsive-img" alt="多线程进阶-JUC并发编程（1）">
                         
-                        <span class="card-title">经典的垃圾收集器</span>
+                        <span class="card-title">多线程进阶-JUC并发编程（1）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是阅读《深入理解Java虚拟机:JVM高级特性与最佳实践(第3版)》的读书笔记，记录学习过程以及一些自己的理解。
+                            这是一篇关于java多线程的进阶文章，会全面的介绍java.util.concurrent （简称JUC)下的内容，也会介绍一下实际生成过程中的情况，提高对java多线程的理解。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-22
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/JVM/" class="post-category">
-                                    JVM
+                            <a href="/categories/Java/" class="post-category">
+                                    Java
                                 </a>
                             
                             
@@ -1034,12 +1023,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">多线程</span>
                     </a>
                     
-                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">读书笔记</span>
+                    <a href="/tags/JUC/">
+                        <span class="chip bg-color">JUC</span>
                     </a>
                     
                 </div>
@@ -1050,49 +1039,47 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/21/leetcode/di-er-zhou/">
+                <a href="/2020/02/20/sui-bi/wo-de-di-yi-pian-bo-ke/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/22.jpg" class="responsive-img" alt="LeetCode刷题：第二周">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/10.jpg" class="responsive-img" alt="我的第一篇博客">
                         
-                        <span class="card-title">LeetCode刷题：第二周</span>
+                        <span class="card-title">我的第一篇博客</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第二周题目：482. 密钥格式化给定一个密钥字符串S，只包含字母，数字以及 ‘-‘（破折号）。N 个 ‘-‘ 将字符串分成了 N+1 组。给定一个数字 K，重新格式化字符串，除了第一个分组以外，每个分组要包含 K 个字符，第一个分组至少要包
+                            我的第一个博客​    经过两天的学习东拼西凑，我的博客总算建成了，希望在接下来的日子里，能够坚持记录学习技术的过程，记录自己的感想，对源码的理解。希望在将来回头来再看学习的经过的时候，能够对技术有更深一步的理解。
+关于博客的建设，以后一边
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/LeetCode/">
-                        <span class="chip bg-color">LeetCode</span>
+                    <a href="/tags/%E6%84%9F%E6%82%9F/">
+                        <span class="chip bg-color">感悟</span>
                     </a>
                     
                 </div>
@@ -1287,7 +1274,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">34.7k</span>&nbsp;字
+                class="white-color">35.3k</span>&nbsp;字
             
             
             
