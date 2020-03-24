@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-22
+                    2020-03-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.3k
+                    3.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    12 分
                 </div>
                 
 				
@@ -538,14 +538,19 @@
 <p>Java堆是垃圾收集器管理的内存区域，因此一些资料中它也被称作<code>GC堆</code>。</p>
 <p>因为现代垃圾收集器大部分都是基于分代收集理论设计的，所以Java堆中经常会出现 <code>新生代</code> 、<code>老年代</code> 、<code>永久代</code> 、<code>Eden空间</code>、 <code>From Survivor空间</code> 、<code>To Survivor空间</code>等名词。</p>
 <p>这些概念在本书后续章节中还会反复登场亮相，在这里笔者想先说明的是这些区域划分仅仅是一部分垃圾收集器的共同特性或者说设计风格而已，而非某个Java虚拟机具体实现的固有内存布局，更不是《Java虚拟机规范》里对Java堆的进一步细致划分。</p>
-<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>方法区与Java堆一样，是各个线程共享的内存区域，它用于存储已被<code>虚拟机加载的类型信息</code>、<code>常量</code>、<code>静态变量</code>、<code>即时编译器编译的代码缓存</code>等数据。</p>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>方法区与Java堆一样，是各个线程共享的内存区域，它用于存储已被<code>Class文件信息</code>、<code>常量</code>、<code>静态变量</code>、<code>即时编译器编译的代码缓存</code>等数据。</p>
 <p>《Java虚拟机规范》中把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫作<code>非堆</code>，目的是与Java堆区分开来。</p>
 <p>永生代的概念：</p>
 <blockquote>
 <p><strong>在JDK8以前</strong>，许多Java程序程序员习惯于在HotSpot虚拟机上开发，很多人愿意把方法区称做<code>永生代</code></p>
 </blockquote>
 <h2 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h2><p>常量池是方法区的一部分，Class文件中除了有<code>类的版本</code>，<code>字段</code>，<code>方法</code>，<code>接口</code>等描述信息外，还有一项就是<code>常量池</code>。</p>
-<p>常量池用于存放即时编译时期生成的字面量与符号引用，这部分内容会在类被加载后 存放到方法区中的常量池中。</p>
+<p>常量池用于存放即时编译时期生成的<code>字面量</code>与<code>符号引用</code>，这部分内容会在类被加载后存放到方法区中的常量池中。</p>
+<p>静态常量池：Class文件中的常量池。</p>
+<p>运行时常量池：在被类加载后根据Class文件中的常量池，生成的常量池中的字符串常量池。在JDK1.7中将运行时的常量池放入堆中</p>
+<p>JDK1.7<code>字符串常量池</code>从方法区移到了堆中，这里只是把字符串常量池单独拿到了堆中，运行时常量池剩下的东西还在方法区。</p>
+<p>JDK8中 hotspot移除了永久带，用<code>元空间</code>取代，此时字符串常量池还在堆中，运行时常量池还在方法区，只不过方法区的实现从永久带变成了元空间。</p>
+<p>JDK8的元空间不在JVM运行时数据区，而在本地内存，此时本地内存包括：元数据区(元空间)和直接内存。</p>
 <h2 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h2><p>在Java语言层面创建对象的方式通常为：</p>
 <ol>
 <li>new关键字</li>
@@ -1404,7 +1409,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">35.3k</span>&nbsp;字
+                class="white-color">38.7k</span>&nbsp;字
             
             
             

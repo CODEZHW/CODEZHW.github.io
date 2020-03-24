@@ -463,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-22
+                    2020-03-24
                 </div>
                 
 
@@ -550,11 +550,11 @@
 <p>在这里例子中：<strong>对象OBJ5、OBJ6、OBJ7仍然具有引用关系，但是它们到GC ROOT是不可达的，所以它们是可回收对象，同理OBJ1.OBJ2.OBJ3是可达的，所以它们是不可回收对象</strong></p>
 <p><strong>固定的几种GCROOT：</strong></p>
 <ul>
-<li>虚拟机栈中（局部变量表中）的引用对象</li>
-<li>方法区中类静态属性应用对象</li>
-<li>方法区中常量引用对象</li>
-<li>本地方法中Native方法引用的对象</li>
-<li>同步锁的持有对象</li>
+<li><strong>虚拟机栈中-&gt; 局部变量表中-&gt;的引用对象</strong></li>
+<li><strong>方法区中 -&gt; 类静态属性应用对象</strong></li>
+<li><strong>方法区中 -&gt; 常量引用对象</strong></li>
+<li><strong>本地方法中 -&gt; Native方法引用的对象</strong></li>
+<li><strong>同步锁 -&gt; 持有对象</strong></li>
 </ul>
 <p>除了这些固定的GC Roots集合以外，根据用户所选用的垃圾收集器以及当前回收的内存区域不同，目前最新的几款垃圾收集器无一例外都具备了局部回收的特征，为了避免GC Roots包含过多对象而过度膨胀，它们在实现上也做出了各种优化处理。</p>
 <h2 id="四大引用"><a href="#四大引用" class="headerlink" title="四大引用"></a>四大引用</h2><p>上述的两种算法，判断对象的存活与否都离不开—-<code>引用</code>.</p>
@@ -1396,7 +1396,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">35.3k</span>&nbsp;字
+                class="white-color">38.7k</span>&nbsp;字
             
             
             
