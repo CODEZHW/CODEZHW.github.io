@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Github常用命令与网站部署, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="介绍Git常用的命令，创建仓库分支将hexo博客自动生成代码和博客源代码分开管理，以及宝塔服务器部署Java Web项目，部署远程数据库。">
+    <meta name="keywords" content="深入理解MySQL, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="重新认识mysql，不再是只会写crud，更加深入的理解mysql的原理。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Github常用命令与网站部署 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
+    <title>深入理解MySQL | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-4708824e29ab0cf675d2fee9d99fb936_720w.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Github常用命令与网站部署</h1>
+                    <h1 class="description center-align post-title">深入理解MySQL</h1>
                 </div>
             </div>
         </div>
@@ -427,12 +427,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-                                <span class="chip bg-color">服务器</span>
-                            </a>
-                        
-                            <a href="/tags/Github/">
-                                <span class="chip bg-color">Github</span>
+                            <a href="/tags/mysql/">
+                                <span class="chip bg-color">mysql</span>
                             </a>
                         
                     </div>
@@ -443,8 +439,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                工具
+                            <a href="/categories/Mysql/" class="post-category">
+                                Mysql
                             </a>
                         
                     </div>
@@ -456,28 +452,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-02
+                    2020-03-27
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-03
+                    2020-03-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    826
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 				
@@ -493,68 +489,38 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Github常用命令与网站部署"><a href="#Github常用命令与网站部署" class="headerlink" title="Github常用命令与网站部署"></a>Github常用命令与网站部署</h1><h2 id="Github常用命令"><a href="#Github常用命令" class="headerlink" title="Github常用命令"></a>Github常用命令</h2><p><strong>git init 新建一个空的仓库</strong><br><strong>git status 查看状态</strong><br><strong>git add . 添加文件</strong><br><strong>git commit -m ‘注释’ 提交添加的文件并备注说明</strong><br><strong>git remote add origin #连接你的Github仓库 连接远程仓库</strong><br><strong>git push -u origin master 将本地仓库文件推送到远程仓库</strong><br><strong>git log 查看变更日志</strong><br><strong>git reset –hard 版本号前六位 回归到指定版本</strong><br><strong>git branch 查看分支</strong><br><strong>git branch newname 创建一个叫newname的分支</strong><br><strong>git checkout newname 切换到叫newname的分支上</strong><br><strong>git merge newname 把newname分支合并到当前分支上</strong><br><strong>git pull origin master 将master分支上的内容拉到本地上</strong></p>
-<h2 id="使用Git向Github-提交代码"><a href="#使用Git向Github-提交代码" class="headerlink" title="使用Git向Github 提交代码"></a>使用Git向Github 提交代码</h2><blockquote>
-<p><strong>第一次使用</strong></p>
-</blockquote>
-<p><strong>第一步：</strong>在Github创建一个仓库</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/wjiUV7frSpBd5cH.png" alt="创建仓库"></p>
-<p><strong>第二步：</strong>进入本地项目文件夹。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>初始化代码仓库，会在文件夹下生成一个.git文件。</p>
-<p><strong>第三步：</strong>添加文件到版本库（只是先放在了缓存区里缓冲区）</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> add.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>第四步：</strong>把添加的文件提交到版本库</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> commit -m <span class="token string">"first commit"</span> <span class="token comment" spellcheck="true"># 可以自定义提交信息</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>第五步：</strong>将本地库与远程库关联</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> remote add origin <span class="token comment" spellcheck="true">#后面跟上你的仓库地址</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>第六步：</strong>推送代码</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> push -u origin master // 推送代码<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p><strong>以后使用</strong></p>
-</blockquote>
-<p><strong>进入要提交代码的文件</strong>执行一下命令：</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> pull origin master  <span class="token comment" spellcheck="true">#拉取远程仓库到本地</span>
-<span class="token function">git</span> add <span class="token keyword">.</span>
-<span class="token function">git</span> commit -m <span class="token string">'描述内容'</span>
-<span class="token function">git</span> push origin master  <span class="token comment" spellcheck="true"># 推送到GitHub仓库</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="Hexo博客创建分支管理"><a href="#Hexo博客创建分支管理" class="headerlink" title="Hexo博客创建分支管理"></a>Hexo博客创建分支管理</h2><p>我们的Hexo博客部署在Github通过hexo clean | hexo g | hexo d 这一系列流程将我们的静态博客提交到Github仓库中。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/it1WmZXD5lofQs8.png" alt="我的博客仓库"></p>
-<p>这是我的Hexo博客，可以看到我们提交的是经过hexo生成的代码文件。</p>
-<p>这和我们的博客源码文件不一样，如果哪天你更换电脑，或者误删了博客文件，会很不好管理，所以我们通过创建分支（branch）来管理我们的博客源码。</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">cd</span> <span class="token comment" spellcheck="true">###进入你的hexo博客文件</span>
-<span class="token function">git</span> init  <span class="token comment" spellcheck="true">#初始化过了后就不必初始化</span>
-<span class="token function">git</span> add <span class="token keyword">.</span> <span class="token comment" spellcheck="true">#将必要的文件依次添加</span>
-<span class="token function">git</span> commit -m <span class="token string">"提交hexo 配置文件"</span>
-<span class="token function">git</span> branch hexo  <span class="token comment" spellcheck="true">#新建hexo分支</span>
-<span class="token function">git</span> checkout hexo  <span class="token comment" spellcheck="true">#切换到hexo分支上 git switch hexo也可以</span>
-<span class="token function">git</span> remote add origin <span class="token comment" spellcheck="true">#本地与远程对接</span>
-<span class="token function">git</span> push origin hexo  <span class="token comment" spellcheck="true">#push到github项目文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/E8v9nY4xIdMi7HV.png" alt="hexo分支"></p>
-<p>这样就保存了我们的源代码的文件了。</p>
-<h2 id="宝塔将Java-Web项目部署到Tomcat服务器"><a href="#宝塔将Java-Web项目部署到Tomcat服务器" class="headerlink" title="宝塔将Java Web项目部署到Tomcat服务器"></a>宝塔将Java Web项目部署到Tomcat服务器</h2><p><strong>准备前提：</strong></p>
+                <h1 id="深入理解MySQL"><a href="#深入理解MySQL" class="headerlink" title="深入理解MySQL"></a>深入理解MySQL</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="MySQL的架构：CS（客户端服务器架构"><a href="#MySQL的架构：CS（客户端服务器架构" class="headerlink" title="MySQL的架构：CS（客户端服务器架构)"></a>MySQL的架构：CS（客户端服务器架构)</h2><p>MySQL是基于CS（客户端服务器架构）实现的，我们的MySQL服务器程序与存储在内存和磁盘的数据打交道，而我们的客户端可以通过发送请求(CRUD)来操作这些数据。</p>
+<p><strong>Mysql的日常场景</strong></p>
+<ol>
+<li>启动MySQL服务器</li>
+<li>启动MySQL客户端程序并连接到服务器程序。</li>
+<li>在客户端程序中输入一些命令语句作为请求发送到服务器程序，服务器程序收到这些请求后，会根据请求的内容来操作具体的数据并向客户端返回操作结果。</li>
+</ol>
+<h2 id="客户端与服务器连接的三种方式"><a href="#客户端与服务器连接的三种方式" class="headerlink" title="客户端与服务器连接的三种方式"></a>客户端与服务器连接的三种方式</h2><p>运行着的服务器程序和客户端程序本质上都是计算机上的一个进程，所以客户端进程向服务器进程发送请求并得到回复的过程<span style="color:red">本质上是一个进程间通信的过程</span>！<code>MySQL</code>支持下边三种客户端进程和服务器进程的通信方式。</p>
 <ul>
-<li>一台服务器</li>
-<li>一个Java Web项目</li>
+<li><strong>TCP/IP</strong></li>
+<li><strong>命名管道</strong></li>
+<li><strong>共享内存</strong></li>
 </ul>
-<ul>
-<li>宝塔服务器运维面板（傻瓜式安装）</li>
-</ul>
-<p>宝塔服务器：</p>
-<p><a href="https://www.bt.cn/?btwaf=97644413" target="_blank" rel="noopener">https://www.bt.cn/?btwaf=97644413</a></p>
-<p><strong>进入官网按步骤操作后进入宝塔面板</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/zmWCPj7l1vTnRAs.png" alt=""></p>
-<p>安装这两个主要的软件（没有数据库连接可以不用，也可以用nignx）,去软件商店中安装想要的软件。</p>
-<p><strong>将Java Web项目打成war包</strong></p>
-<p><strong>点击-&gt; <code>文件</code>-&gt;<code>www</code>-&gt;<code>server</code>&gt;<code>tomcat</code>-&gt;<code>webapps</code></strong></p>
-<p><strong>将war包放到webapps目录中</strong></p>
-<p><strong>重启tomcat服务器</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/7kWTsO2YvyAB8aq.png" alt="重启tomcat"></p>
-<p><strong>数据库配置</strong></p>
-<p><strong>创建宝塔服务器数据库，密码会自动生成。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/03/02/6EiRU2m7BpTcCjP.png" alt="创建数据库"></p>
-<p><strong>连接数据库的xx.properties文件改为宝塔服务器的数据库。</strong></p>
-<p><strong>最后就可以通过：<code>服务器域名：端口号/项目文件名/</code>  访问了。</strong></p>
+<p><strong>TCP/IP</strong></p>
+<p>在真实的业务逻辑场景中，MySQL服务器通常不与客户端位于同一台电脑上，因此它们之间的通信就要用到TCP/IP协议来进行网络通信。</p>
+<p><code>MySQL</code>采用<code>TCP</code>作为服务器和客户端之间的网络通信协议。</p>
+<p>客户端可以通过<code>IP地址 + 端口号</code>的方式来与MySQL服务器进程连接，这样进程之间就可以通过网络进行通信了。</p>
+<p><strong>命名管道和共享内存</strong></p>
+<p>Windows用户可以选择命名管道和共享内存这两种通信方式。</p>
+<p>不过需要注意的是，使用<code>共享内存</code>的方式进行通信的服务器进程和客户端进程必须在同一台Windows主机中。</p>
+<h2 id="客户端服务器请求处理"><a href="#客户端服务器请求处理" class="headerlink" title="客户端服务器请求处理"></a>客户端服务器请求处理</h2><p>其实不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：<span style="color:red">客户端进程向服务器进程发送一段文本（MySQL语句），服务器进程处理后再向客户端进程发送一段文本（处理结果）</span>。那服务器进程对客户端进程发送的请求做了什么处理，才能产生最后的处理结果呢？客户端可以向服务器发送增删改查各类请求，我们这里以比较复杂的查询请求为例来画个图展示一下大致的过程：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200327215020.png" alt=""></p>
+<p> <strong>连接管理</strong></p>
+<p>客户端进程可以采用我们上边介绍的<code>TCP/IP</code>、<code>命名管道或共享内存</code>、<code>Unix域套接字</code>这几种方式之一来与服务器进程建立连接，每当有一个客户端进程连接到服务器进程时，服务器进程都会创建一个线程来专门处理与这个客户端的交互，当该客户端退出时会与服务器断开连接，服务器并不会立即把与该客户端交互的线程销毁掉，而是把它缓存起来，在另一个新的客户端再进行连接时，把这个缓存的线程分配给该新客户端。这样就起到了不频繁创建和销毁线程的效果，从而节省开销。从这一点大家也能看出，<code>MySQL</code>服务器会为每一个连接进来的客户端分配一个线程，但是线程分配的太多了会严重影响系统性能，所以我们也需要限制一下可以同时连接到服务器的客户端数量，至于怎么限制我们后边再说哈～</p>
+<p>在客户端程序发起连接的时候，需要携带主机信息、用户名、密码，服务器程序会对客户端程序提供的这些信息进行认证，如果认证失败，服务器程序会拒绝连接。另外，如果客户端程序和服务器程序不运行在一台计算机上，我们还可以采用使用了<code>SSL</code>（安全套接字）的网络连接进行通信，来保证数据传输的安全性。</p>
+<p>当连接建立后，与该客户端关联的服务器线程会一直等待客户端发送过来的请求，<code>MySQL</code>服务器接收到的请求只是一个文本消息，该文本消息还要经过各种处理，预知后事如何，继续往下看哈～</p>
+<p><strong>解析与优化</strong></p>
+<p>到现在为止，<code>MySQL</code>服务器已经获得了文本形式的请求，接着<br>还要经过九九八十一难的处理，其中的几个比较重要的部分分别是<code>查询缓存</code>、<code>语法解析</code>和<code>查询优化</code>，下边我们详细来看。</p>
+<p><strong>查询缓存</strong></p>
+<p>如果我问你<code>9+8×16-3×2×17</code>的值是多少，你可能会用计算器去算一下，或者牛逼一点用心算，最终得到了结果<code>35</code>，如果我再问你一遍<code>9+8×16-3×2×17</code>的值是多少，你还用再傻呵呵的算一遍么？我们刚刚已经算过了，直接说答案就好了。<code>MySQL</code>服务器程序处理查询请求的过程也是这样，会把刚刚处理过的查询请求和结果<code>缓存</code>起来，如果下一次有一模一样的请求过来，直接从缓存中查找结果就好了，就不用再傻呵呵的去底层的表中查找了。这个查询缓存可以在不同客户端之间共享，也就是说如果客户端A刚刚查询了一个语句，而客户端B之后发送了同样的查询请求，那么客户端B的这次查询就可以直接使用查询缓存中的数据。</p>
+<p>当然，<code>MySQL</code>服务器并没有人聪明，<span style="color:red">如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中</span>。另外，<span style="color:red">如果查询请求中包含某些系统函数、用户自定义变量和函数、一些系统表，如 mysql 、information_schema、 performance_schema 数据库中的表，那这个请求就不会被缓存</span>。以某些系统函数举例，可能同样的函数的两次调用会产生不一样的结果，比如函数<code>NOW</code>，每次调用都会产生最新的当前时间，如果在一个查询请求中调用了这个函数，那即使查询请求的文本信息都一样，那不同时间的两次查询也应该得到不同的结果，如果在第一次查询时就缓存了，那第二次查询的时候直接使用第一次查询的结果就是错误的！</p>
+<p>不过既然是缓存，那就有它缓存失效的时候。<span style="color:red">MySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了<code>INSERT</code>、 <code>UPDATE</code>、<code>DELETE</code>、<code>TRUNCATE TABLE</code>、<code>ALTER TABLE</code>、<code>DROP TABLE</code>或 <code>DROP DATABASE</code>语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除</span>！</p>
 
             </div>
             <hr/>
@@ -580,7 +546,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/">https://codezhw.club/2020/03/02/gong-ju/github-chang-yong-ming-ling-yu-bao-ta-wang-zhan-bu-shu/</a>
+                    <a href="https://codezhw.club/2020/03/27/mysql/shen-ru-li-jie-mysql/">https://codezhw.club/2020/03/27/mysql/shen-ru-li-jie-mysql/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -618,12 +584,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
-                                    <span class="chip bg-color">服务器</span>
-                                </a>
-                            
-                                <a href="/tags/Github/">
-                                    <span class="chip bg-color">Github</span>
+                                <a href="/tags/mysql/">
+                                    <span class="chip bg-color">mysql</span>
                                 </a>
                             
                         </div>
@@ -1052,50 +1014,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/08/java/jdk1.7hashtable-concurrenthashmap/">
+                <a href="/2020/03/27/mysql/shen-ru-li-jie-mysql/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg" class="responsive-img" alt="JDK1.7Hashtable&ConcurrentHashMap探究">
+                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-4708824e29ab0cf675d2fee9d99fb936_720w.jpg" class="responsive-img" alt="深入理解MySQL">
                         
-                        <span class="card-title">JDK1.7Hashtable&ConcurrentHashMap探究</span>
+                        <span class="card-title">深入理解MySQL</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是一篇关于Java JDK1.7版本,介绍实现Map线程安全的文章，对Hashtable、ConcurrentHashMap进行探究，分析它们实现线程安全的原理，以及二者之间的比较。
+                            重新认识mysql，不再是只会写crud，更加深入的理解mysql的原理。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
+                            <a href="/categories/Mysql/" class="post-category">
+                                    Mysql
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/HashMap/">
-                        <span class="chip bg-color">HashMap</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">源码</span>
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
                     </a>
                     
                 </div>
@@ -1109,24 +1069,26 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/02/27/java/java8-xin-te-xing-han-shu-shi-bian-cheng/">
+                <a href="/2020/03/26/java/arraylist-yuan-ma-fen-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/15.jpg" class="responsive-img" alt="Java8新特性:函数式编程以及Stream流式计算">
+                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-e160d60fd3803317fc1939eaf3f1a2bc_720w.jpg" class="responsive-img" alt="ArrayList源码分析">
                         
-                        <span class="card-title">Java8新特性:函数式编程以及Stream流式计算</span>
+                        <span class="card-title">ArrayList源码分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是一篇关于Java8新特性，函数式接口以及Stream流式计算的文章，作为新时代的程序必须掌握的JDK8新特性：Lambda表达式、链式编程、函数式接口、Stream流式计算，本文主要介绍了函数式接口以及Stream流式计算, Lambda表达式和链式编程夹带讲解。
+                            前言这是一道面试题： 写一段代码在遍历 ArrayList 时移除一个元素？
+考察的目的是：使用正确的方式来实现在遍历的过程中移除元素，而不会出现 ConcurrentModificationException 异常的示例代码。
+今天从源码
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-26
                             </span>
                         <span class="publish-author">
                             
@@ -1143,12 +1105,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/">
-                        <span class="chip bg-color">函数式接口</span>
+                    <a href="/tags/%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">源码</span>
                     </a>
                     
-                    <a href="/tags/Stream%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/">
-                        <span class="chip bg-color">Stream流式计算</span>
+                    <a href="/tags/ArrayList/">
+                        <span class="chip bg-color">ArrayList</span>
                     </a>
                     
                 </div>
