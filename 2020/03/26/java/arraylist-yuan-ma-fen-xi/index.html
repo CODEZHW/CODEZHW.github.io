@@ -429,12 +429,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/ArrayList/">
-                                <span class="chip bg-color">ArrayList</span>
-                            </a>
-                        
                             <a href="/tags/%E6%BA%90%E7%A0%81/">
                                 <span class="chip bg-color">源码</span>
+                            </a>
+                        
+                            <a href="/tags/ArrayList/">
+                                <span class="chip bg-color">ArrayList</span>
                             </a>
                         
                     </div>
@@ -472,14 +472,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    2.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    9 分
                 </div>
                 
 				
@@ -528,12 +528,18 @@
 <li><strong>直接看文档注释：</strong></li>
 </ul>
 <blockquote>
-<pre><code>This exception may be thrown by methods that have detected concurrent
-modification of an object when such modification is not permissible.</code></pre><p><strong>一个方法检测到被一个对象多线程修改时，会抛出这个异常。</strong></p>
-<pre><code>For example, it is not generally permissible for one thread to modify a Collection while another thread is iterating over it.  </code></pre><p><strong>举例：一个线程对集合进行修改，另一个线程对集合进行遍历。</strong></p>
-<pre><code>Some Iterator implementations (including those of all the general purpose collection implementations provided by the JRE) may choose to throw this exception if this behavior is detected.</code></pre><p><strong>一但检测到这个，一些Iterator的实现类可以能抛出这个异常。</strong></p>
-<pre><code>Iterators that do this are known as &lt;i&gt;fail-fast&lt;/i&gt; iterators。</code></pre><p><strong>这样的迭代器我们称它为-快速失败迭代器。</strong></p>
-<pre><code>Note that this exception does not always indicate that an object has been concurrently modified by a &lt;i&gt;different&lt;/i&gt; thread.  If a single thread issues a sequence of method invocations that violates the contract of an object, the object may throw this exception.  For example, if a thread modifies a collection directly while it is iterating over the collection with a fail-fast iterator, the iterator will throw this exception.</code></pre><p><strong>请注意，这个异常并只是再多线程下进行修改时候会产生，在单线程环境下，如果你使用了迭代器对集合进行修改<code>有可能</code>产生这个异常。</strong></p>
+<pre class="line-numbers language-bash"><code class="language-bash">This exception may be thrown by methods that have detected concurrent
+modification of an object when such modification is not permissible.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>一个方法检测到被一个对象多线程修改时，会抛出这个异常。</strong></p>
+<pre class="line-numbers language-bash"><code class="language-bash">For example, it is not generally permissible <span class="token keyword">for</span> one thread to modify a 
+Collection <span class="token keyword">while</span> another thread is iterating over it.  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>举例：一个线程对集合进行修改，另一个线程对集合进行遍历。</strong></p>
+<pre class="line-numbers language-bash"><code class="language-bash">Some Iterator implementations <span class="token punctuation">(</span>including those of all the general purpose collection implementations provided by the JRE<span class="token punctuation">)</span> may choose to throw this exception <span class="token keyword">if</span> this behavior is detected.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>一但检测到这个，一些Iterator的实现类可以能抛出这个异常。</strong></p>
+<pre class="line-numbers language-bash"><code class="language-bash">Iterators that <span class="token keyword">do</span> this are known as <span class="token operator">&lt;</span>i<span class="token operator">></span>fail-fast<span class="token operator">&lt;</span>/i<span class="token operator">></span> iterators。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>这样的迭代器我们称它为-快速失败迭代器。</strong></p>
+<pre class="line-numbers language-bash"><code class="language-bash">Note that this exception does not always indicate that an object has been concurrently modified by a <span class="token operator">&lt;</span>i<span class="token operator">></span>different<span class="token operator">&lt;</span>/i<span class="token operator">></span> thread.  If a single thread issues a sequence of method invocations that violates the contract of an object, the object may throw this exception.  For example, <span class="token keyword">if</span> a thread modifies a collection directly <span class="token keyword">while</span> it is iterating over the collection with a fail-fast iterator, the iterator will throw this exception.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>请注意，这个异常并只是再多线程下进行修改时候会产生，在单线程环境下，如果你使用了迭代器对集合进行修改<code>有可能</code>产生这个异常。</strong></p>
 </blockquote>
 <h2 id="ArrayList源码分析"><a href="#ArrayList源码分析" class="headerlink" title="ArrayList源码分析"></a><strong>ArrayList源码分析</strong></h2><ul>
 <li><strong>关键字段</strong></li>
@@ -563,6 +569,7 @@ modification of an object when such modification is not permissible.</code></pre
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span> expectedModCount <span class="token operator">=</span> modCount<span class="token punctuation">;</span>
 <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//cursor下一个元素的索引</span>
+    <span class="token comment" spellcheck="true">//当前容器的值</span>
     <span class="token keyword">return</span> cursor <span class="token operator">!=</span> size<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
@@ -584,73 +591,90 @@ modification of an object when such modification is not permissible.</code></pre
     <span class="token comment" spellcheck="true">//如果当前的操作次数与预期的操作次数不相等，则会抛出异常。</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>modCount <span class="token operator">!=</span> expectedModCount<span class="token punctuation">)</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ConcurrentModificationException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>那么很明显了，正式因为list.move（）操作导致了我们的操作次数与期望的不一致，所以抛出异常。</p>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>那么很明显了，正式因为list.move（）操作导致了<code>modCount != expectedModCount</code>，所以抛出异常。</strong></p>
 <ul>
-<li>list.move()源码</li>
-</ul>
+<li><p><strong>list.move()源码</strong></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">remove</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">final</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> es <span class="token operator">=</span> elementData<span class="token punctuation">;</span>
-    <span class="token keyword">final</span> <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>size<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    found<span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>o <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>es<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> null<span class="token punctuation">)</span>
-                    <span class="token keyword">break</span> found<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>o<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>es<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                    <span class="token keyword">break</span> found<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//上面的操作都是从数组中，找到我们想要删除的元素。</span>
-    <span class="token comment" spellcheck="true">//真正执行删除操作的是 fastRemove</span>
-    <span class="token function">fastRemove</span><span class="token punctuation">(</span>es<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token keyword">final</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> es <span class="token operator">=</span> elementData<span class="token punctuation">;</span>
+  <span class="token keyword">final</span> <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>size<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  found<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>o <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+              <span class="token keyword">if</span> <span class="token punctuation">(</span>es<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> null<span class="token punctuation">)</span>
+                  <span class="token keyword">break</span> found<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+              <span class="token keyword">if</span> <span class="token punctuation">(</span>o<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>es<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token keyword">break</span> found<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">//上面的操作都是从数组中，找到我们想要删除的元素。</span>
+  <span class="token comment" spellcheck="true">//真正执行删除操作的是 fastRemove</span>
+  <span class="token function">fastRemove</span><span class="token punctuation">(</span>es<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p>private void fastRemove(Object[] es, int i) {<br>        //就是这个操作。<br>        modCount++;<br>        final int newSize;<br>        if ((newSize = size - 1) &gt; i)<br>            System.arraycopy(es, i + 1, es, i, newSize - i);<br>        es[size = newSize] = null;<br>    }</p>
+<pre><code>
 
-<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">fastRemove</span><span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span> es<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//就是这个操作。</span>
-        modCount<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token keyword">final</span> <span class="token keyword">int</span> newSize<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>newSize <span class="token operator">=</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">></span> i<span class="token punctuation">)</span>
-            System<span class="token punctuation">.</span><span class="token function">arraycopy</span><span class="token punctuation">(</span>es<span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> es<span class="token punctuation">,</span> i<span class="token punctuation">,</span> newSize <span class="token operator">-</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        es<span class="token punctuation">[</span>size <span class="token operator">=</span> newSize<span class="token punctuation">]</span> <span class="token operator">=</span> null<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>怎么样解决这个问题呢？</strong></p>
-<p><strong>我们可以调用iterator.move()方法。</strong></p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>lastRet <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalStateException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">checkForComodification</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">try</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//调用的是重写的remove方法 重写自AbstractList，继承List</span>
-        ArrayList<span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>lastRet<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        cursor <span class="token operator">=</span> lastRet<span class="token punctuation">;</span>
-        lastRet <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+**现在来开最开始的问题：为什么到数第二个元素可以被删除？**
 
-        expectedModCount <span class="token operator">=</span> modCount<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IndexOutOfBoundsException</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ConcurrentModificationException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+抛出异常的位置是在：`next()-&gt;checkForComodification()-modCount != expectedModCount`判断条件不相等。
 
-<span class="token keyword">public</span> E <span class="token function">remove</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        Objects<span class="token punctuation">.</span><span class="token function">checkIndex</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">final</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> es <span class="token operator">=</span> elementData<span class="token punctuation">;</span>
+那难道删除倒数第二个元素，它们的值就会相等吗？
 
-        <span class="token annotation punctuation">@SuppressWarnings</span><span class="token punctuation">(</span><span class="token string">"unchecked"</span><span class="token punctuation">)</span> E oldValue <span class="token operator">=</span> <span class="token punctuation">(</span>E<span class="token punctuation">)</span> es<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//虽说本值也是调用了fastRemove，但是它的预期操作数也同步跟新了，所以不会抛出异常;</span>
-        <span class="token function">fastRemove</span><span class="token punctuation">(</span>es<span class="token punctuation">,</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+不会的，你只要执行了list.remove()操作都会使modCount++，而且expectedModCount是在创建Ttor对象的时候赋值为modCount，所以它们是不相等的。
 
-        <span class="token keyword">return</span> oldValue<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>最来再来简单聊一聊ArrayList的其他源码</strong></p>
-<p>任何源码都从构造函数起</p>
+那是怎么回事呢？
+
+我们循环的条件是：`while(iterator.hasNext ())=&gt; return cursor != size;` 这个判断条件
+
+我们可以看到在fastRemove操作里面有一个`es[size = newSize] = null;`操作，这个操作使得size = size-1
+
+而`cursor`是指向下一个元素的索引，假设当前list中有三个元素，遍历到了第二个元素此时cursor=2（从0起，指向的是下一个元素也就是数组中的第三个元素），此时执行remove操作后，`size = 3 - 1 = 2`在下一次
+
+hasNext()判断的时候就直接返回了，不会执行next()方法了,所以不会抛出异常。
+
+**怎么样解决这个问题呢？**
+
+**我们可以调用iterator.move()方法。**
+
+```java
+public void remove() {
+    if (lastRet &lt; 0)
+        throw new IllegalStateException();
+    checkForComodification();
+
+    try {
+        //调用的是重写的remove方法 重写自AbstractList，继承List
+        ArrayList.this.remove(lastRet);
+        cursor = lastRet;
+        lastRet = -1;
+
+        expectedModCount = modCount;
+    } catch (IndexOutOfBoundsException ex) {
+        throw new ConcurrentModificationException();
+    }
+}
+
+public E remove(int index) {
+        Objects.checkIndex(index, size);
+        final Object[] es = elementData;
+
+        @SuppressWarnings(&quot;unchecked&quot;) E oldValue = (E) es[index];
+        //虽说本质也是调用了fastRemove，但是它的预期操作数也同步跟新了，所以不会抛出异常;
+        fastRemove(es, index);
+
+        return oldValue;
+    }</code></pre><p><strong>最来再来简单聊一聊ArrayList的其他源码</strong></p>
+<p><strong>任何源码都从构造函数起</strong></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//其实什么也没有，就是初始化一个空的数组~ </span>
 <span class="token comment" spellcheck="true">//这个赋值的条件，在后面真正初始化的时候会用到~</span>
 <span class="token keyword">public</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -684,7 +708,6 @@ modification of an object when such modification is not permissible.</code></pre
                                            <span class="token function">newCapacity</span><span class="token punctuation">(</span>minCapacity<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-
 <span class="token keyword">private</span> <span class="token keyword">int</span> <span class="token function">newCapacity</span><span class="token punctuation">(</span><span class="token keyword">int</span> minCapacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">// overflow-conscious code</span>
         <span class="token comment" spellcheck="true">//初始为0</span>
@@ -712,7 +735,38 @@ modification of an object when such modification is not permissible.</code></pre
     <span class="token keyword">return</span> <span class="token punctuation">(</span>minCapacity <span class="token operator">></span> MAX_ARRAY_SIZE<span class="token punctuation">)</span>
         <span class="token operator">?</span> Integer<span class="token punctuation">.</span>MAX_VALUE
         <span class="token operator">:</span> MAX_ARRAY_SIZE<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//在指定位置添加元素的方法</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> E element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">rangeCheckForAdd</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">final</span> <span class="token keyword">int</span> s<span class="token punctuation">;</span>
+        Object<span class="token punctuation">[</span><span class="token punctuation">]</span> elementData<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//判断是否需要扩容</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>s <span class="token operator">=</span> size<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token punctuation">(</span>elementData <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>elementData<span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span>
+            elementData <span class="token operator">=</span> <span class="token function">grow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//native本地方法，把从index起往后的元素全部后移，空出idex位置。</span>
+        System<span class="token punctuation">.</span><span class="token function">arraycopy</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span> index<span class="token punctuation">,</span>
+                         elementData<span class="token punctuation">,</span> index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>
+                         s <span class="token operator">-</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        elementData<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> element<span class="token punctuation">;</span>
+        size <span class="token operator">=</span> s <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//遍历数组找到要删除的元素i，如果i是最后一个元素直接删除，如果不是将</span>
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">fastRemove</span><span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span> es<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">final</span> <span class="token keyword">int</span> newSize<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>newSize <span class="token operator">=</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">></span> i<span class="token punctuation">)</span>
+            System<span class="token punctuation">.</span><span class="token function">arraycopy</span><span class="token punctuation">(</span>es<span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> es<span class="token punctuation">,</span> i<span class="token punctuation">,</span> newSize <span class="token operator">-</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        es<span class="token punctuation">[</span>size <span class="token operator">=</span> newSize<span class="token punctuation">]</span> <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>删除的实现原理是：将第i的位置之后的所有元素全部往前移，将第i个元素移至数组末尾。</strong></p>
+<p><strong>然后删除末尾的元素。</strong></p>
+<p><strong>这里有一个问题？为什么要先移动再删除呢？</strong></p>
+<p><strong>这是为了提高代码的复用，这样可以同时将要删除的数组元素再最后一个这样的情况考虑进来。</strong></p>
+<p><strong>会减少一些不必要的代码。</strong></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>JDK1.8之前数组的默认初始化容量是10，JDK1.8之后则是0。</strong></p>
 <p><strong>JDK1.8的默认容量是10，但是并不是在初始化的时候就为数组赋值了，在ADD（）方法第一次执行的时候为数组初始化容量</strong></p>
 <p><strong>通过增强for循环的方式遍历容器，并移除同样会报并发修改异常。</strong></p>
@@ -782,12 +836,12 @@ modification of an object when such modification is not permissible.</code></pre
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/ArrayList/">
-                                    <span class="chip bg-color">ArrayList</span>
-                                </a>
-                            
                                 <a href="/tags/%E6%BA%90%E7%A0%81/">
                                     <span class="chip bg-color">源码</span>
+                                </a>
+                            
+                                <a href="/tags/ArrayList/">
+                                    <span class="chip bg-color">ArrayList</span>
                                 </a>
                             
                         </div>
@@ -1258,12 +1312,12 @@ modification of an object when such modification is not permissible.</code></pre
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ArrayList/">
-                        <span class="chip bg-color">ArrayList</span>
-                    </a>
-                    
                     <a href="/tags/%E6%BA%90%E7%A0%81/">
                         <span class="chip bg-color">源码</span>
+                    </a>
+                    
+                    <a href="/tags/ArrayList/">
+                        <span class="chip bg-color">ArrayList</span>
                     </a>
                     
                 </div>
@@ -1511,7 +1565,7 @@ modification of an object when such modification is not permissible.</code></pre
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">41.2k</span>&nbsp;字
+                class="white-color">41.7k</span>&nbsp;字
             
             
             

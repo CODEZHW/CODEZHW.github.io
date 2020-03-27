@@ -519,7 +519,7 @@
 <h3 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h3><p>引用分析算法的主要思想：<code>在对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用失效时，计数器值就减一；任何时刻计数器为零的对象就是不可能再被使用的。</code></p>
 <p>引用分析算法优缺点很明显：</p>
 <p>​    优点：它的算法简单，因此效率很高，在很多领域都有应用。</p>
-<p>​    缺点：算法过于简单，无法处理复杂的情况，假设有两个对象他们互相持有对方的引用，除此之外再无其他引用，这样会导致他们的引用计数器永远不为0，所以他们无法被回收。</p>
+<p>​    缺点：无法处理复杂的情况，假设有两个对象他们互相持有对方的引用，除此之外再无其他引用，这样会导致他们的引用计数器不为0，所以他们无法被回收。</p>
 <p>我们用Java实现这个例子来看一下Java会不会回收这两个对象。</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo1</span> <span class="token punctuation">{</span>
 
@@ -586,13 +586,13 @@
 <p>一般情况下会Java堆中划分为<code>新生代（Young Generation）</code>和<code>老年代（Old Generation）</code></p>
 <p>针对不同分代的类似名词：</p>
 <ul>
-<li>部分收集（Partial GC）：指目标不是完整收集整个Java堆的垃圾收集，其中又分为：<ul>
-<li>新生代收集（Minor GC/Young GC）：指目标只是新生代的垃圾收集。</li>
-<li>年代收集（Major GC/Old GC）：指目标只是老年代的垃圾收集。目前只有CMS收集器会有单独收集老年代的行为。</li>
-<li>混合收集（Mixed GC）：指目标是收集整个新生代以及部分老年代的垃圾收集。目前只有G1收集器会有这种行为。</li>
+<li><strong>部分收集（Partial GC）：指目标不是完整收集整个Java堆的垃圾收集，其中又分为：</strong><ul>
+<li><strong>新生代收集（Minor GC/Young GC）：指目标只是新生代的垃圾收集。</strong></li>
+<li><strong>年代收集（Major GC/Old GC）：指目标只是老年代的垃圾收集。目前只有CMS收集器会有单独收集老年代的行为。</strong></li>
+<li><strong>混合收集（Mixed GC）：指目标是收集整个新生代以及部分老年代的垃圾收集。目前只有G1收集器会有这种行为。</strong></li>
 </ul>
 </li>
-<li>整堆收集（Full GC）：收集整个Java堆和方法区的垃圾收集。</li>
+<li><strong>整堆收集（Full GC）：收集整个Java堆和方法区的垃圾收集。</strong></li>
 </ul>
 <h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><p>最早出现也是最基础的垃圾收集算法是“标记-清除”（Mark-Sweep）算法，在1960年由Lisp之父John McCarthy所提出。</p>
 <p>如它的名字一样，算法分为<code>标记</code>和<code>清除</code>两个阶段：<strong>首先标记出所有需要回收的对象，在标记完成后，统一回收掉所有被标记的对象，也可以反过来，标记存活的对象，统一回收所有未被标记的对象。</strong></p>
@@ -1396,7 +1396,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">41.2k</span>&nbsp;字
+                class="white-color">41.7k</span>&nbsp;字
             
             
             
