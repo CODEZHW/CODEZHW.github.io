@@ -465,7 +465,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-26
+                    2020-03-27
                 </div>
                 
 
@@ -498,7 +498,7 @@
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>这是一道面试题： 写一段代码在遍历 ArrayList 时移除一个元素？</strong></p>
 <p><strong>考察的目的是：使用正确的方式来实现在遍历的过程中移除元素，而不会出现 ConcurrentModificationException 异常的示例代码。</strong></p>
 <p><strong>今天从源码的角度去解析这个问题，分析一下ArrayList数组。</strong></p>
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>这里有一段代码：<strong>实现了遍历list时，找到值为s3的元素，然后删除掉它。</strong></p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>这里有一段代码：<strong>实现了遍历list时，找到值为s4的元素，然后删除掉它。</strong></p>
 <pre class="line-numbers language-java"><code class="language-java">ArrayList <span class="token operator">&lt;</span>String<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span> <span class="token operator">&lt;</span><span class="token operator">></span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
         list<span class="token punctuation">.</span><span class="token function">add</span> <span class="token punctuation">(</span> <span class="token string">"s1"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
         list<span class="token punctuation">.</span><span class="token function">add</span> <span class="token punctuation">(</span> <span class="token string">"s2"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -513,7 +513,7 @@
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="C:%5CUsers%5CUSERzhw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326140759682.png" alt="运行结果"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com/codezhw/blogimage/raw/master/img/20200326140755.png" alt="运行结果"></p>
 <p>可以看到它抛出了一个<code>多线程修改异常</code>。</p>
 <p>从报错来看我们可以知道它出错的问题在于，<code>ArrayList-&gt;Itr(内部类)-chekForComdification（方法）</code>。</p>
 <p>我们先修改一下代码，我们删除第三个元素s3。</p>
@@ -717,7 +717,7 @@ modification of an object when such modification is not permissible.</code></pre
 <p><strong>JDK1.8的默认容量是10，但是并不是在初始化的时候就为数组赋值了，在ADD（）方法第一次执行的时候为数组初始化容量</strong></p>
 <p><strong>通过增强for循环的方式遍历容器，并移除同样会报并发修改异常。</strong></p>
 <p><strong>因为增强for循环被JVM解析出来后实际上就是Iterator。</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="C:%5CUsers%5CUSERzhw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200326161319850.png" alt="增强for循环"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/image-20200326161319850.png" alt="增强for循环"></p>
 <p><strong>最后的最后，阅读源码真的能提高我们的理解，一步步单步调试去理解它们的原理。</strong></p>
 
             </div>
@@ -1511,7 +1511,7 @@ modification of an object when such modification is not permissible.</code></pre
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">40.8k</span>&nbsp;字
+                class="white-color">41.2k</span>&nbsp;字
             
             
             

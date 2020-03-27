@@ -463,21 +463,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-17
+                    2020-03-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    6 分
                 </div>
                 
 				
@@ -579,7 +579,81 @@
 <p><strong>HashTable容器在竞争激烈的并发环境下表现出效率低下的原因是所有访问HashTable的线程都必须竞争同一把锁，假如容器里有多把锁，每一把锁用于锁容器其中一部分数据，那么当多线程访问容器里不同数据段的数据时，线程间就不会存在锁竞争，从而可以有效提高并 发访问效率，这就是ConcurrentHashMap所使用的锁分段技术</strong></p>
 </blockquote>
 <p>在 JDK1.5中 Java提供了 java.util.concurrent.ConcurrentHashMap 类，首先将数据分成一段一段地存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。</p>
-<p>先暂时放在这里。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200326203943.png" alt=""></p>
+<ul>
+<li><strong>concurrentHashMap的重要成员变量</strong></li>
+</ul>
+<pre class="line-numbers language-java"><code class="language-java">     <span class="token comment" spellcheck="true">//默认数组容量</span>
+     <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> DEFAULT_INITIAL_CAPACITY <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//默认的负载因子</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">float</span> DEFAULT_LOAD_FACTOR <span class="token operator">=</span> <span class="token number">0.75f</span><span class="token punctuation">;</span>
+
+
+     <span class="token comment" spellcheck="true">//默认的并发级别</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> DEFAULT_CONCURRENCY_LEVEL <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//每个segment中至少包含2个HashEntry数组，它必须是2的整数幂</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> MIN_SEGMENT_TABLE_CAPACITY <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//segment最大值</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> MAX_SEGMENTS <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">16</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// slightly conservative</span>
+
+    <span class="token comment" spellcheck="true">//在调用lock方法前的最大非重试次数</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> RETRIES_BEFORE_LOCK <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">final</span> <span class="token keyword">int</span> segmentMask<span class="token punctuation">;</span>
+
+    <span class="token keyword">final</span> <span class="token keyword">int</span> segmentShift<span class="token punctuation">;</span>
+
+    <span class="token keyword">final</span> Segment<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> segments<span class="token punctuation">;</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token function">ConcurrentHashMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//设置默认容量：16， 默认负载因子：0.75， 默认最大并发级别：16.</span>
+    <span class="token keyword">this</span><span class="token punctuation">(</span>DEFAULT_INITIAL_CAPACITY<span class="token punctuation">,</span> DEFAULT_LOAD_FACTOR<span class="token punctuation">,</span> DEFAULT_CONCURRENCY_LEVEL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">public</span> <span class="token function">ConcurrentHashMap</span><span class="token punctuation">(</span><span class="token keyword">int</span> initialCapacity<span class="token punctuation">,</span>
+                             <span class="token keyword">float</span> loadFactor<span class="token punctuation">,</span> <span class="token keyword">int</span> concurrencyLevel<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span>loadFactor <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">||</span> initialCapacity <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> concurrencyLevel <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>concurrencyLevel <span class="token operator">></span> MAX_SEGMENTS<span class="token punctuation">)</span>
+            concurrencyLevel <span class="token operator">=</span> MAX_SEGMENTS<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//记录ssize左移的位数。</span>
+        <span class="token keyword">int</span> sshift <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//ssize用于初始化segment数组。</span>
+        <span class="token keyword">int</span> ssize <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//初始化完ssize = 16</span>
+        <span class="token comment" spellcheck="true">//找到大于等于当前并发级别的2的幂次方数</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>ssize <span class="token operator">&lt;</span> concurrencyLevel<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token operator">++</span>sshift<span class="token punctuation">;</span>
+            ssize <span class="token operator">&lt;&lt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>segmentShift <span class="token operator">=</span> <span class="token number">32</span> <span class="token operator">-</span> sshift<span class="token punctuation">;</span>
+           <span class="token comment" spellcheck="true">//用于计算元素放在segment[]数组中的位置</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>segmentMask <span class="token operator">=</span> ssize <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>initialCapacity <span class="token operator">></span> MAXIMUM_CAPACITY<span class="token punctuation">)</span>
+            initialCapacity <span class="token operator">=</span> MAXIMUM_CAPACITY<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> c <span class="token operator">=</span> initialCapacity <span class="token operator">/</span> ssize<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">*</span> ssize <span class="token operator">&lt;</span> initialCapacity<span class="token punctuation">)</span>
+            <span class="token operator">++</span>c<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//初始cap = 2，不管初始化多大容量，它都会是2的幂次方数，目的是为了找到HashEntry中元素的下标。</span>
+        <span class="token keyword">int</span> cap <span class="token operator">=</span> MIN_SEGMENT_TABLE_CAPACITY<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>cap <span class="token operator">&lt;</span> c<span class="token punctuation">)</span>
+            cap <span class="token operator">&lt;&lt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// create segments and segments[0]</span>
+        Segment<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> s0 <span class="token operator">=</span>
+            <span class="token keyword">new</span> <span class="token class-name">Segment</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">(</span>loadFactor<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>cap <span class="token operator">*</span> loadFactor<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                             <span class="token punctuation">(</span>HashEntry<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token keyword">new</span> <span class="token class-name">HashEntry</span><span class="token punctuation">[</span>cap<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Segment<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> ss <span class="token operator">=</span> <span class="token punctuation">(</span>Segment<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token keyword">new</span> <span class="token class-name">Segment</span><span class="token punctuation">[</span>ssize<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        UNSAFE<span class="token punctuation">.</span><span class="token function">putOrderedObject</span><span class="token punctuation">(</span>ss<span class="token punctuation">,</span> SBASE<span class="token punctuation">,</span> s0<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// ordered write of segments[0]</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>segments <span class="token operator">=</span> ss<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1364,7 +1438,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">40.8k</span>&nbsp;字
+                class="white-color">41.2k</span>&nbsp;字
             
             
             

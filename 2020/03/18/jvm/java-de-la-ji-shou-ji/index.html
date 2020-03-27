@@ -463,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-24
+                    2020-03-27
                 </div>
                 
 
@@ -543,8 +543,8 @@
         Demo1<span class="token punctuation">.</span><span class="token function">testGc</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="C:%5CUsers%5CUSERzhw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200318141816294.png" alt="image-20200318141816294"></p>
 <p>可以看到对象依然被回收了，这也侧面证明了我们<code>Java虚拟机并不是通过引用计数器去判断对象是否消亡</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/image-20200318141816294.png" alt=""></p>
 <h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><p>当前主流的商用程序语言（Java、C#，上溯至前面提到的古老的Lisp）的内存管理子系统，都是通过可达性分析算法来判定对象是否存活的。这个算法的基本思路就是通过一系列称为<code>“GC Roots”的根对象作为起始节点集</code>，<strong>从这些节点开始，根据引用关系向下搜索，搜索过程所走过的路径称为“引用链”，如果某个对象到GCRoots间没有任何引用链相连，或者用图论的话来说就是从GC Roots到这个对象不可达时，则证明此对象是不可能再被使用的。</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200318143148.png" alt=""></p>
 <p>在这里例子中：<strong>对象OBJ5、OBJ6、OBJ7仍然具有引用关系，但是它们到GC ROOT是不可达的，所以它们是可回收对象，同理OBJ1.OBJ2.OBJ3是可达的，所以它们是不可回收对象</strong></p>
@@ -1396,7 +1396,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">40.8k</span>&nbsp;字
+                class="white-color">41.2k</span>&nbsp;字
             
             
             
