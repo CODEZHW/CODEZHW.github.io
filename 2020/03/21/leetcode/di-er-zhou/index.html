@@ -463,14 +463,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-26
+                    2020-03-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.1k
+                    3.3k
                 </div>
                 
 
@@ -573,8 +573,8 @@
 <p>输入: 10<br>输出: false<br>解释: 从右向左读, 为 01 。因此它不是一个回文数。</p>
 <p><strong>解题思路：</strong></p>
 <ul>
-<li>首先负数的回文一定不想当，所以直接false。</li>
-<li>然后正常操作</li>
+<li>首先负数的回文一定不相等，所以直接返回false。</li>
+<li>然后正常操作去各位数</li>
 </ul>
 <p><strong>代码：</strong></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> <span class="token function">isPalindrome</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> x <span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -834,6 +834,10 @@ ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next 
 <p>输入: [1,null,2,3]<br>   1<br>    <br>     2<br>    /<br>   3</p>
 <p>输出: [1,3,2]</p>
 <p><strong>解题思路：</strong></p>
+<ul>
+<li>直接递归</li>
+<li></li>
+</ul>
 <p><strong>代码:</strong></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> List <span class="token operator">&lt;</span> Integer <span class="token operator">></span> <span class="token function">inorderTraversal</span><span class="token punctuation">(</span>TreeNode root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         List <span class="token operator">&lt;</span> Integer <span class="token operator">></span> res <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span> <span class="token operator">&lt;</span> <span class="token operator">></span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -852,6 +856,33 @@ ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next 
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="题目：114-二叉树展开为链表"><a href="#题目：114-二叉树展开为链表" class="headerlink" title="题目：114. 二叉树展开为链表"></a>题目：<a href="https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/" target="_blank" rel="noopener">114. 二叉树展开为链表</a></h2><p>给定一个二叉树，原地将它展开为链表。</p>
+<p>例如，给定二叉树</p>
+<pre><code>1</code></pre><p>   / <br>  2   5<br> / \   <br>3   4   6<br>将其展开为：</p>
+<p>1<br> <br>  2<br>   <br>    3<br>     <br>      4<br>       <br>        5<br>         <br>          6</p>
+<p><strong>解题思路：</strong></p>
+<ul>
+<li>第一种：可以通过前序遍历+链表的形式来存储</li>
+<li>前序遍历的方式是：左、右、根；如果我们将遍历顺序改为 右、左、根。</li>
+<li>那么可以得到null-6-5-4-3-2-1这样的序列。</li>
+<li>这样我么可以再遍历到节点的时候将其挂在上一个节点之上</li>
+</ul>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">flatten</span><span class="token punctuation">(</span>TreeNode root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    TreeNode pre <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">helper</span><span class="token punctuation">(</span>TreeNode root<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>root <span class="token operator">==</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        root<span class="token punctuation">.</span>right <span class="token operator">=</span> pre<span class="token punctuation">;</span>
+        root<span class="token punctuation">.</span>left <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        pre <span class="token operator">=</span> root<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1640,7 +1671,7 @@ ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, 以及 ans.next.next.next 
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">43.6k</span>&nbsp;字
+                class="white-color">43.7k</span>&nbsp;字
             
             
             
