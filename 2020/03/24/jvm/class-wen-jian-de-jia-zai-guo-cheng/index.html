@@ -463,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-27
+                    2020-03-28
                 </div>
                 
 
@@ -508,7 +508,7 @@
 <ul>
 <li><strong>通过<code>一个类的全限定名</code>来获取定义此类的二进制字节流。</strong></li>
 <li><strong>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</strong></li>
-<li><strong>在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据的访问入口。</strong></li>
+<li><strong>在内存（堆）中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据的访问入口。</strong></li>
 </ul>
 <blockquote>
 <p>通过一个类的全限定类名，并不局限于磁盘。</p>
@@ -519,7 +519,7 @@
 </ul>
 </blockquote>
 <p>在Java虚拟机中，实现这个加载操作是由 <code>引导类加载器(Class Loader)</code>或者<code>自定义类加载器</code>来完成的。</p>
-<p>对于数组而言，数组不是通过类加载器创建的，它由Java虚拟机直接在内存中动态创建。</p>
+<p>对于数组而言，数组不是通过类加载器创建的，它由Java虚拟机直接在<code>内存中动态创建</code>。</p>
 <p>如果数组是引用类型，它就会递归的采用上述加载过程去加载整个数组。</p>
 <p>数组类的可访问性与它的组件类型的可访问性一致，如果组件类型不是引用类型，它的数组类的可访问性将默认为public，可被所有的类和接口访问到</p>
 <p><strong>加载阶段结束后，Java虚拟机外部class文件就按照虚拟机所设定的格式存储在方法区之中了，在数据安排好之后，会在Java堆内存中实例化一个<code>java.lang.Class对象，这个对象作为程序访问方法区中类型数据的外部接口</code>。</strong></p>
@@ -540,7 +540,7 @@
 <p><strong>类变量的内存分配，随着JDK1.7中永久代的移除，在JDK1.8随着Class对象一起存放在Java堆中。</strong></p>
 <p><strong>在这个赋值阶段，如果类变量字段属性中有final字样，那么在准备阶段就会为其赋初始值。</strong></p>
 <h2 id="解析阶段"><a href="#解析阶段" class="headerlink" title="解析阶段"></a>解析阶段</h2><p><strong>解析阶段的主要目的是Java虚拟机将常量池内的符号引用替换为直接引用</strong></p>
-<p><strong>加载、验证、准备、初始化和卸载这五个阶段的顺序是确定的</strong>，类型的加载过程必须按照这种顺序按部就班地开始，而<code>解析阶段则不一定</code>：它在某些情况下可以在初始化阶段之后再开始，这是为了支持Java语言的<code>动态绑定。</code></p>
+<p><strong>加载、验证、准备、初始化和卸载这五个阶段的顺序是确定的</strong>，类型的加载过程必须按照这种顺序按部就班地开始，而<code>解析阶段则不一定</code>：它在某些情况下可以在初始化阶段之后再开始，这是为了支持Java语言的<code>动态绑定</code>。</p>
 <p><strong>符号引用: 符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量。符号引用与虚拟机实现的内存布局无关，引用的目标并不一定是已经加载到虚拟机内存当中的内容。</strong></p>
 <p><strong>直接引用：直接引用是可以直接指向目标的指针、相对偏移量或者是一个能间接定位到目标的句柄。直接引用是和虚拟机实现的内存布局直接相关的，同一个符号引用在不同虚拟机实例上翻译出来的直接引用一般不会相同。如果有了直接引用，那引用的目标必定已经在虚拟机的内存中存在。</strong></p>
 <h2 id="初始化阶段"><a href="#初始化阶段" class="headerlink" title="初始化阶段"></a>初始化阶段</h2><p><strong>Java虚拟机中严格规定的六种必须初始化情况</strong>：</p>
@@ -1377,7 +1377,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">43.7k</span>&nbsp;字
+                class="white-color">46k</span>&nbsp;字
             
             
             
