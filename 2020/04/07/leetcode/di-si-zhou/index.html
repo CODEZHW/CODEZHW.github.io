@@ -466,21 +466,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-08
+                    2020-04-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    10 分
                 </div>
                 
 				
@@ -635,6 +635,7 @@
             pre <span class="token operator">=</span> slow<span class="token punctuation">;</span>
             slow <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
+
          <span class="token keyword">while</span><span class="token punctuation">(</span>head<span class="token operator">!=</span>null<span class="token operator">&amp;&amp;</span>pre<span class="token operator">!=</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">if</span><span class="token punctuation">(</span>head<span class="token punctuation">.</span>val<span class="token operator">!=</span>pre<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
                 <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
@@ -644,9 +645,9 @@
          <span class="token punctuation">}</span>
 
         <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="题目：-203-移除链表元素"><a href="#题目：-203-移除链表元素" class="headerlink" title="题目： 203. 移除链表元素"></a>题目： <a href="https://leetcode-cn.com/problems/remove-linked-list-elements/" target="_blank" rel="noopener">203. 移除链表元素</a></h2><p>难度简单367收藏分享切换为英文关注反馈</p>
-<p>删除链表中等于给定值 <strong><em>val\</em></strong> 的所有节点。</p>
+<p>删除链表中等于给定值 val\ 的所有节点。</p>
 <p><strong>示例:</strong></p>
 <pre><code>输入: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6
 输出: 1-&gt;2-&gt;3-&gt;4-&gt;5</code></pre><p><strong>解题思路：</strong></p>
@@ -691,6 +692,129 @@
             head <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="题目：19-删除链表的倒数第N个节点"><a href="#题目：19-删除链表的倒数第N个节点" class="headerlink" title="题目：19. 删除链表的倒数第N个节点"></a>题目：<a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/" target="_blank" rel="noopener">19. 删除链表的倒数第N个节点</a></h2><p>难度中等777收藏分享切换为英文关注反馈</p>
+<p>给定一个链表，删除链表的倒数第 <em>n</em> 个节点，并且返回链表的头结点。</p>
+<p><strong>示例：</strong></p>
+<pre><code>给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.
+
+当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</code></pre><p><strong>解题思路：</strong></p>
+<ul>
+<li>和链表的倒数第k个节点差不多，我们只需要移动到到数第k+1个节点。</li>
+<li>但是为了防止极端情况即删除头节点，所以我们要使用哑节点。</li>
+<li>最后返回哑节点的下一个节点就可以了。</li>
+</ul>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> ListNode <span class="token function">removeNthFromEnd</span><span class="token punctuation">(</span>ListNode head<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ListNode dummyHead <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ListNode</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dummyHead<span class="token punctuation">.</span>next<span class="token operator">=</span>head<span class="token punctuation">;</span>
+        ListNode slow <span class="token operator">=</span> dummyHead<span class="token punctuation">;</span>
+        ListNode fast <span class="token operator">=</span> dummyHead<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token operator">+</span><span class="token number">1</span> <span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            fast <span class="token operator">=</span> fast<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>fast<span class="token operator">!=</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            fast <span class="token operator">=</span> fast<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            slow <span class="token operator">=</span> slow<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        slow<span class="token punctuation">.</span>next <span class="token operator">=</span> slow<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token punctuation">;</span>        
+        <span class="token keyword">return</span> dummyHead<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="题目：83-删除排序链表中的重复元素"><a href="#题目：83-删除排序链表中的重复元素" class="headerlink" title="题目：83. 删除排序链表中的重复元素"></a>题目：<a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="noopener">83. 删除排序链表中的重复元素</a></h2><p>难度简单287收藏分享切换为英文关注反馈</p>
+<p>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: 1-&gt;1-&gt;2
+输出: 1-&gt;2</code></pre><p><strong>示例 2:</strong></p>
+<pre><code>输入: 1-&gt;1-&gt;2-&gt;3-&gt;3
+输出: 1-&gt;2-&gt;3</code></pre><p><strong>解题思路：</strong></p>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> ListNode <span class="token function">deleteDuplicates</span><span class="token punctuation">(</span>ListNode head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ListNode cur <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>cur<span class="token operator">!=</span>null <span class="token operator">&amp;&amp;</span> cur<span class="token punctuation">.</span>next<span class="token operator">!=</span>null <span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>val <span class="token operator">==</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                cur<span class="token punctuation">.</span>next <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+                cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="题目：24-两两交换链表中的节点"><a href="#题目：24-两两交换链表中的节点" class="headerlink" title="题目：24. 两两交换链表中的节点"></a>题目：<a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/" target="_blank" rel="noopener">24. 两两交换链表中的节点</a></h2><p>难度中等466收藏分享切换为英文关注反馈</p>
+<p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
+<p><strong>你不能只是单纯的改变节点内部的值</strong>，而是需要实际的进行节点交换。</p>
+<p><strong>示例:</strong></p>
+<pre><code>给定 1-&gt;2-&gt;3-&gt;4, 你应该返回 2-&gt;1-&gt;4-&gt;3.</code></pre><p><strong>解题思路：</strong></p>
+<ul>
+<li>非递归普通解法</li>
+<li>递归</li>
+</ul>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> ListNode <span class="token function">swapPairs</span><span class="token punctuation">(</span>ListNode head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>head <span class="token operator">==</span>null <span class="token operator">||</span> head<span class="token punctuation">.</span>next<span class="token operator">==</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        ListNode next <span class="token operator">=</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        head<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token function">swapPairs</span><span class="token punctuation">(</span>next<span class="token punctuation">.</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        next<span class="token punctuation">.</span>next <span class="token operator">=</span> head<span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="题目：82-删除排序链表中的重复元素-II"><a href="#题目：82-删除排序链表中的重复元素-II" class="headerlink" title="题目：82. 删除排序链表中的重复元素 II"></a>题目：<a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/" target="_blank" rel="noopener">82. 删除排序链表中的重复元素 II</a></h2><p>难度中等255收藏分享切换为英文关注反馈</p>
+<p>给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 <em>没有重复出现</em> 的数字。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5
+输出: 1-&gt;2-&gt;5</code></pre><p><strong>示例 2:</strong></p>
+<pre><code>输入: 1-&gt;1-&gt;1-&gt;2-&gt;3
+输出: 2-&gt;3</code></pre><p><strong>解题思路：</strong></p>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> ListNode <span class="token function">deleteDuplicates</span><span class="token punctuation">(</span>ListNode head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ListNode dummy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ListNode</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dummy<span class="token punctuation">.</span>next <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        ListNode cur <span class="token operator">=</span> dummy<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>next<span class="token operator">!=</span>null <span class="token operator">&amp;&amp;</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token operator">!=</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>next<span class="token punctuation">.</span>val <span class="token operator">==</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">.</span>next<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                ListNode tmp <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+                <span class="token keyword">while</span><span class="token punctuation">(</span>tmp<span class="token operator">!=</span>null<span class="token operator">&amp;&amp;</span>tmp<span class="token punctuation">.</span>next<span class="token operator">!=</span>null<span class="token operator">&amp;&amp;</span>tmp<span class="token punctuation">.</span>val<span class="token operator">==</span>tmp<span class="token punctuation">.</span>next<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    tmp <span class="token operator">=</span> tmp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                cur<span class="token punctuation">.</span>next <span class="token operator">=</span> tmp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+                cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> dummy<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="题目：122-买卖股票的最佳时机-II"><a href="#题目：122-买卖股票的最佳时机-II" class="headerlink" title="题目：122. 买卖股票的最佳时机 II"></a>题目：<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">122. 买卖股票的最佳时机 II</a></h2><p>难度简单662收藏分享切换为英文关注反馈</p>
+<p>给定一个数组，它的第 <em>i</em> 个元素是一支给定股票第 <em>i</em> 天的价格。</p>
+<p>设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</p>
+<p><strong>注意：</strong>你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code>输入: [7,1,5,3,6,4]
+输出: 7
+解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
+     随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。</code></pre><p><strong>示例 2:</strong></p>
+<pre><code>输入: [1,2,3,4,5]
+输出: 4
+解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。
+     注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。
+     因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。</code></pre><p><strong>示例 3:</strong></p>
+<pre><code>输入: [7,6,4,3,1]
+输出: 0
+解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</code></pre><p><strong>解题思路：</strong></p>
+<ul>
+<li>贪心算法</li>
+</ul>
+<p><strong>代码：</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxProfit</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+       <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span> prices<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">int</span> tmp <span class="token operator">=</span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> prices<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>tmp <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                res <span class="token operator">+=</span>tmp<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+       <span class="token punctuation">}</span>
+       <span class="token keyword">return</span> res<span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
@@ -1485,7 +1609,7 @@ Hash表是基于Map接口所实现的，这个实现类提供了Map所有的可�
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">57.4k</span>&nbsp;字
+                class="white-color">60.7k</span>&nbsp;字
             
             
             

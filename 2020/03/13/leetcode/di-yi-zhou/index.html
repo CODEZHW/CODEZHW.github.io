@@ -466,7 +466,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-03
+                    2020-04-11
                 </div>
                 
 
@@ -636,10 +636,9 @@
         <span class="token keyword">if</span> <span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span> <span class="token punctuation">(</span> num <span class="token punctuation">)</span> <span class="token operator">></span> nums<span class="token punctuation">.</span>length <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> num<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="题目：面试题40-最小的k个数"><a href="#题目：面试题40-最小的k个数" class="headerlink" title="题目：面试题40. 最小的k个数"></a>题目：<a href="https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/" target="_blank" rel="noopener">面试题40. 最小的k个数</a></h2><p><strong>输入整数数组 <code>arr</code> ，找出其中最小的 <code>k</code> 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。</strong></p>
 <p><strong>示例 1：</strong></p>
 <p>输入：arr = [3,2,1], k = 2<br>输出：[1,2] 或者 [2,1]<br><strong>示例 2：</strong></p>
@@ -660,11 +659,9 @@
     <span class="token comment" spellcheck="true">//手写快排 这和上面那种一样</span>
     <span class="token function">quicksort</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> arr<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span> <span class="token punctuation">(</span> arr<span class="token punctuation">,</span> k <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 <span class="token punctuation">}</span>
 
-
-   <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">quicksort</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> low<span class="token punctuation">,</span> <span class="token keyword">int</span> high <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">quicksort</span> <span class="token punctuation">(</span> <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> low<span class="token punctuation">,</span> <span class="token keyword">int</span> high <span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>low <span class="token operator">></span> high<span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -692,7 +689,7 @@
         <span class="token function">quicksort</span> <span class="token punctuation">(</span> arr<span class="token punctuation">,</span> low<span class="token punctuation">,</span> j <span class="token operator">-</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">quicksort</span> <span class="token punctuation">(</span> arr<span class="token punctuation">,</span> j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> high <span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="题目：1160-拼写单词"><a href="#题目：1160-拼写单词" class="headerlink" title="题目：1160. 拼写单词"></a>题目：<a href="https://leetcode-cn.com/problems/find-words-that-can-be-formed-by-characters/" target="_blank" rel="noopener">1160. 拼写单词</a></h2><p><strong>给你一份『词汇表』（字符串数组） words 和一张『字母表』（字符串） chars。</strong></p>
 <p><strong>假如你可以用 chars 中的『字母』（字符）拼写出 words 中的某个『单词』（字符串），那么我们就认为你掌握了这个单词。</strong></p>
 <p><strong>注意：每次拼写时，chars 中的每个字母都只能用一次。</strong></p>
@@ -1611,7 +1608,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">57.4k</span>&nbsp;字
+                class="white-color">60.7k</span>&nbsp;字
             
             
             
