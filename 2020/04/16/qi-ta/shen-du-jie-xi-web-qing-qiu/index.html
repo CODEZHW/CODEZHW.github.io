@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="深入理解MySQL, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="深入理解MySQL前言MySQL的架构：CS（客户端服务器架构)MySQL是基于CS（客户端服务器架构）实现的，我们的MySQL服务器程序与存储在内存和磁盘的数据打交道，而我们的客户端可以通过发送请求(CRUD)来操作这些数据。
-Mysql">
+    <meta name="keywords" content="深度解析Web请求, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="前言在如今的Web2.0时代，互联网的网络架构已经由传统的C/S(客户端/服务端)模式转变为更加高效、快捷的B/S(游览器/服务器)模式。
+B/S 架构带来了以下两方面的好处：
+
+客户端使用统一的浏览器（Browser）。由于浏览器具有统一">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +16,7 @@ Mysql">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>深入理解MySQL | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
+    <title>深度解析Web请求 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -306,12 +308,12 @@ Mysql">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-4708824e29ab0cf675d2fee9d99fb936_720w.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">深入理解MySQL</h1>
+                    <h1 class="description center-align post-title">深度解析Web请求</h1>
                 </div>
             </div>
         </div>
@@ -428,8 +430,12 @@ Mysql">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/mysql/">
-                                <span class="chip bg-color">mysql</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
                             </a>
                         
                     </div>
@@ -440,8 +446,8 @@ Mysql">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Mysql/" class="post-category">
-                                Mysql
+                            <a href="/categories/%E5%85%B6%E4%BB%96/" class="post-category">
+                                其他
                             </a>
                         
                     </div>
@@ -453,7 +459,7 @@ Mysql">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-27
+                    2020-04-16
                 </div>
                 
 
@@ -467,14 +473,14 @@ Mysql">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    3.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    12 分
                 </div>
                 
 				
@@ -490,38 +496,182 @@ Mysql">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="深入理解MySQL"><a href="#深入理解MySQL" class="headerlink" title="深入理解MySQL"></a>深入理解MySQL</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="MySQL的架构：CS（客户端服务器架构"><a href="#MySQL的架构：CS（客户端服务器架构" class="headerlink" title="MySQL的架构：CS（客户端服务器架构)"></a>MySQL的架构：CS（客户端服务器架构)</h2><p>MySQL是基于CS（客户端服务器架构）实现的，我们的MySQL服务器程序与存储在内存和磁盘的数据打交道，而我们的客户端可以通过发送请求(CRUD)来操作这些数据。</p>
-<p><strong>Mysql的日常场景</strong></p>
-<ol>
-<li>启动MySQL服务器</li>
-<li>启动MySQL客户端程序并连接到服务器程序。</li>
-<li>在客户端程序中输入一些命令语句作为请求发送到服务器程序，服务器程序收到这些请求后，会根据请求的内容来操作具体的数据并向客户端返回操作结果。</li>
-</ol>
-<h2 id="客户端与服务器连接的三种方式"><a href="#客户端与服务器连接的三种方式" class="headerlink" title="客户端与服务器连接的三种方式"></a>客户端与服务器连接的三种方式</h2><p>运行着的服务器程序和客户端程序本质上都是计算机上的一个进程，所以客户端进程向服务器进程发送请求并得到回复的过程<span style="color:red">本质上是一个进程间通信的过程</span>！<code>MySQL</code>支持下边三种客户端进程和服务器进程的通信方式。</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在如今的Web2.0时代，互联网的网络架构已经由传统的<code>C/S(客户端/服务端)模式</code>转变为更加高效、快捷的<code>B/S(游览器/服务器)模式</code>。</p>
+<p><code>B/S</code> 架构带来了以下两方面的好处：</p>
 <ul>
-<li><strong>TCP/IP</strong></li>
-<li><strong>命名管道</strong></li>
-<li><strong>共享内存</strong></li>
+<li>客户端使用统一的浏览器（<code>Browser</code>）。由于浏览器具有统一性，不需要特殊的配置和网络连接。另外浏览器的交互特性使得用户使用它非常简便，且用户行为的可继承性非常强，也就是用户只要学会了上网，不管使用哪个应用，一旦学会了，便具备了使用其它任何互联网服务的经验。</li>
+<li>服务端（<code>Server</code>）基于统一的 <code>HTTP</code>。和传统的 C/S 架构使用自定义的应用层协议不同。使用统一的 HTTP 简化了开发模式，并且基于 HTTP 的服务器又很多，如 <code>Apache</code>、<code>Nginx</code>、<code>Tomcat</code> 等，这些服务器可以直接拿来使用，不仅如此，连开发服务的通用框架也可以直接拿来使用，不需要单独开发，如 <code>Spring</code>、<code>Spring MVC</code>、<code>MyBatis</code> 等，我们只需关注服务的业务逻辑，同样简化了我们的开发工作。</li>
 </ul>
-<p><strong>TCP/IP</strong></p>
-<p>在真实的业务逻辑场景中，MySQL服务器通常不与客户端位于同一台电脑上，因此它们之间的通信就要用到TCP/IP协议来进行网络通信。</p>
-<p><code>MySQL</code>采用<code>TCP</code>作为服务器和客户端之间的网络通信协议。</p>
-<p>客户端可以通过<code>IP地址 + 端口号</code>的方式来与MySQL服务器进程连接，这样进程之间就可以通过网络进行通信了。</p>
-<p><strong>命名管道和共享内存</strong></p>
-<p>Windows用户可以选择命名管道和共享内存这两种通信方式。</p>
-<p>不过需要注意的是，使用<code>共享内存</code>的方式进行通信的服务器进程和客户端进程必须在同一台Windows主机中。</p>
-<h2 id="客户端服务器请求处理"><a href="#客户端服务器请求处理" class="headerlink" title="客户端服务器请求处理"></a>客户端服务器请求处理</h2><p>其实不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：<span style="color:red">客户端进程向服务器进程发送一段文本（MySQL语句），服务器进程处理后再向客户端进程发送一段文本（处理结果）</span>。那服务器进程对客户端进程发送的请求做了什么处理，才能产生最后的处理结果呢？客户端可以向服务器发送增删改查各类请求，我们这里以比较复杂的查询请求为例来画个图展示一下大致的过程：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200327215020.png" alt=""></p>
-<p> <strong>连接管理</strong></p>
-<p>客户端进程可以采用我们上边介绍的<code>TCP/IP</code>、<code>命名管道或共享内存</code>、<code>Unix域套接字</code>这几种方式之一来与服务器进程建立连接，每当有一个客户端进程连接到服务器进程时，服务器进程都会创建一个线程来专门处理与这个客户端的交互，当该客户端退出时会与服务器断开连接，服务器并不会立即把与该客户端交互的线程销毁掉，而是把它缓存起来，在另一个新的客户端再进行连接时，把这个缓存的线程分配给该新客户端。这样就起到了不频繁创建和销毁线程的效果，从而节省开销。从这一点大家也能看出，<code>MySQL</code>服务器会为每一个连接进来的客户端分配一个线程，但是线程分配的太多了会严重影响系统性能，所以我们也需要限制一下可以同时连接到服务器的客户端数量，至于怎么限制我们后边再说哈～</p>
-<p>在客户端程序发起连接的时候，需要携带主机信息、用户名、密码，服务器程序会对客户端程序提供的这些信息进行认证，如果认证失败，服务器程序会拒绝连接。另外，如果客户端程序和服务器程序不运行在一台计算机上，我们还可以采用使用了<code>SSL</code>（安全套接字）的网络连接进行通信，来保证数据传输的安全性。</p>
-<p>当连接建立后，与该客户端关联的服务器线程会一直等待客户端发送过来的请求，<code>MySQL</code>服务器接收到的请求只是一个文本消息，该文本消息还要经过各种处理，预知后事如何，继续往下看哈～</p>
-<p><strong>解析与优化</strong></p>
-<p>到现在为止，<code>MySQL</code>服务器已经获得了文本形式的请求，接着<br>还要经过九九八十一难的处理，其中的几个比较重要的部分分别是<code>查询缓存</code>、<code>语法解析</code>和<code>查询优化</code>，下边我们详细来看。</p>
-<p><strong>查询缓存</strong></p>
-<p>如果我问你<code>9+8×16-3×2×17</code>的值是多少，你可能会用计算器去算一下，或者牛逼一点用心算，最终得到了结果<code>35</code>，如果我再问你一遍<code>9+8×16-3×2×17</code>的值是多少，你还用再傻呵呵的算一遍么？我们刚刚已经算过了，直接说答案就好了。<code>MySQL</code>服务器程序处理查询请求的过程也是这样，会把刚刚处理过的查询请求和结果<code>缓存</code>起来，如果下一次有一模一样的请求过来，直接从缓存中查找结果就好了，就不用再傻呵呵的去底层的表中查找了。这个查询缓存可以在不同客户端之间共享，也就是说如果客户端A刚刚查询了一个语句，而客户端B之后发送了同样的查询请求，那么客户端B的这次查询就可以直接使用查询缓存中的数据。</p>
-<p>当然，<code>MySQL</code>服务器并没有人聪明，<span style="color:red">如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中</span>。另外，<span style="color:red">如果查询请求中包含某些系统函数、用户自定义变量和函数、一些系统表，如 mysql 、information_schema、 performance_schema 数据库中的表，那这个请求就不会被缓存</span>。以某些系统函数举例，可能同样的函数的两次调用会产生不一样的结果，比如函数<code>NOW</code>，每次调用都会产生最新的当前时间，如果在一个查询请求中调用了这个函数，那即使查询请求的文本信息都一样，那不同时间的两次查询也应该得到不同的结果，如果在第一次查询时就缓存了，那第二次查询的时候直接使用第一次查询的结果就是错误的！</p>
-<p>不过既然是缓存，那就有它缓存失效的时候。<span style="color:red">MySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了<code>INSERT</code>、 <code>UPDATE</code>、<code>DELETE</code>、<code>TRUNCATE TABLE</code>、<code>ALTER TABLE</code>、<code>DROP TABLE</code>或 <code>DROP DATABASE</code>语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除</span>！</p>
+<p><code>B/S</code> 基于统一的应用层协议 <code>HTTP</code> 来交互数据，与大多数 <code>C/S</code> 互联网应用程序采用的长连接的交互模式不同。<code>HTTP</code> 采用无状态的短连接的通信方式，通常情况下，一次请求就完成了一次数据交互，然后这次通信连接就断开了。采用这种方式可以有效应对更多的用户请求。</p>
+<p>因此我们希望了解，当我们在游览器地址栏中键入：<code>codezhw.club</code>这个url链接之后会发生什么？</p>
+<p>因此这篇文章希望能够让大家了解到：</p>
+<ul>
+<li><strong><code>用户访问网站的基本流程</code></strong></li>
+<li><strong><code>DNS的解析过程</code></strong></li>
+<li><strong><code>CDN的工作机制</code></strong></li>
+<li><strong><code>HTTP数据包</code></strong></li>
+<li><strong><code>POST与GET的区别</code></strong></li>
+<li><strong><code>HTTP1.0与HTTP2.0、HTTP3.0之间的差异</code></strong></li>
+</ul>
+<h2 id="用户访问网站的基本流程"><a href="#用户访问网站的基本流程" class="headerlink" title="用户访问网站的基本流程"></a>用户访问网站的基本流程</h2><p>我们每天都会使用游览器上网游览网页内容，当我们在游览器中键入网站地址例如：<a href="https://codezhw.club">codezhw.club</a></p>
+<p>之后很快就会看到网站的内容。这一切似乎看起来很神奇，那么在其背后到底是怎样的实现流程呢？</p>
+<p>下面就为大家揭晓从客户端用户在Web浏览器里输入网站地址，到看到网站内容的完整访问流程。</p>
+<ul>
+<li><strong>1.地址解析：</strong> 地址解析通过DNS服务器解析域名并得到域名对应的最终IP地址，游览器会对IP地址对应的服务器发起请求。</li>
+<li><strong>2.封装HTTP数据包：</strong>封装HTTP数据包，解析协议名、主机名、端口号、对象路径并结合本机的信息组成一个HTTP请求数据包。</li>
+<li><strong>3.封装TCP数据包：</strong>将HTTP数据包进一步封装成TCP数据包</li>
+<li><strong>4.建立TCP连接：</strong>通过TCP三次握手机制建立可靠传输</li>
+<li><strong>5.客户端发送请求：</strong>在建立连接之后游览器发送请求给服务器</li>
+<li><strong>6.服务器响应请求：</strong> 服务器接受到请求后，进行业务的逻辑处理然后向游览器返回响应信息。在响应信息中包含状态行、协议版本号、成功或错误的代码、消息体等内容。</li>
+<li><strong>7.服务器关闭TCP连接：</strong>服务器在向浏览器发送请求响应数据后关闭TCP连接，在HTTP1.1可以通过<code>Connection:keep-alive</code>建立持续连接。</li>
+</ul>
+<h2 id="DNS的解析过程"><a href="#DNS的解析过程" class="headerlink" title="DNS的解析过程"></a>DNS的解析过程</h2><ul>
+<li><p><strong>第一步：</strong>客户端在游览器键入：codezhw.club网址之后，回车；系统首先会查找本地的DNS缓存以及hosts文件信息，判断是否存在codezhw.club域名对应的IP解析记录，如果有直接获取IP，然后去访问这个IP对应的服务器。</p>
+</li>
+<li><p><strong>第二步：</strong>如果客户端本地DNS缓存及hosts文件没有codezhw.club域名对应的解析记录，那么，系统会把浏览器的解析请求发送给客户端本地设置的DNS服务器地址解析，如果LDNS服务器的本地缓存有对应的解析记录就会直接返回IP地址给客户端，如果没有，则LDNS会负责继续请求其他的DNS服务器。</p>
+</li>
+<li><p><strong>第三步：</strong> LDNS从DNS系统的（”.”）根开始请求对codezhw.club域名的解析，并针对各个层级的DNS服务器系统进行一系列的查找，最终会查找到codezhw.club域名对应的授权DNS服务器，而这个授权DNS服务器正是企业购买域名时用于管理域名解析的服务器，这个授权服务器会有codezhw.club对应的IP解析记录。</p>
+</li>
+<li><p><strong>第四步：</strong>codezhw.club域名授权的DNS服务器，会把codezhw.club对应的最终解析IP发送给LDNS，LDNS把来自授权DNS服务器codezhw.club对应的IP解析记录发送给客户端，并在本地缓存域名和IP对应解析，在缓存的有效时间之内记录都不会过期。</p>
+</li>
+<li><p><strong>第五步：</strong>游览器获取codezhw.club对应的IP地址，接下来会对IP地址对应的服务器发起请求，服务器接受到请求后响应处理。</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200416171535.png" alt=""></p>
+<p>在Linux中通过dig命令可以查看域名服务器的一些相关信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200416172603.png" alt=""></p>
+<p>可以看到它先去13个rootDNS服务器查找域名，解析club的6个DNS服务器，解析codezhw.club的一共有两个DNS服务器，授权DNS flglns1.dnspod.net和flglns2.dnspod.net负责了最终的CNAME记录解析。</p>
+<h2 id="CND的工作机制"><a href="#CND的工作机制" class="headerlink" title="CND的工作机制"></a>CND的工作机制</h2><p><code>CDN</code> 也就是内容分布网络，<strong>以缓存网站中的静态数据为主，如 CSS、JS、IMG 等数据</strong>。用户先从主站服务器请求到动态内容后，再从 <code>CDN</code> 上下载这些静态数据，从而加速网页数据内容的下载速度。</p>
+<p>通常来说 <code>CDN</code> 要达到可扩展性、安全性、可靠性几个目标。工作步骤如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/javaweb06-1.png" alt=""></p>
+<p>负载均衡可以通过NGINX服务器来实现。</p>
+<h2 id="HTTP数据包"><a href="#HTTP数据包" class="headerlink" title="HTTP数据包"></a>HTTP数据包</h2><ul>
+<li><em>请求行</em>：请求的类型/请求路径/协议和版本号</li>
+<li><em>消息头</em>：一些键值对，下面会详细介绍</li>
+<li><em>空行</em> ：请求头和请求体之间用一个空行来表示</li>
+<li><em>请求体</em>：要发送的数据（一般POST方式会使用）</li>
+</ul>
+<pre class="line-numbers language-html"><code class="language-html"># Request Headers
+
+POST /adduser HTTP/1.1
+Host: localhost:8030
+Connection: keep-alive
+Content-Length: 16
+Pragma: no-cache
+Cache-Control: no-cache
+Origin: chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+
+# Form Data
+name=name&amp;age=11<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre><code>Accept：指浏览器或其他客户可以接爱的MIME文件格式。Servlet可以根据它判断并返回适当的文件格式。
+
+User-Agent：是客户浏览器名称
+
+Host：对应网址URL中的Web名称和端口号。
+
+Accept-Langeuage：指出浏览器可以接受的语言种类，如en或en-us，指英语。
+
+connection：用来告诉服务器是否可以维持固定的HTTP连接。http是无连接的，HTTP/1.1使用Keep-Alive为默认值，这样，当浏览器需要多个文件时(比如一个HTML文件和相关的图形文件)，不需要每次都建立连接
+
+Cookie：浏览器用这个属性向服务器发送Cookie。Cookie是在浏览器中寄存的小型数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能。
+
+Referer：表明产生请求的网页URL。如比从网页/icconcept/index.jsp中点击一个链接到网页/icwork/search，在向服务器发送的GET/icwork/search中的请求中，Referer是http://hostname:8080/icconcept/index.jsp。这个属性可以用来跟踪Web请求是从什么网站来的。
+
+Content-Type：用来表名request的内容类型。可以用HttpServletRequest的getContentType()方法取得。
+
+Accept-Charset：指出浏览器可以接受的字符编码。英文浏览器的默认值是ISO-8859-1.
+
+Accept-Encoding：指出浏览器可以接受的编码方式。编码方式不同于文件格式，它是为了压缩文件并加速文件传递速度。浏览器在接收到Web响应之后先解码，然后再检查文件格式。</code></pre><p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/20200416201146.png" alt="状态码"></p>
+<p>常见的状态码：</p>
+<p><strong>200：服务器成功返回网页</strong></p>
+<p><strong>301：永久重定向</strong></p>
+<p><strong>302：临时重定向</strong></p>
+<p><strong>403：服务器禁止客户端访问，客户端的请求是合法的，一般情况下是客户端与服务器权限配置不当导致，例如证书问题。</strong></p>
+<p><strong>404：服务器找不到客户端请求的资源路径，可能是客户端请求了服务器上不存在的资源导致</strong></p>
+<p><strong>500：服务器内部错误，服务器遇到了意料之外的事件，不饿能完成客户端的请求。</strong></p>
+<p><strong>503：当前服务器不可用，可能是服务器超载或者停机维护导致，或是反向代理后没有提供服务的节点。</strong></p>
+<p><strong>504：网关超时，一般情况是服务器没有在规定的时间内处理客户端的请求，多数情况是服务器过载导致。</strong></p>
+<h2 id="GET和POST的区别"><a href="#GET和POST的区别" class="headerlink" title="GET和POST的区别"></a>GET和POST的区别</h2><p>常见的HTTP请求方法：</p>
+<ul>
+<li><strong>GET：</strong>客户端请求指定资源信息，服务器返回指定资源</li>
+<li><strong>HEAD：</strong>只请求响应报文中的头部</li>
+<li><strong>POST：</strong>将客户端数据提交到服务器</li>
+<li><strong>PUT：</strong>用从客户端向服务器传送的数据取代指定的文档内容</li>
+<li><strong>DELETE：</strong>请求服务器删除request-url所标识的资源</li>
+<li><strong>MOVE：</strong>请求服务器将指定页面移至宁一个网络</li>
+</ul>
+<p>我们比较常用的两个方法是GET和PUT</p>
+<p>相信学过Java Web的同学都大概知道一些这两者的区别</p>
+<p>比如：</p>
+<ul>
+<li><p>get用来获取数据，post用来发送数据</p>
+</li>
+<li><p>get请求会在url连接看到数据，post不会，所以post比get更加安全（get把参数放在url链接里，post通过request body传递参数）</p>
+</li>
+<li><p>get的url有长度限制，post没有</p>
+</li>
+<li><p>get请求可以被游览器缓存，post不行</p>
+</li>
+</ul>
+<p>这是关于get和post比较全的比较：<a href="https://www.diffen.com/difference/GET-vs-POST-HTTP-Requests" target="_blank" rel="noopener">https://www.diffen.com/difference/GET-vs-POST-HTTP-Requests</a></p>
+<p>深入底层GET和POST是HTTP的请求方法</p>
+<p>HTTP协议的底层是TCP连接</p>
+<p>那么它们两个有什么区别呢？</p>
+<blockquote>
+<p>GET产生一个TCP数据包，POST产生两个TCP数据包。</p>
+<p>对于GET请求，游览器会把请求头和请求体一起发送出去，服务器成功响应200(success)。</p>
+<p>对于POST请求，游览器会先发送请求头然后等待服务器响应100(continue)，再发送请求体也就是数据的部分。</p>
+</blockquote>
+<h2 id="HTTP1-0与HTTP2-0、HTTP3-0的区别"><a href="#HTTP1-0与HTTP2-0、HTTP3-0的区别" class="headerlink" title="HTTP1.0与HTTP2.0、HTTP3.0的区别"></a>HTTP1.0与HTTP2.0、HTTP3.0的区别</h2><p>先来看看HTTP1.1与1.0的对比</p>
+<p>HTTP/1.1 相比 HTTP/1.0 性能上的改进：</p>
+<ul>
+<li>使用 TCP 长连接的方式改善了 HTTP/1.0 短连接造成的性能开销。</li>
+<li>支持 管道（pipeline）网络传输，只要第一个请求发出去了，不必等其回来，就可以发第二个请求出去，可以减少整体的响应时间。</li>
+</ul>
+<p>但 HTTP/1.1 还是有性能瓶颈：</p>
+<ul>
+<li>请求 / 响应头部（Header）未经压缩就发送，首部信息越多延迟越大。只能压缩 <code>Body</code> 的部分；</li>
+<li>发送冗长的首部。每次互相发送相同的首部造成的浪费较多；</li>
+<li>服务器是按请求的顺序响应的，如果服务器响应慢，会招致客户端一直请求不到数据，也就是队头阻塞；</li>
+<li>没有请求优先级控制；</li>
+<li>请求只能从客户端开始，服务器只能被动响应。</li>
+</ul>
+<p>HTTP/2 相比 HTTP/1.1 性能上的改进：</p>
+<ul>
+<li>1.头部压缩<ul>
+<li>HTTP2会压缩头部，如果你同时发起多个请求，它们的头部是一样的话，那么协议会帮你消除重复的部分，换句话来说就是这多次请求复用同一个请求头，提高了效率。</li>
+</ul>
+</li>
+<li>二进制格式<ul>
+<li>HTTP/2 不再像 HTTP/1.1 里的纯文本形式的报文，而是全面采用了<strong>二进制格式</strong>，头信息和数据体都是二进制，并且统称为帧（frame）：<strong>头信息帧和数据帧</strong>。</li>
+</ul>
+</li>
+<li>数据流<ul>
+<li>每个请求或回应的所有数据包，称为一个数据流（<code>Stream</code>）。每个数据流都标记着一个独一无二的编号，其中规定客户端发出的数据流编号为奇数， 服务器发出的数据流编号为偶数</li>
+</ul>
+</li>
+<li>多路复用<ul>
+<li>HTTP/2 是可以在<strong>一个连接中并发多个请求或回应，而不用按照顺序一一对应</strong>。</li>
+<li>移除了 HTTP/1.1 中的串行请求，不需要排队等待，也就不会再出现「队头阻塞」问题，<strong>降低了延迟，大幅度提高了连接的利用率</strong>。</li>
+</ul>
+</li>
+<li>服务器推送<ul>
+<li>HTTP/2 还在一定程度上改善了传统的「请求 - 应答」工作模式，服务不再是被动地响应，也可以<strong>主动</strong>向客户端发送消息。</li>
+</ul>
+</li>
+</ul>
+<p>HTTP/3在HTTP/2之上做的优化</p>
+<p>HTTP/2 主要的问题在于，多个 HTTP 请求在复用一个 TCP 连接，下层的 TCP 协议是不知道有多少个 HTTP 请求的。所以一旦发生了丢包现象，就会触发 TCP 的重传机制，这样在一个 TCP 连接中的<strong>所有的 HTTP 请求都必须等待这个丢了的包被重传回来</strong>。</p>
+<ul>
+<li>HTTP/1.1 中的管道（ pipeline）传输中如果有一个请求阻塞了，那么队列后请求也统统被阻塞住了</li>
+<li>HTTP/2 多请求复用一个TCP连接，一旦发生丢包，就会阻塞住所有的 HTTP 请求。</li>
+</ul>
+<p>这都是基于 TCP 传输层的问题，所以 <strong>HTTP/3 把 HTTP 下层的 TCP 协议改成了 UDP！</strong></p>
 
             </div>
             <hr/>
@@ -547,7 +697,7 @@ Mysql">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/03/27/mysql/shen-ru-li-jie-mysql/">https://codezhw.club/2020/03/27/mysql/shen-ru-li-jie-mysql/</a>
+                    <a href="https://codezhw.club/2020/04/16/qi-ta/shen-du-jie-xi-web-qing-qiu/">https://codezhw.club/2020/04/16/qi-ta/shen-du-jie-xi-web-qing-qiu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -585,8 +735,12 @@ Mysql">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/mysql/">
-                                    <span class="chip bg-color">mysql</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
                                 </a>
                             
                         </div>
@@ -1015,39 +1169,91 @@ Mysql">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/30/leetcode/di-san-zhou/">
+                <a href="/2020/04/16/qi-ta/shen-du-jie-xi-web-qing-qiu/">
                     <div class="card-image">
                         
                         
-                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-e160d60fd3803317fc1939eaf3f1a2bc_720w.jpg" class="responsive-img" alt="LeetCode刷题:第一周">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg" class="responsive-img" alt="深度解析Web请求">
                         
-                        <span class="card-title">LeetCode刷题:第一周</span>
+                        <span class="card-title">深度解析Web请求</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            题目： 面试题06. 从尾到头打印链表输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
-示例 1：
-输入：head = [1,3,2]
-输出：[2,3,1]解题思路：
+                            前言在如今的Web2.0时代，互联网的网络架构已经由传统的C/S(客户端/服务端)模式转变为更加高效、快捷的B/S(游览器/服务器)模式。
+B/S 架构带来了以下两方面的好处：
 
-用递归
-用辅助栈
-
-代码：
-//递归
-ArrayL
+客户端使用统一的浏览器（Browser）。由于浏览器具有统一
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-30
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%85%B6%E4%BB%96/" class="post-category">
+                                    其他
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/13/leetcode/di-wu-zhou/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-254b8fbc986f41c3312766df6cffe716_720w.jpg" class="responsive-img" alt="LeetCode刷题:第五周">
+                        
+                        <span class="card-title">LeetCode刷题:第五周</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            题目：283. 移动零难度简单554收藏分享切换为英文关注反馈
+给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+示例:
+输入: [0,1,0,3,12]
+输出: [1,3,12,0,0]说明:
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1069,61 +1275,6 @@ ArrayL
                     
                     <a href="/tags/LeetCode/">
                         <span class="chip bg-color">LeetCode</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/26/java/arraylist-yuan-ma-fen-xi/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-e160d60fd3803317fc1939eaf3f1a2bc_720w.jpg" class="responsive-img" alt="ArrayList源码分析">
-                        
-                        <span class="card-title">ArrayList源码分析</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            前言这是一道面试题： 写一段代码在遍历 ArrayList 时移除一个元素？
-考察的目的是：使用正确的方式来实现在遍历的过程中移除元素，而不会出现 ConcurrentModificationException 异常的示例代码。
-今天从源码
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-26
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ArrayList/">
-                        <span class="chip bg-color">ArrayList</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">源码</span>
                     </a>
                     
                 </div>
