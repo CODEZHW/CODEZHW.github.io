@@ -464,21 +464,21 @@ Mybatis是一个半 ORM对象关系映射框架也叫持久层框架，它内部
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-16
+                    2020-04-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    2.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    13 分
                 </div>
                 
 				
@@ -510,6 +510,7 @@ Mybatis是一个半 ORM对象关系映射框架也叫持久层框架，它内部
 <li><strong>第一：构建，也就是解析我们写的xml配置，将其变成它所需要的对象。</strong></li>
 <li><strong>第二：就是执行，在构建完成的基础上，去执行我们的SQL，完成与Jdbc的交互。</strong></li>
 </ul>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/04/17/TFYSjz4UdEVso7D.png" alt="Mybatis包.png"></p>
 <h2 id="XML配置文件"><a href="#XML配置文件" class="headerlink" title="XML配置文件"></a>XML配置文件</h2><p>在单独使用Mybatis的情况下，最常见的是配置两个xml文件用于构建我们的mybatis,分别是mybatis-config.xml和XXXmaper.xml。</p>
 <ul>
 <li>Mybatis-config.xml</li>
@@ -729,10 +730,278 @@ Mybatis是一个半 ORM对象关系映射框架也叫持久层框架，它内部
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>根据传入的Configuration去创建一个默认的DefaultSqlSessionFactory对象。</p>
+<h2 id="生成Mapper对象"><a href="#生成Mapper对象" class="headerlink" title="生成Mapper对象"></a>生成Mapper对象</h2><p>解析完mapper后，通过创建XMLMapperBuilder，将Mapper里面的sql语句生成Mapper对象并放入configuration中</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">parse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//判断资源路径是否加载</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>configuration<span class="token punctuation">.</span><span class="token function">isResourceLoaded</span><span class="token punctuation">(</span>resource<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//解析mapper下的内容</span>
+    <span class="token function">configurationElement</span><span class="token punctuation">(</span>parser<span class="token punctuation">.</span><span class="token function">evalNode</span><span class="token punctuation">(</span><span class="token string">"/mapper"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//添加资源路径到configuration中</span>
+    configuration<span class="token punctuation">.</span><span class="token function">addLoadedResource</span><span class="token punctuation">(</span>resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">bindMapperForNamespace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">parsePendingResultMaps</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">parsePendingCacheRefs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">parsePendingStatements</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">configurationElement</span><span class="token punctuation">(</span>XNode context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">//获取命名空间</span>
+    String namespace <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"namespace"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>namespace <span class="token operator">==</span> null <span class="token operator">||</span> namespace<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BuilderException</span><span class="token punctuation">(</span><span class="token string">"Mapper's namespace cannot be empty"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    builderAssistant<span class="token punctuation">.</span><span class="token function">setCurrentNamespace</span><span class="token punctuation">(</span>namespace<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">//解析缓存节点</span>
+    <span class="token function">cacheRefElement</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">evalNode</span><span class="token punctuation">(</span><span class="token string">"cache-ref"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">cacheElement</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">evalNode</span><span class="token punctuation">(</span><span class="token string">"cache"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">//解析参数映射</span>
+    <span class="token function">parameterMapElement</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">evalNodes</span><span class="token punctuation">(</span><span class="token string">"/mapper/parameterMap"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">//解析结果集</span>
+    <span class="token function">resultMapElements</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">evalNodes</span><span class="token punctuation">(</span><span class="token string">"/mapper/resultMap"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">//解析sql节点 可重用代码段</span>
+    <span class="token function">sqlElement</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">evalNodes</span><span class="token punctuation">(</span><span class="token string">"/mapper/sql"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">//根据上下文环境创建statement &lt;select> &lt;insert> &lt;update> &lt;delete></span>
+    <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">evalNodes</span><span class="token punctuation">(</span><span class="token string">"select|insert|update|delete"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BuilderException</span><span class="token punctuation">(</span><span class="token string">"Error parsing Mapper XML. The XML location is '"</span> <span class="token operator">+</span> resource <span class="token operator">+</span> <span class="token string">"'. Cause: "</span> <span class="token operator">+</span> e<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>XNode<span class="token operator">></span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>configuration<span class="token punctuation">.</span><span class="token function">getDatabaseId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> configuration<span class="token punctuation">.</span><span class="token function">getDatabaseId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>XNode<span class="token operator">></span> list<span class="token punctuation">,</span> String requiredDatabaseId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>XNode context <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">final</span> XMLStatementBuilder statementParser <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLStatementBuilder</span><span class="token punctuation">(</span>configuration<span class="token punctuation">,</span> builderAssistant<span class="token punctuation">,</span> context<span class="token punctuation">,</span> requiredDatabaseId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      statementParser<span class="token punctuation">.</span><span class="token function">parseStatementNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IncompleteElementException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      configuration<span class="token punctuation">.</span><span class="token function">addIncompleteStatement</span><span class="token punctuation">(</span>statementParser<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>XNode<span class="token operator">></span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>configuration<span class="token punctuation">.</span><span class="token function">getDatabaseId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> configuration<span class="token punctuation">.</span><span class="token function">getDatabaseId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//解析xml</span>
+    <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">buildStatementFromContext</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>XNode<span class="token operator">></span> list<span class="token punctuation">,</span> String requiredDatabaseId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>XNode context <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">final</span> XMLStatementBuilder statementParser <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLStatementBuilder</span><span class="token punctuation">(</span>configuration<span class="token punctuation">,</span> builderAssistant<span class="token punctuation">,</span> context<span class="token punctuation">,</span> requiredDatabaseId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">//解析xml节点</span>
+      statementParser<span class="token punctuation">.</span><span class="token function">parseStatementNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IncompleteElementException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">//xml语句有问题时 存储到集合中 等解析完能解析的再重新解析</span>
+      configuration<span class="token punctuation">.</span><span class="token function">addIncompleteStatement</span><span class="token punctuation">(</span>statementParser<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">parseStatementNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//获取&lt;select id="xxx">中的id</span>
+    String id <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取databaseId 用于多数据库，这里为null</span>
+    String databaseId <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"databaseId"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">databaseIdMatchesCurrent</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> databaseId<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>requiredDatabaseId<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//获取节点名  select update delete insert</span>
+    String nodeName <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getNodeName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//根据节点名，得到SQL操作的类型</span>
+    SqlCommandType sqlCommandType <span class="token operator">=</span> SqlCommandType<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>nodeName<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span>Locale<span class="token punctuation">.</span>ENGLISH<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//判断是否是查询</span>
+    <span class="token keyword">boolean</span> isSelect <span class="token operator">=</span> sqlCommandType <span class="token operator">==</span> SqlCommandType<span class="token punctuation">.</span>SELECT<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//是否刷新缓存 默认:增删改刷新 查询不刷新</span>
+    <span class="token keyword">boolean</span> flushCache <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBooleanAttribute</span><span class="token punctuation">(</span><span class="token string">"flushCache"</span><span class="token punctuation">,</span> <span class="token operator">!</span>isSelect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//是否使用二级缓存 默认值:查询使用 增删改不使用</span>
+    <span class="token keyword">boolean</span> useCache <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBooleanAttribute</span><span class="token punctuation">(</span><span class="token string">"useCache"</span><span class="token punctuation">,</span> isSelect<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//是否需要处理嵌套查询结果 group by</span>
+
+    <span class="token comment" spellcheck="true">// 三组数据 分成一个嵌套的查询结果</span>
+    <span class="token keyword">boolean</span> resultOrdered <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBooleanAttribute</span><span class="token punctuation">(</span><span class="token string">"resultOrdered"</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Include Fragments before parsing</span>
+    XMLIncludeTransformer includeParser <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLIncludeTransformer</span><span class="token punctuation">(</span>configuration<span class="token punctuation">,</span> builderAssistant<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//替换Includes标签为对应的sql标签里面的值</span>
+    includeParser<span class="token punctuation">.</span><span class="token function">applyIncludes</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">getNode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//获取parameterType名</span>
+    String parameterType <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"parameterType"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取parameterType的Class</span>
+    Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> parameterTypeClass <span class="token operator">=</span> <span class="token function">resolveClass</span><span class="token punctuation">(</span>parameterType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//解析配置的自定义脚本语言驱动 这里为null</span>
+    String lang <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"lang"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    LanguageDriver langDriver <span class="token operator">=</span> <span class="token function">getLanguageDriver</span><span class="token punctuation">(</span>lang<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Parse selectKey after includes and remove them.</span>
+    <span class="token comment" spellcheck="true">//解析selectKey</span>
+    <span class="token function">processSelectKeyNodes</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> parameterTypeClass<span class="token punctuation">,</span> langDriver<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// Parse the SQL (pre: &lt;selectKey> and &lt;include> were parsed and removed)</span>
+    <span class="token comment" spellcheck="true">//设置主键自增规则</span>
+    KeyGenerator keyGenerator<span class="token punctuation">;</span>
+    String keyStatementId <span class="token operator">=</span> id <span class="token operator">+</span> SelectKeyGenerator<span class="token punctuation">.</span>SELECT_KEY_SUFFIX<span class="token punctuation">;</span>
+    keyStatementId <span class="token operator">=</span> builderAssistant<span class="token punctuation">.</span><span class="token function">applyCurrentNamespace</span><span class="token punctuation">(</span>keyStatementId<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>configuration<span class="token punctuation">.</span><span class="token function">hasKeyGenerator</span><span class="token punctuation">(</span>keyStatementId<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      keyGenerator <span class="token operator">=</span> configuration<span class="token punctuation">.</span><span class="token function">getKeyGenerator</span><span class="token punctuation">(</span>keyStatementId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      keyGenerator <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBooleanAttribute</span><span class="token punctuation">(</span><span class="token string">"useGeneratedKeys"</span><span class="token punctuation">,</span>
+          configuration<span class="token punctuation">.</span><span class="token function">isUseGeneratedKeys</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> SqlCommandType<span class="token punctuation">.</span>INSERT<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>sqlCommandType<span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token operator">?</span> Jdbc3KeyGenerator<span class="token punctuation">.</span>INSTANCE <span class="token operator">:</span> NoKeyGenerator<span class="token punctuation">.</span>INSTANCE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">/************************************************************************************/</span>
+    <span class="token comment" spellcheck="true">//解析Sql（重要）  根据sql文本来判断是否需要动态解析 如果没有动态sql语句且 只有#{}的时候 直接静态解析使用?占位 当有 ${} 不解析</span>
+    SqlSource sqlSource <span class="token operator">=</span> langDriver<span class="token punctuation">.</span><span class="token function">createSqlSource</span><span class="token punctuation">(</span>configuration<span class="token punctuation">,</span> context<span class="token punctuation">,</span> parameterTypeClass<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取StatementType，可以理解为Statement和PreparedStatement</span>
+    StatementType statementType <span class="token operator">=</span> StatementType<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"statementType"</span><span class="token punctuation">,</span> StatementType<span class="token punctuation">.</span>PREPARED<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//没用过</span>
+    Integer fetchSize <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getIntAttribute</span><span class="token punctuation">(</span><span class="token string">"fetchSize"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//超时时间</span>
+    Integer timeout <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getIntAttribute</span><span class="token punctuation">(</span><span class="token string">"timeout"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//已过时</span>
+    String parameterMap <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"parameterMap"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取返回值类型名</span>
+    String resultType <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"resultType"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取返回值烈性的Class</span>
+    Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> resultTypeClass <span class="token operator">=</span> <span class="token function">resolveClass</span><span class="token punctuation">(</span>resultType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取resultMap的id</span>
+    String resultMap <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"resultMap"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//获取结果集类型</span>
+    String resultSetType <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"resultSetType"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ResultSetType resultSetTypeEnum <span class="token operator">=</span> <span class="token function">resolveResultSetType</span><span class="token punctuation">(</span>resultSetType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>resultSetTypeEnum <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      resultSetTypeEnum <span class="token operator">=</span> configuration<span class="token punctuation">.</span><span class="token function">getDefaultResultSetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    String keyProperty <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"keyProperty"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String keyColumn <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"keyColumn"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String resultSets <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getStringAttribute</span><span class="token punctuation">(</span><span class="token string">"resultSets"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//将刚才获取到的属性，封装成MappedStatement对象（代码贴在下面）</span>
+    builderAssistant<span class="token punctuation">.</span><span class="token function">addMappedStatement</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> sqlSource<span class="token punctuation">,</span> statementType<span class="token punctuation">,</span> sqlCommandType<span class="token punctuation">,</span>
+        fetchSize<span class="token punctuation">,</span> timeout<span class="token punctuation">,</span> parameterMap<span class="token punctuation">,</span> parameterTypeClass<span class="token punctuation">,</span> resultMap<span class="token punctuation">,</span> resultTypeClass<span class="token punctuation">,</span>
+        resultSetTypeEnum<span class="token punctuation">,</span> flushCache<span class="token punctuation">,</span> useCache<span class="token punctuation">,</span> resultOrdered<span class="token punctuation">,</span>
+        keyGenerator<span class="token punctuation">,</span> keyProperty<span class="token punctuation">,</span> keyColumn<span class="token punctuation">,</span> databaseId<span class="token punctuation">,</span> langDriver<span class="token punctuation">,</span> resultSets<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//将刚才获取到的属性，封装成MappedStatement对象</span>
+  <span class="token keyword">public</span> MappedStatement <span class="token function">addMappedStatement</span><span class="token punctuation">(</span>
+      String id<span class="token punctuation">,</span>
+      SqlSource sqlSource<span class="token punctuation">,</span>
+      StatementType statementType<span class="token punctuation">,</span>
+      SqlCommandType sqlCommandType<span class="token punctuation">,</span>
+      Integer fetchSize<span class="token punctuation">,</span>
+      Integer timeout<span class="token punctuation">,</span>
+      String parameterMap<span class="token punctuation">,</span>
+      Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> parameterType<span class="token punctuation">,</span>
+      String resultMap<span class="token punctuation">,</span>
+      Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> resultType<span class="token punctuation">,</span>
+      ResultSetType resultSetType<span class="token punctuation">,</span>
+      <span class="token keyword">boolean</span> flushCache<span class="token punctuation">,</span>
+      <span class="token keyword">boolean</span> useCache<span class="token punctuation">,</span>
+      <span class="token keyword">boolean</span> resultOrdered<span class="token punctuation">,</span>
+      KeyGenerator keyGenerator<span class="token punctuation">,</span>
+      String keyProperty<span class="token punctuation">,</span>
+      String keyColumn<span class="token punctuation">,</span>
+      String databaseId<span class="token punctuation">,</span>
+      LanguageDriver lang<span class="token punctuation">,</span>
+      String resultSets<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>unresolvedCacheRef<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IncompleteElementException</span><span class="token punctuation">(</span><span class="token string">"Cache-ref not yet resolved"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//id = namespace</span>
+    id <span class="token operator">=</span> <span class="token function">applyCurrentNamespace</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">boolean</span> isSelect <span class="token operator">=</span> sqlCommandType <span class="token operator">==</span> SqlCommandType<span class="token punctuation">.</span>SELECT<span class="token punctuation">;</span>
+
+      <span class="token comment" spellcheck="true">//通过构造者模式+链式变成，构造一个MappedStatement的构造者</span>
+    MappedStatement<span class="token punctuation">.</span>Builder statementBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MappedStatement<span class="token punctuation">.</span>Builder</span><span class="token punctuation">(</span>configuration<span class="token punctuation">,</span> id<span class="token punctuation">,</span> sqlSource<span class="token punctuation">,</span> sqlCommandType<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">resource</span><span class="token punctuation">(</span>resource<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">fetchSize</span><span class="token punctuation">(</span>fetchSize<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">timeout</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">statementType</span><span class="token punctuation">(</span>statementType<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">keyGenerator</span><span class="token punctuation">(</span>keyGenerator<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">keyProperty</span><span class="token punctuation">(</span>keyProperty<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">keyColumn</span><span class="token punctuation">(</span>keyColumn<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">databaseId</span><span class="token punctuation">(</span>databaseId<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">lang</span><span class="token punctuation">(</span>lang<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">resultOrdered</span><span class="token punctuation">(</span>resultOrdered<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">resultSets</span><span class="token punctuation">(</span>resultSets<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">resultMaps</span><span class="token punctuation">(</span><span class="token function">getStatementResultMaps</span><span class="token punctuation">(</span>resultMap<span class="token punctuation">,</span> resultType<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">resultSetType</span><span class="token punctuation">(</span>resultSetType<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">flushCacheRequired</span><span class="token punctuation">(</span><span class="token function">valueOrDefault</span><span class="token punctuation">(</span>flushCache<span class="token punctuation">,</span> <span class="token operator">!</span>isSelect<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">useCache</span><span class="token punctuation">(</span><span class="token function">valueOrDefault</span><span class="token punctuation">(</span>useCache<span class="token punctuation">,</span> isSelect<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">cache</span><span class="token punctuation">(</span>currentCache<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    ParameterMap statementParameterMap <span class="token operator">=</span> <span class="token function">getStatementParameterMap</span><span class="token punctuation">(</span>parameterMap<span class="token punctuation">,</span> parameterType<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>statementParameterMap <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      statementBuilder<span class="token punctuation">.</span><span class="token function">parameterMap</span><span class="token punctuation">(</span>statementParameterMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+      <span class="token comment" spellcheck="true">//通过构造者构造MappedStatement</span>
+    MappedStatement statement <span class="token operator">=</span> statementBuilder<span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment" spellcheck="true">//将MappedStatement对象封装到Configuration对象中</span>
+    configuration<span class="token punctuation">.</span><span class="token function">addMappedStatement</span><span class="token punctuation">(</span>statement<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> statement<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这一段代码特别特别长，但是也很好理解。就是解析我们的Mapper里面配置的sql语句最后封装成一个MappedStatement，然后将其放入Configuration对象中。</p>
+<p>MyBatis需要对配置文件进行解析，最终会解析成一个Configuration对象，但是要说两个配置文件对应了两个对象实际上也没有错：</p>
+<ul>
+<li>1.Configuration对象，保存了mybatis-config.xml的配置信息。</li>
+<li>2.MappedStatement，保存了XXXMapper.xml的配置信息。</li>
+</ul>
+<h2 id="生成SqlSession对象"><a href="#生成SqlSession对象" class="headerlink" title="生成SqlSession对象"></a>生成SqlSession对象</h2><p>根据传入的Configuration去创建一个默认的DefaultSqlSessionFactory对象。</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> SqlSessionFactory <span class="token function">build</span><span class="token punctuation">(</span>Configuration config<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">DefaultSqlSessionFactory</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>最后我们调用这个生成的SqlSessionFactory的opensession()方法，开启一个会话。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> SqlSession <span class="token function">openSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token function">openSessionFromDataSource</span><span class="token punctuation">(</span>configuration<span class="token punctuation">.</span><span class="token function">getDefaultExecutorType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> null<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//参数一个默认的执行器，事务的隔离级别设为null,不支持事务自动提交。</span>
+<span class="token keyword">private</span> SqlSession <span class="token function">openSessionFromDataSource</span><span class="token punctuation">(</span>ExecutorType execType<span class="token punctuation">,</span> TransactionIsolationLevel level<span class="token punctuation">,</span> <span class="token keyword">boolean</span> autoCommit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  Transaction tx <span class="token operator">=</span> null<span class="token punctuation">;</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      <span class="token comment" spellcheck="true">//获取环境配置</span>
+    <span class="token keyword">final</span> Environment environment <span class="token operator">=</span> configuration<span class="token punctuation">.</span><span class="token function">getEnvironment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">//获取事务</span>
+    <span class="token keyword">final</span> TransactionFactory transactionFactory <span class="token operator">=</span> <span class="token function">getTransactionFactoryFromEnvironment</span><span class="token punctuation">(</span>environment<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    tx <span class="token operator">=</span> transactionFactory<span class="token punctuation">.</span><span class="token function">newTransaction</span><span class="token punctuation">(</span>environment<span class="token punctuation">.</span><span class="token function">getDataSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> level<span class="token punctuation">,</span> autoCommit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">//获取执行器</span>
+    <span class="token keyword">final</span> Executor executor <span class="token operator">=</span> configuration<span class="token punctuation">.</span><span class="token function">newExecutor</span><span class="token punctuation">(</span>tx<span class="token punctuation">,</span> execType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment" spellcheck="true">//生成默认的SqlSession</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">DefaultSqlSession</span><span class="token punctuation">(</span>configuration<span class="token punctuation">,</span> executor<span class="token punctuation">,</span> autoCommit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">closeTransaction</span><span class="token punctuation">(</span>tx<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// may have fetched a connection so lets call close()</span>
+    <span class="token keyword">throw</span> ExceptionFactory<span class="token punctuation">.</span><span class="token function">wrapException</span><span class="token punctuation">(</span><span class="token string">"Error opening session.  Cause: "</span> <span class="token operator">+</span> e<span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+    ErrorContext<span class="token punctuation">.</span><span class="token function">instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-java"><code class="language-java">
+<span class="token keyword">public</span> <span class="token function">DefaultSqlSession</span><span class="token punctuation">(</span>Configuration configuration<span class="token punctuation">,</span> Executor executor<span class="token punctuation">,</span> <span class="token keyword">boolean</span> autoCommit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>configuration <span class="token operator">=</span> configuration<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>executor <span class="token operator">=</span> executor<span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>dirty <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>autoCommit <span class="token operator">=</span> autoCommit<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最关键的就是设置了configuration代表着这个sqlsession所运行时的配置环境。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://i.loli.net/2020/04/17/O8rUIAa2dKoLmWY.png" alt="mybatis流程图.png"></p>
+<p>最后遗留了一个getMapper()方法，它设计到反射和动态代理，所以会单独作为一篇文章来讲解。</p>
+<p>接下来大概会再了解一下mybatis的一二级缓存以及redis作为mybatis的二级缓存。</p>
 
             </div>
             <hr/>
@@ -1533,7 +1802,7 @@ ArrayL
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">66.7k</span>&nbsp;字
+                class="white-color">69.3k</span>&nbsp;字
             
             
             

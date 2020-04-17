@@ -466,14 +466,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-15
+                    2020-04-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    2.7k
                 </div>
                 
 
@@ -798,6 +798,11 @@
 输出: 1-&gt;2-&gt;5</code></pre><p><strong>示例 2:</strong></p>
 <pre><code>输入: 1-&gt;1-&gt;1-&gt;2-&gt;3
 输出: 2-&gt;3</code></pre><p><strong>解题思路：</strong></p>
+<ul>
+<li>定义哑节点去规避头节点的操作。</li>
+<li>循环条件当前节点的下一节点以及下下一个节点不为null</li>
+<li>判断当前节点的下一节点与下下一个节点是否相等，如果相等则继续遍历，不相等当前节点后移。</li>
+</ul>
 <p><strong>代码：</strong></p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> ListNode <span class="token function">deleteDuplicates</span><span class="token punctuation">(</span>ListNode head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         ListNode dummy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ListNode</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1640,7 +1645,7 @@ Hash表是基于Map接口所实现的，这个实现类提供了Map所有的可�
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">66.7k</span>&nbsp;字
+                class="white-color">69.3k</span>&nbsp;字
             
             
             
