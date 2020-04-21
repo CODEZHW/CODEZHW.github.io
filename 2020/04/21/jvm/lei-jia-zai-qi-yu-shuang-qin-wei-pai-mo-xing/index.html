@@ -554,7 +554,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>我们通过重写<code>ClassLoader::findClass()</code>方法自定义一个类加载器<code>MyClassLoader</code>，通过这个类加载器和反射机制去创建一个<code>ClassLoaderTest</code>对象object，然去比对它和应用程序类加载器创建的对象是否相等。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="C:%5CUsers%5CUSERzhw%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200421194442722.png" alt="比对结果"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/image-20200421194442722.png" alt="比对结果"></p>
 <p><strong>object对象和ClassLoaderTest类的Class对象是一致的；但是它们的类加载器不同，object是我们自己定义的类加载器，ClassLoaderTest类的类加载器是应用程序类加载器；它们的类加载器不一致，所以它们两的对象不’相等’。</strong></p>
 <h2 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h2><p>这里直接从网上找的图</p>
 <p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/17047ba01d1f16d7.jpg" alt=""></p>
