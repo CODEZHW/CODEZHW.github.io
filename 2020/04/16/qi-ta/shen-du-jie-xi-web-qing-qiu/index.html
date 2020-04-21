@@ -466,7 +466,7 @@ B/S 架构带来了以下两方面的好处：
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-16
+                    2020-04-21
                 </div>
                 
 
@@ -544,16 +544,16 @@ B/S 架构带来了以下两方面的好处：
 <h2 id="CND的工作机制"><a href="#CND的工作机制" class="headerlink" title="CND的工作机制"></a>CND的工作机制</h2><p><code>CDN</code> 也就是内容分布网络，<strong>以缓存网站中的静态数据为主，如 CSS、JS、IMG 等数据</strong>。用户先从主站服务器请求到动态内容后，再从 <code>CDN</code> 上下载这些静态数据，从而加速网页数据内容的下载速度。</p>
 <p>通常来说 <code>CDN</code> 要达到可扩展性、安全性、可靠性几个目标。工作步骤如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/javaweb06-1.png" alt=""></p>
-<p>负载均衡可以通过NGINX服务器来实现。</p>
+<p>负载均衡可以通过Nginx服务器来实现。</p>
 <h2 id="HTTP数据包"><a href="#HTTP数据包" class="headerlink" title="HTTP数据包"></a>HTTP数据包</h2><ul>
 <li><em>请求行</em>：请求的类型/请求路径/协议和版本号</li>
 <li><em>消息头</em>：一些键值对，下面会详细介绍</li>
 <li><em>空行</em> ：请求头和请求体之间用一个空行来表示</li>
 <li><em>请求体</em>：要发送的数据（一般POST方式会使用）</li>
 </ul>
-<pre class="line-numbers language-html"><code class="language-html"># Request Headers
-
+<pre class="line-numbers language-html"><code class="language-html"># 请求行
 POST /adduser HTTP/1.1
+#消息头
 Host: localhost:8030
 Connection: keep-alive
 Content-Length: 16
@@ -566,7 +566,7 @@ Accept: */*
 Accept-Encoding: gzip, deflate, br
 Accept-Language: zh-CN,zh;q=0.9
 
-# Form Data
+# 请求体
 name=name&amp;age=11<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre><code>Accept：指浏览器或其他客户可以接爱的MIME文件格式。Servlet可以根据它判断并返回适当的文件格式。
 
@@ -1169,46 +1169,42 @@ Accept-Encoding：指出浏览器可以接受的编码方式。编码方式不�
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/16/qi-ta/shen-du-jie-xi-web-qing-qiu/">
+                <a href="/2020/04/18/mybatis/mybatis-huan-cun-jie-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg" class="responsive-img" alt="深度解析Web请求">
+                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-4708824e29ab0cf675d2fee9d99fb936_720w.jpg" class="responsive-img" alt="Mybatis/Mybatis缓存解析">
                         
-                        <span class="card-title">深度解析Web请求</span>
+                        <span class="card-title">Mybatis/Mybatis缓存解析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前言在如今的Web2.0时代，互联网的网络架构已经由传统的C/S(客户端/服务端)模式转变为更加高效、快捷的B/S(游览器/服务器)模式。
-B/S 架构带来了以下两方面的好处：
-
-客户端使用统一的浏览器（Browser）。由于浏览器具有统一
+                            前言在简单介绍了Mybatis的创建以及执行过程之后，我们想要了解的是Mybatis里的缓存机制，Mybatis有两种缓存级别分别为一级和二级：
+一级是默认开启的：一级缓存是SqlSession级别的缓存。执行相同的sql语句的情况下，我们
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-16
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-18
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%85%B6%E4%BB%96/" class="post-category">
-                                    其他
+                            <a href="/categories/Mybatis/" class="post-category">
+                                    Mybatis
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1216,8 +1212,8 @@ B/S 架构带来了以下两方面的好处：
                         <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">计算机网络</span>
+                    <a href="/tags/%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">源码</span>
                     </a>
                     
                 </div>
@@ -1469,7 +1465,7 @@ B/S 架构带来了以下两方面的好处：
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">69.3k</span>&nbsp;字
+                class="white-color">75.2k</span>&nbsp;字
             
             
             
