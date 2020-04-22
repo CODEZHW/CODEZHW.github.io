@@ -4,8 +4,20 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="if..else表达式优化策略, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="前情提要if…else 是所有高级编程语言都有的必备功能。但现实中的代码往往存在着过多的 if…else。如果我们日常工作中需要进行以一个逻辑比较复杂的判断，写完后会嵌套好几层if..else，这样代码的可读性和可维护性非常差，下面介绍几种">
+    <meta name="keywords" content="代理模式, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="前言代理模式定义：
+
+ 为其它对象提供一个代理对象，并由代理对象控制这个对象的访问。
+
+特点：
+
+很直接的，实现同一个接口或者继承同一个抽象类。
+代理对象控制对被代理对象的访问。
+
+通过这篇文章你将会学到：
+
+什么是静态代理？
+什么是动态代">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +25,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>if..else表达式优化策略 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
+    <title>代理模式 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -305,12 +317,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">if..else表达式优化策略</h1>
+                    <h1 class="description center-align post-title">代理模式</h1>
                 </div>
             </div>
         </div>
@@ -427,8 +439,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%BC%98%E5%8C%96/">
-                                <span class="chip bg-color">优化</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
                     </div>
@@ -439,8 +451,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Java/" class="post-category">
-                                Java
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                设计模式
                             </a>
                         
                     </div>
@@ -452,28 +464,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-09
+                    2020-04-22
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-03-17
+                    2020-04-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    936
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    7 分
                 </div>
                 
 				
@@ -489,144 +501,237 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h1><p><strong>if…else</strong> 是所有高级编程语言都有的必备功能。但现实中的代码往往存在着过多的 if…else。如果我们日常工作中需要进行以一个逻辑比较复杂的判断，写完后会嵌套好几层if..else，这样代码的可读性和可维护性非常差，下面介绍几种优化if..else的策略，提高我们代码的可读性和简洁程。</p>
-<h1 id="1-取反条件，提前return"><a href="#1-取反条件，提前return" class="headerlink" title="1. 取反条件，提前return"></a>1. 取反条件，提前return</h1><p>这是我们日常中经常遇到，但是又容易忽略的情况。</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>代理模式定义：</strong></p>
 <ul>
-<li>优化前：</li>
+<li> <strong>为其它对象提供一个代理对象，并由代理对象控制这个对象的访问。</strong></li>
 </ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
-    <span class="token keyword">return</span> xxx <span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>特点：</strong></p>
 <ul>
-<li>优化后：</li>
+<li>很直接的，实现同一个接口或者继承同一个抽象类。</li>
+<li>代理对象控制对被代理对象的访问。</li>
 </ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">if</span>（<span class="token operator">!</span>condition）<span class="token punctuation">{</span>
-    <span class="token keyword">return</span> xxx<span class="token punctuation">;</span>
+<p>通过这篇文章你将会学到：</p>
+<ul>
+<li>什么是静态代理？</li>
+<li>什么是动态代理？</li>
+<li>JDK的动态代理和CGLIB的动态代理</li>
+<li>ASM和Javassit的一个Demo</li>
+</ul>
+<h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Rent</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">rent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="2-条件三目运算符"><a href="#2-条件三目运算符" class="headerlink" title="2. 条件三目运算符"></a>2. 条件三目运算符</h1><p>这在Java基础中学过，但是缺很少运用到实际中。</p>
-<ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span>  num <span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    num <span class="token operator">=</span> <span class="token number">80</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
-    num <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span> num <span class="token operator">=</span> condition <span class="token operator">?</span> <span class="token number">80</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="3-数组优化（表驱动法）"><a href="#3-数组优化（表驱动法）" class="headerlink" title="3. 数组优化（表驱动法）"></a>3. 数组优化（表驱动法）</h1><p>这里举例我们想要得到一年各个月份的天数。</p>
-<ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span> <span class="token function">getDays</span><span class="token punctuation">(</span><span class="token keyword">int</span> month<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">29</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">6</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">7</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">8</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">9</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">11</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">30</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>month <span class="token operator">==</span> <span class="token number">12</span><span class="token punctuation">)</span>  <span class="token keyword">return</span> <span class="token number">31</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">int</span> monthDays<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">29</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">getDays</span><span class="token punctuation">(</span><span class="token keyword">int</span> month<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">return</span> monthDays<span class="token punctuation">[</span><span class="token operator">--</span>month<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="4-表驱动法："><a href="#4-表驱动法：" class="headerlink" title="4.表驱动法："></a>4.表驱动法：</h1><p><strong>表驱动法</strong>，又称之为表驱动、表驱动方法。表驱动方法是一种使你可以在表中查找信息，而不必用很多的逻辑语句（if或Case）来把它们找出来的方法。以下的demo，把map抽象成表，在map中查找信息，而省去不必要的逻辑语句。</p>
-<ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>value1<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">dosomething1</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>value2<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">dosomething2</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>value3<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">dosomething3</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Host</span> <span class="token keyword">implements</span> <span class="token class-name">Rent</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">rent</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Host.rent : 房东要出租房子"</span>   <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>提炼出一个接口Rent定义租房的功能。</p>
+<p>Host继承Rent，实现租房的功能。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Proxy</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> Host host<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">Proxy</span> <span class="token punctuation">(</span> Host host <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>host <span class="token operator">=</span> host<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token function">Proxy</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">rent</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">seeHouse</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        host<span class="token punctuation">.</span><span class="token function">rent</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">hetong</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">fare</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">hetong</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy.hetong：签租凭合同"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">seeHouse</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy.seeHouse：中介带你看房"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">fare</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy.fare：收中介费"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>创建一个代理对象（中介），去代理要出租的房子。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Client</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Host host <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Host</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Proxy proxy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span> <span class="token punctuation">(</span> host <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        proxy<span class="token punctuation">.</span><span class="token function">rent</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>模拟客户租房的流程。</p>
+<p><strong>客户想要租房-&gt;找到中介-&gt;中介找房-&gt;收取中介费用</strong></p>
+<p> <strong>UML图（如果不了解UML图，请百度它们之间的关系。）</strong>：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/20200422192048.png" alt="租房业务"></p>
+<p><strong>Proxy理解为中介；Host为房子，它实现了租房的功能；客户通过中介进行租房。</strong></p>
+<p><strong>Proxy就是Host的代理对象，Proxy提供了对Host的访问。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/20200422192430.png" alt="结果"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/20200422192629.png" alt="增删改业务"></p>
+<p>UserServiceProxy通过代理为UserServiceImpl对象，提供了log的方法，用来记录日志。</p>
+<p>总结：</p>
 <ul>
-<li>优化后</li>
+<li>上面两个例子中:<code>UserServiceProxy</code>和<code>Proxy</code>分别持有<code>UserServiceImpl</code>和<code>Host</code>即XXProxy持有XX对象。因为XX对象是固定的，你可以明确知道被代理的是哪一个对象，所以这就叫做静态代理。</li>
+<li>反之动态代理就是被代理的对象是不确定的，具有动态性；所以称为动态代理。</li>
+<li>常见的两种动态代理实现由：<code>JDK动态代理</code>，<code>CGLIB动态代理</code>；二者之间各有优缺我们之后会介绍。</li>
 </ul>
-<pre class="line-numbers language-java"><code class="language-java">Map<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token punctuation">,</span> Function<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> action<span class="token operator">></span> actionMappings <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 这里泛型 ? 是为方便演示，实际可替换为你需要的类型</span>
-
-<span class="token comment" spellcheck="true">// 初始化</span>
-actionMappings<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>value1<span class="token punctuation">,</span> <span class="token punctuation">(</span>someParams<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token function">dosomething1</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-actionMappings<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>value2<span class="token punctuation">,</span> <span class="token punctuation">(</span>someParams<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token function">dosomething2</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-actionMappings<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>value3<span class="token punctuation">,</span> <span class="token punctuation">(</span>someParams<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span> <span class="token function">dosomething3</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// 省略多余逻辑语句</span>
-actionMappings<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>someParams<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这里非常的精髓，将我们的HashMap ,Function&lt;T, R&gt; 和Lambda 结合起来。</p>
-<h1 id="5-优化逻辑结构，让正常流程走主干"><a href="#5-优化逻辑结构，让正常流程走主干" class="headerlink" title="5.优化逻辑结构，让正常流程走主干"></a>5.优化逻辑结构，让正常流程走主干</h1><ul>
-<li>优化前</li>
+<h2 id="JDK的动态代理"><a href="#JDK的动态代理" class="headerlink" title="JDK的动态代理"></a>JDK的动态代理</h2><p>jdk动态代理是jre提供给我们的类库，可以直接使用，不依赖第三方。</p>
+<p>先看下jdk动态代理的使用代码，再理解原理。</p>
+<p>同样还是客户通过中介租房的案例。</p>
+<ul>
+<li>被代理的对象(要出租的房子,它要继承自接口Rent,实现出租的功能)</li>
 </ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getAdjustedCapital</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_capital <span class="token operator">&lt;=</span> <span class="token number">0.0</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_intRate <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> _duration <span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>_income <span class="token operator">/</span> _duration<span class="token punctuation">)</span> <span class="token operator">*</span>ADJ_FACTOR<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Rent</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">rent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getAdjustedCapital</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_capital <span class="token operator">&lt;=</span> <span class="token number">0.0</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Host</span> <span class="token keyword">implements</span> <span class="token class-name">Rent</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">rent</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Host.rent : 房东要出租房子"</span>   <span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_intRate <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token operator">||</span> _duration <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>房东要租房，但是房东又很懒不想自己去完成这件事，因此打算把房子挂到中介中心，让中介人员去完成租房的功能。</p>
+<ul>
+<li>中介中心类</li>
+</ul>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Proxy_Handler</span> <span class="token keyword">implements</span> <span class="token class-name">InvocationHandler</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//被代理的接口</span>
+    <span class="token keyword">private</span> Rent rent<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setRent</span> <span class="token punctuation">(</span> Rent rent <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>rent <span class="token operator">=</span> rent<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>_income <span class="token operator">/</span> _duration<span class="token punctuation">)</span> <span class="token operator">*</span>ADJ_FACTOR<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> Object <span class="token function">getProxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> Proxy<span class="token punctuation">.</span><span class="token function">newProxyInstance</span> <span class="token punctuation">(</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getClass</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>rent<span class="token punctuation">.</span><span class="token function">getClass</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getInterfaces</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token keyword">this</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Object <span class="token function">invoke</span> <span class="token punctuation">(</span> Object proxy<span class="token punctuation">,</span> Method method<span class="token punctuation">,</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy_Handler.invoke：签租凭合同"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy_Handler.invoke：中介带你看房"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Object result <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">invoke</span> <span class="token punctuation">(</span> rent<span class="token punctuation">,</span> args <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy_Handler.invoke：收中介费"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>注意要点：</strong></p>
+<ul>
+<li>代理对象需要继承InvocationHandler接口。</li>
+<li>需要又被代理对象的实例。</li>
+<li>重写invoke方法，进行方法增强。</li>
+<li>创建返回代理对象的方法。(Proxy.newProxyInstance()可以创建一个代理对象，它需要三个参数：代理对象的类加载器；被代理对象的接口，一个继承InvocationHandler的实例)</li>
+</ul>
+<ul>
+<li>客户端实例类</li>
+</ul>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Client</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span> <span class="token punctuation">(</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token comment" spellcheck="true">//房东持有自己的房子</span>
+        Host host <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Host</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//中介中心</span>
+        Proxy_Handler pih <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy_Handler</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//房东将房子交给中介</span>
+        pih<span class="token punctuation">.</span><span class="token function">setRent</span> <span class="token punctuation">(</span> host <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//创建代理对象：中介</span>
+        Rent proxy <span class="token operator">=</span> <span class="token punctuation">(</span>Rent<span class="token punctuation">)</span>pih<span class="token punctuation">.</span><span class="token function">getProxy</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//中介去租房：（执行增强后的方法）</span>
+        proxy<span class="token punctuation">.</span><span class="token function">rent</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/20200422195514.png" alt="动态代理的结果"></p>
+<p>可以看到我们实现了一样的功能，相较于静态代理中我们手动的添加方法；动态代理的实现要更加便捷。</p>
+<p>而且中介中心不仅仅能租房，还可以租车，租女朋友…什么都能租，只要我们更换要出租的对象。</p>
+<h2 id="JDK动态代理原理理解"><a href="#JDK动态代理原理理解" class="headerlink" title="JDK动态代理原理理解"></a>JDK动态代理原理理解</h2><p>我们深入’中介中心’这个类也就是继承InvocationHandler的这个类。</p>
+<p>它主要做了以下几件事：</p>
+<ul>
+<li>接受一个要出租的房子(要被代理的对象，简称为对象A)</li>
+<li>代Proxyf根据A的接口生成一个实现类，这个类就是代理对象（我们称为B）。生成的过程呢，由于我们拿到了接口，所以可以获取它的方法定义，也就能声明一个新的类型去实现该接口的所有方法，这些方法显然都是’虚’的，它调用另一个对象的方法。当然这个被调用的对象不能是对象A，如果是对象A，我们就没法增强了，等于饶了一圈又回来了。</li>
+<li>所以呢它调用了A的包装类，这个包装类需要我们来实现，但是jdk给出了约束，它必须实现InvocationHandler。也就是我们的Proxy_Handler这个类。</li>
+<li>这个接口里面有个方法，它是所有Rent所有方法的调用入口（invoke），调用之前我们可以加自己的代码增强。</li>
+</ul>
+<p><strong>我们通过反编译工具去查看动态代理生成的类$Proxy0究竟有哪些神奇之处</strong></p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> $Proxy0 <span class="token keyword">extends</span> <span class="token class-name">Proxy</span> <span class="token keyword">implements</span> <span class="token class-name">Rent</span>
+<span class="token punctuation">{</span>
+
+
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Method m1<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Method m3<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Method m2<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Method m0<span class="token punctuation">;</span>
+
+
+    <span class="token keyword">public</span> $<span class="token function">Proxy0</span><span class="token punctuation">(</span><span class="token keyword">final</span> InvocationHandler invocationHandler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>invocationHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">rent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">super</span><span class="token punctuation">.</span>h<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> $Proxy0<span class="token punctuation">.</span>m3<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Error</span> <span class="token operator">|</span> RuntimeException error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">UndeclaredThrowableException</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            $Proxy0<span class="token punctuation">.</span>m1 <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"java.lang.Object"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token string">"equals"</span><span class="token punctuation">,</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"java.lang.Object"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            $Proxy0<span class="token punctuation">.</span>m3 <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"hut.demo3.Rent"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token string">"rent"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            $Proxy0<span class="token punctuation">.</span>m2 <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"java.lang.Object"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token string">"toString"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            $Proxy0<span class="token punctuation">.</span>m0 <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"java.lang.Object"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token string">"hashCode"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NoSuchMethodException</span> ex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NoSuchMethodError</span><span class="token punctuation">(</span>ex<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ClassNotFoundException</span> ex2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NoClassDefFoundError</span><span class="token punctuation">(</span>ex2<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-
-
-<span class="token comment" spellcheck="true">//再优化</span>
-<span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getAdjustedCapital</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span>_capital <span class="token operator">&lt;=</span> <span class="token number">0.0</span> <span class="token operator">||</span>_intRate <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token operator">||</span> _duration <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>_income <span class="token operator">/</span> _duration<span class="token punctuation">)</span> <span class="token operator">*</span>ADJ_FACTOR<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>感觉这里的思想和取反条件，提前return差不多。</p>
-<h1 id="6-Optional"><a href="#6-Optional" class="headerlink" title="6. Optional"></a>6. Optional</h1><p>Java 代码中的一部分 if…else 是由非空检查导致的。因此，降低这部分带来的 if…else 也就能降低整体的 if…else 的个数。</p>
-<ul>
-<li>优化前</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java">String str <span class="token operator">=</span> <span class="token string">"Hello World!"</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>str <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>优化后</li>
-</ul>
-<pre class="line-numbers language-java"><code class="language-java">Optional<span class="token operator">&lt;</span>String<span class="token operator">></span> strOptional <span class="token operator">=</span> Optional<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-strOptional<span class="token punctuation">.</span><span class="token function">ifPresentOrElse</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>out<span class="token operator">:</span><span class="token operator">:</span>println<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Null"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="7"><a href="#7" class="headerlink" title="7."></a>7.</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>Java 8 为我们提供了强大的能力，它的新特性是划时代的（Java 8 之后的版本中新特性都不够亮眼），包括 Lambda 表达式和 Stream 流，我们通过它们可以写出简洁又高效的代码。</p>
-<p>但是我们需要注意不能过度可以的去使用这些方法，过度不恰当的使用可能会造成我们代码的混乱，不可读性，甚至低效。</p>
-<p>函数式编程出现的目的可不仅仅是为了减少冗余代码，它是为了解放生产力——言外之意就是说，代码复杂点没关系，只要可用可靠。编程的目标不是产生尽可能少的代码，而是产生易于维护的、高性能的系统。</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p> m0,m1,m2 不是我们所关心的(所以我把它们省略掉了，从静态代码快中你可以知道它们分别是hashcode()、equals()、toString()方法)，我们注意m3它是Rent接口中的rent()方法。</p>
+<p>注意rent()方法：</p>
+<p><code>super.h.invoke(this, $Proxy0.m3, null);</code></p>
+<p>它调用了父类中的h属性的invoke方法。</p>
+<p>我们点进入Proxy类就可以看到这个h是什么</p>
+<p><code>protected InvocationHandler h;</code></p>
+<p>没错就是我们的InvocationHandler的实例</p>
+<p>还记不记得我们在定义getProxy()中时传入的参数</p>
+<p>它的h正是我们的Proxy_Handler类,</p>
+<p>它的invoke方法就是我们重写的invoke()</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> Object <span class="token function">invoke</span> <span class="token punctuation">(</span> Object proxy<span class="token punctuation">,</span> Method method<span class="token punctuation">,</span> Object<span class="token punctuation">[</span><span class="token punctuation">]</span> args <span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy_Handler.invoke：签租凭合同"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy_Handler.invoke：中介带你看房"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Object result <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">invoke</span> <span class="token punctuation">(</span> rent<span class="token punctuation">,</span> args <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span> <span class="token punctuation">(</span> <span class="token string">"Proxy_Handler.invoke：收中介费"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这就是我们实现方法增强的全过程</p>
+<h2 id="cglib动态代理"><a href="#cglib动态代理" class="headerlink" title="cglib动态代理"></a>cglib动态代理</h2><p>我们了解到，“代理”的目的是构造一个和被代理的对象有同样行为的对象，一个对象的行为是在类中定义的，对象只是类的实例。所以构造代理，不一定非得通过持有、包装对象这一种方式。</p>
+<p>通过’继承’可以继承父类所有的公开方法，然后可以重写这些方法，在重写时对这些方法增强，这就是cglib的思想。根据里氏代换原则（LSP），父类需要出现的地方，子类可以出现，所以cglib实现的代理也是可以被正常使用的。</p>
 
             </div>
             <hr/>
@@ -652,7 +757,7 @@ strOptional<span class="token punctuation">.</span><span class="token function">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/">https://codezhw.club/2020/03/09/java/if..else-biao-da-shi-you-hua-ce-lue/</a>
+                    <a href="https://codezhw.club/2020/04/22/she-ji-mo-shi/dai-li-mo-shi/">https://codezhw.club/2020/04/22/she-ji-mo-shi/dai-li-mo-shi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -690,8 +795,8 @@ strOptional<span class="token punctuation">.</span><span class="token function">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%BC%98%E5%8C%96/">
-                                    <span class="chip bg-color">优化</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
                         </div>
@@ -1120,17 +1225,80 @@ strOptional<span class="token punctuation">.</span><span class="token function">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/10/jvm/java-zhong-nei-cun-qu-yu/">
+                <a href="/2020/04/22/she-ji-mo-shi/dai-li-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-254b8fbc986f41c3312766df6cffe716_720w.jpg" class="responsive-img" alt="Java中的内存区域">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/10.jpg" class="responsive-img" alt="代理模式">
                         
-                        <span class="card-title">Java中的内存区域</span>
+                        <span class="card-title">代理模式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            前言代理模式定义：
+
+ 为其它对象提供一个代理对象，并由代理对象控制这个对象的访问。
+
+特点：
+
+很直接的，实现同一个接口或者继承同一个抽象类。
+代理对象控制对被代理对象的访问。
+
+通过这篇文章你将会学到：
+
+什么是静态代理？
+什么是动态代
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/21/jvm/lei-jia-zai-qi-yu-shuang-qin-wei-pai-mo-xing/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/15.jpg" class="responsive-img" alt="类加载器与双亲委派模型">
+                        
+                        <span class="card-title">类加载器与双亲委派模型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1140,9 +1308,9 @@ strOptional<span class="token punctuation">.</span><span class="token function">
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1164,59 +1332,6 @@ strOptional<span class="token punctuation">.</span><span class="token function">
                     
                     <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
                         <span class="chip bg-color">读书笔记</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/08/java/jdk1.7concurrenthashmap/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/22.jpg" class="responsive-img" alt="JDK1.7ConcurrentHashMap探究">
-                        
-                        <span class="card-title">JDK1.7ConcurrentHashMap探究</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            这是一篇关于Java JDK1.7版本,介绍实现Map线程安全的文章，对Hashtable、ConcurrentHashMap进行探究，分析它们实现线程安全的原理，以及二者之间的比较。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">源码</span>
-                    </a>
-                    
-                    <a href="/tags/HashMap/">
-                        <span class="chip bg-color">HashMap</span>
                     </a>
                     
                 </div>
