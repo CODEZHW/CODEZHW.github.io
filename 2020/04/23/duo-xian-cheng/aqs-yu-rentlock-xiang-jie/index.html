@@ -4,10 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="LinkedList源码分析, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
-    <meta name="description" content="前言最近在做算法题，遇到太多需要使用了队列或者栈的情况了，通常情况下我们会使用Java集合包下的Stack。
-但是因为Stack是继承自Vector的（线程安全的List集合）所以在性能上会有些许差距。
-这个时候就是我们的LinkedLis">
+    <meta name="keywords" content="AQS与RentLock()详解, Java,Sql,Redis,Spring,Spring MVC,Mybatis,JVM等">
+    <meta name="description" content="前言锁是用来控制多个线程访问共享资源的方式。在JDK1.5之前Java程序通过Synchronized来实现锁的功能，而在JDK1.5之后，Java提供了并JUC并发包。其中新增了Lock接口用来实现锁的功能。
+它提供了与synchroni">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +14,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>LinkedList源码分析 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
+    <title>AQS与RentLock()详解 | 🇨 🇴 🇩 🇪 🇿🇭🇼</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/cion.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.0/source/libs/awesome/css/all.css">
@@ -307,12 +306,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">LinkedList源码分析</h1>
+                    <h1 class="description center-align post-title">AQS与RentLock()详解</h1>
                 </div>
             </div>
         </div>
@@ -429,12 +428,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%BA%90%E7%A0%81/">
-                                <span class="chip bg-color">源码</span>
+                            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                                <span class="chip bg-color">多线程</span>
                             </a>
                         
-                            <a href="/tags/LinkedList/">
-                                <span class="chip bg-color">LinkedList</span>
+                            <a href="/tags/AQS/">
+                                <span class="chip bg-color">AQS</span>
                             </a>
                         
                     </div>
@@ -458,28 +457,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-07
+                    2020-04-23
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-07
+                    2020-04-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    863
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    3 分
                 </div>
                 
 				
@@ -495,166 +494,130 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在做算法题，遇到太多需要使用了队列或者栈的情况了，通常情况下我们会使用Java集合包下的<code>Stack</code>。</p>
-<p>但是因为<code>Stack</code>是继承自<code>Vector</code>的（线程安全的List集合）所以在性能上会有些许差距。</p>
-<p>这个时候就是我们的<code>LinkedList</code>出场了，<code>LinkedList</code>是一个双端链表，可以基于它实现栈或者队列这样的数据结构。(如果你想实现更高效的队列可以使用<code>ArrayDeque</code>)</p>
-<p>这里我们主要介绍<code>LinkedList</code>中的一些常用的API。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img/170684135210f258.jpg" alt=""></p>
-<h2 id="基本属性"><a href="#基本属性" class="headerlink" title="基本属性"></a>基本属性</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LinkedList</span><span class="token operator">&lt;</span>E<span class="token operator">></span><span class="token keyword">extends</span> <span class="token class-name">AbstractSequentialList</span><span class="token operator">&lt;</span>E<span class="token operator">></span>
-    <span class="token keyword">implements</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>E<span class="token operator">></span><span class="token punctuation">,</span> Deque<span class="token operator">&lt;</span>E<span class="token operator">></span><span class="token punctuation">,</span> Cloneable<span class="token punctuation">,</span> java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>Serializable
-
-
-<span class="token keyword">transient</span> <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-
-<span class="token keyword">transient</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> first<span class="token punctuation">;</span>
-
-<span class="token keyword">transient</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> last<span class="token punctuation">;</span>
-
-<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span>E<span class="token operator">></span> <span class="token punctuation">{</span>
-        E item<span class="token punctuation">;</span>
-        Node<span class="token operator">&lt;</span>E<span class="token operator">></span> next<span class="token punctuation">;</span>
-        Node<span class="token operator">&lt;</span>E<span class="token operator">></span> prev<span class="token punctuation">;</span>
-
-        <span class="token function">Node</span><span class="token punctuation">(</span>Node<span class="token operator">&lt;</span>E<span class="token operator">></span> prev<span class="token punctuation">,</span> E element<span class="token punctuation">,</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">this</span><span class="token punctuation">.</span>item <span class="token operator">=</span> element<span class="token punctuation">;</span>
-            <span class="token keyword">this</span><span class="token punctuation">.</span>next <span class="token operator">=</span> next<span class="token punctuation">;</span>
-            <span class="token keyword">this</span><span class="token punctuation">.</span>prev <span class="token operator">=</span> prev<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>首先可以看到LinkedList继承自AbstractSequentialList，这个类继承自AbstractList。</strong></p>
-<p><strong>实现了List、Deque接口；Cloneable接口可以实现克隆，Serializable序列化。</strong></p>
-<p><strong>实现栈和队列的关键字段： <code>Node&lt;E&gt; first</code>、 <code>Node&lt;E&gt; last</code>。</strong></p>
-<p><strong>还有一个数据节点：Node。它维护了一个双向链表。</strong></p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//默认的空参构造函数</span>
-<span class="token keyword">public</span> <span class="token function">LinkedList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//传入一个集合，它会把集合里面的所有元素添加到链表中去</span>
-<span class="token keyword">public</span> <span class="token function">LinkedList</span><span class="token punctuation">(</span>Collection<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">E</span><span class="token operator">></span> c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">this</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">addAll</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="addFirst"><a href="#addFirst" class="headerlink" title="addFirst()"></a>addFirst()</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//将指定的元素插入链表的头部</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addFirst</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">linkFirst</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">linkFirst</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//获取头节点元素</span>
-        <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> f <span class="token operator">=</span> first<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//创建一个新的节点，将它的前一个节点置空，下一个节点指向f</span>
-        <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>null<span class="token punctuation">,</span> e<span class="token punctuation">,</span> f<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        first <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//判断头节点是否为空</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>f <span class="token operator">==</span> null<span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true">//说明链表为空，把最后一个节点指针指向新的节点</span>
-            last <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
-        <span class="token keyword">else</span>
-            <span class="token comment" spellcheck="true">//不为空，就把原来的头节点的前指针指向新的节点</span>
-            f<span class="token punctuation">.</span>prev <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
-        size<span class="token operator">++</span><span class="token punctuation">;</span>
-        modCount<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="addLast"><a href="#addLast" class="headerlink" title="addLast()"></a>addLast()</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//将指定元素追加到链表的尾部</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addLast</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">linkLast</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">void</span> <span class="token function">linkLast</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//获取尾节点的元素</span>
-        <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> l <span class="token operator">=</span> last<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//创建一个新的节点，它的前一个节点是尾节点，下一个节点是null</span>
-        <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>l<span class="token punctuation">,</span> e<span class="token punctuation">,</span> null<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        last <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//判断为节点是否为null</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>l <span class="token operator">==</span> null<span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true">//说明链表为空，将第一个指针指向新的节点</span>
-            first <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
-        <span class="token keyword">else</span>
-            <span class="token comment" spellcheck="true">//不为空，就把原来的尾节点的下一个节点赋值为新建的节点</span>
-            l<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
-        size<span class="token operator">++</span><span class="token punctuation">;</span>
-        modCount<span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="removeFirst"><a href="#removeFirst" class="headerlink" title="removeFirst()"></a>removeFirst()</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//移除当前链表的第一个元素并返回值(头节点不为空)</span>
-<span class="token keyword">public</span> E <span class="token function">removeFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> f <span class="token operator">=</span> first<span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>f <span class="token operator">==</span> null<span class="token punctuation">)</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NoSuchElementException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token function">unlinkFirst</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-
-<span class="token keyword">private</span> E <span class="token function">unlinkFirst</span><span class="token punctuation">(</span>Node<span class="token operator">&lt;</span>E<span class="token operator">></span> f<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// assert f == first &amp;&amp; f != null;</span>
-        <span class="token comment" spellcheck="true">//获取头节点的值</span>
-        <span class="token keyword">final</span> E element <span class="token operator">=</span> f<span class="token punctuation">.</span>item<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//获取头节点的下一个节点</span>
-        <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> next <span class="token operator">=</span> f<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-        f<span class="token punctuation">.</span>item <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        f<span class="token punctuation">.</span>next <span class="token operator">=</span> null<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// help GC（主动的将对象引用设为null，帮助垃圾回收）</span>
-        <span class="token comment" spellcheck="true">//将头节点置为下一个节点</span>
-        first <span class="token operator">=</span> next<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//如果下一个节点为null</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">==</span> null<span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true">//尾节点置空,因为在链表只有一个元素的时候，头指针和尾指针指向同一个元素</span>
-            last <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        <span class="token keyword">else</span>
-            <span class="token comment" spellcheck="true">//新的头节点的前一个节点置空</span>
-            next<span class="token punctuation">.</span>prev <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        size<span class="token operator">--</span><span class="token punctuation">;</span>
-        modCount<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> element<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="removeLast"><a href="#removeLast" class="headerlink" title="removeLast()"></a>removeLast()</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//移除链表中的最后一个元素并返回值(尾节点不为空)</span>
-<span class="token keyword">public</span> E <span class="token function">removeLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> l <span class="token operator">=</span> last<span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>l <span class="token operator">==</span> null<span class="token punctuation">)</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NoSuchElementException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token function">unlinkLast</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">private</span> E <span class="token function">unlinkLast</span><span class="token punctuation">(</span>Node<span class="token operator">&lt;</span>E<span class="token operator">></span> l<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// assert l == last &amp;&amp; l != null;</span>
-        <span class="token comment" spellcheck="true">//获取尾节点</span>
-        <span class="token keyword">final</span> E element <span class="token operator">=</span> l<span class="token punctuation">.</span>item<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//获取尾节点的下一个节点</span>
-        <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> prev <span class="token operator">=</span> l<span class="token punctuation">.</span>prev<span class="token punctuation">;</span>
-        l<span class="token punctuation">.</span>item <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        l<span class="token punctuation">.</span>prev <span class="token operator">=</span> null<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// help GC</span>
-        <span class="token comment" spellcheck="true">//把尾节点指向前一个节点</span>
-        last <span class="token operator">=</span> prev<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//如果前一个节点为空</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>prev <span class="token operator">==</span> null<span class="token punctuation">)</span>
-            <span class="token comment" spellcheck="true">//头节点置空,因为在链表只有一个元素的时候，头指针和尾指针指向同一个元素</span>
-            first <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        <span class="token keyword">else</span>
-            <span class="token comment" spellcheck="true">//前一个节点的下一个节点置空</span>
-            prev<span class="token punctuation">.</span>next <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        size<span class="token operator">--</span><span class="token punctuation">;</span>
-        modCount<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> element<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="peek（）"><a href="#peek（）" class="headerlink" title="peek（）"></a>peek（）</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//返回当前链表的第一个元素</span>
-<span class="token keyword">public</span> E <span class="token function">peekFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> f <span class="token operator">=</span> first<span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>f <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token operator">?</span> null <span class="token operator">:</span> f<span class="token punctuation">.</span>item<span class="token punctuation">;</span>
- <span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//返回当前链表的最后一个元素</span>
-<span class="token keyword">public</span> E <span class="token function">peekLast</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">final</span> Node<span class="token operator">&lt;</span>E<span class="token operator">></span> l <span class="token operator">=</span> last<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>l <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token operator">?</span> null <span class="token operator">:</span> l<span class="token punctuation">.</span>item<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="pop-amp-push"><a href="#pop-amp-push" class="headerlink" title="pop()&amp;push()"></a><strong>pop()&amp;push()</strong></h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> E <span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token function">removeFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token function">addFirst</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>可以看到我们的POP()和PUSH（）方法分别调用的是removeFirst（）和addFirst（）方法。</strong></p>
-<p><strong>可以基于此实现 FIFO的队列结构或者FILO的栈结构。</strong></p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>锁是用来控制多个线程访问共享资源的方式。在JDK1.5之前Java程序通过Synchronized来实现锁的功能，而在JDK1.5之后，Java提供了并JUC并发包。其中新增了Lock接口用来实现锁的功能。</p>
+<p>它提供了与synchronized关键字类似的同步功能，只是在使用时需要显式地获取和释放锁。虽然它缺少了与Synchronized隐式获取与释放锁的便捷性，但是丰富了锁的功能性，将锁的操作更加细粒度化可以操作复杂的业务场景。</p>
+<p>通常情况下锁是一种用于控制多线程对共享资源的访问的工具。锁提供对共享资源的独占访问：一次只能有一个线程可以获取该锁，并且对共享资源的所有访问都需要首先获取该锁。但是，某些锁可能允许并发访问共享资源，例如<code>ReadWriteLock</code>的读取锁也叫（共享锁）,我们平时用的一个线程获取一个锁的形式称为排他锁Synchronized就是一种排他锁，在JUC包中<code>ReentrantLock</code>也是排他锁。</p>
+<p>这两种锁又支持:<code>公平锁</code>与<code>非公平锁</code>两种方式。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/20200423200125.png" alt="UML关系图"></p>
+<p>可以从简单的从UML关系图中看出：不论是<code>ReadWriteLock</code>还是<code>ReentrantLock</code>这两种锁它们又持有一个静态内部类<code>Sync</code>它是实现lock同步控制的基础。它继承自<code>AbstractQueuedSynchronizer</code>抽象类，这个抽象类也叫队列同步器，是实现锁或者其他同步组件的基础框架，它使用了一个int成员变量表示同步状态，通过内置的FIFO队列来完成资源获取线程的排队工作，并发包的作者期望它能够成为实现大部分同步需求的基础。</p>
+<p><code>AbstractQueuedSynchronizer</code>又继承自<code>AbstractOwnableSynchronizer</code>是为了实现同步器提供的基础和概念。</p>
+<h2 id="AQS的重要关键字"><a href="#AQS的重要关键字" class="headerlink" title="AQS的重要关键字"></a>AQS的重要关键字</h2><p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/20200423203612.png" alt="AQS中的关键字段"></p>
+<p>着重于AQS的关键字段</p>
+<ul>
+<li><p><strong>head：头节点，具体实现是node</strong></p>
+</li>
+<li><p><strong>tail：尾巴节点，具体实现是node</strong></p>
+</li>
+<li><p><strong>node：AQS中最基本的数据结构，用于存放获取线程的节点。</strong></p>
+</li>
+<li><p><strong>state: 同步状态State</strong></p>
+</li>
+<li><p><strong>STAT、HEAD、TAIL是句柄变量是JDK9引入用来代替UNSAFE类的，它更加的高效便捷.</strong></p>
+</li>
+</ul>
+<p>光NODE节点又能拿出一张图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/20200423204337.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th align="left">方法和属性值</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">waitStatus</td>
+<td align="left">当前节点在队列中的状态</td>
+</tr>
+<tr>
+<td align="left">thread</td>
+<td align="left">表示处于该节点的线程</td>
+</tr>
+<tr>
+<td align="left">prev</td>
+<td align="left">前驱指针</td>
+</tr>
+<tr>
+<td align="left">predecessor</td>
+<td align="left">返回前驱节点，没有的话抛出npe</td>
+</tr>
+<tr>
+<td align="left">nextWaiter</td>
+<td align="left">指向下一个处于CONDITION状态的节点（由于本篇文章不讲述Condition Queue队列，这个指针不多介绍）</td>
+</tr>
+<tr>
+<td align="left">next</td>
+<td align="left">后继指针</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SHARED</td>
+<td align="left">表示线程以共享的模式等待锁</td>
+</tr>
+<tr>
+<td align="left">EXCLUSIVE</td>
+<td align="left">表示线程正在以独占的方式等待锁</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">状态</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">当一个Node被初始化的时候的默认值</td>
+</tr>
+<tr>
+<td align="left">CANCELLED</td>
+<td align="left">为1，表示线程获取锁的请求已经取消了</td>
+</tr>
+<tr>
+<td align="left">CONDITION</td>
+<td align="left">为-2，表示节点在等待队列中，节点线程等待唤醒</td>
+</tr>
+<tr>
+<td align="left">PROPAGATE</td>
+<td align="left">为-3，当前线程处在SHARED情况下，该字段才会使用</td>
+</tr>
+<tr>
+<td align="left">SIGNAL</td>
+<td align="left">为-1，表示线程已经准备好了，就等资源释放了</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">方法名</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">protected final int getState()</td>
+<td align="left">获取State的值</td>
+</tr>
+<tr>
+<td align="left">protected final void setState(int newState)</td>
+<td align="left">设置State的值</td>
+</tr>
+<tr>
+<td align="left">protected final boolean compareAndSetState(int expect, int update)</td>
+<td align="left">使用CAS方式更新State</td>
+</tr>
+<tr>
+<td align="left">final boolean compareAndSetNext(Node expect, Node update)</td>
+<td align="left">使用CAS方式跟新Next</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.1/source/medias/loading.jpg" data-original="https://gitee.com//CODEZHW/blogimage/raw/master/img2/27605d483e8935da683a93be015713f331378.png" alt="独占锁获取的流程"></p>
 
             </div>
             <hr/>
@@ -680,7 +643,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://codezhw.club/2020/04/07/java/linkedlist-yuan-ma-fen-xi/">https://codezhw.club/2020/04/07/java/linkedlist-yuan-ma-fen-xi/</a>
+                    <a href="https://codezhw.club/2020/04/23/duo-xian-cheng/aqs-yu-rentlock-xiang-jie/">https://codezhw.club/2020/04/23/duo-xian-cheng/aqs-yu-rentlock-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -718,12 +681,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%BA%90%E7%A0%81/">
-                                    <span class="chip bg-color">源码</span>
+                                <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                                    <span class="chip bg-color">多线程</span>
                                 </a>
                             
-                                <a href="/tags/LinkedList/">
-                                    <span class="chip bg-color">LinkedList</span>
+                                <a href="/tags/AQS/">
+                                    <span class="chip bg-color">AQS</span>
                                 </a>
                             
                         </div>
@@ -1156,27 +1119,28 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/07/leetcode/di-si-zhou/">
+                <a href="/2020/04/27/leetcode/di-qi-zhou/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/15.jpg" class="responsive-img" alt="LeetCode刷题:第四周">
+                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-86a5cd1bb6bc11a5d835f705e90b8b33_720w.jpg" class="responsive-img" alt="LeetCode刷题：第七周">
                         
-                        <span class="card-title">LeetCode刷题:第四周</span>
+                        <span class="card-title">LeetCode刷题：第七周</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            题目：面试题68 - II. 二叉树的最近公共祖先解题思路：
-代码：
- public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-      
+                            题目：1351. 统计有序矩阵中的负数难度简单19收藏分享切换为英文关注反馈
+给你一个 m * n 的矩阵 grid，矩阵中的元素无论是按行还是按列，都以非递增顺序排列。 
+请你统计并返回 grid 中 负数 的数目。
+示例 1：
+输入：g
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-07
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-27
                         </span>
                         <span class="publish-author">
                             
@@ -1212,32 +1176,43 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/01/mybatis/mybatis-yuan-ma-jie-xi/">
+                <a href="/2020/04/22/she-ji-mo-shi/dai-li-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://gitee.com//CODEZHW/blogimage/raw/master/img/v2-4708824e29ab0cf675d2fee9d99fb936_720w.jpg" class="responsive-img" alt="Mybatis源码解析">
+                        <img src="https://cdn.jsdelivr.net/gh/codezhw/cdn@1.2/source/medias/featureimages/10.jpg" class="responsive-img" alt="代理模式">
                         
-                        <span class="card-title">Mybatis源码解析</span>
+                        <span class="card-title">代理模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是Mybatis?它的优点是什么？什么是Mybatis？
-Mybatis是一个半 ORM对象关系映射框架也叫持久层框架，它内部封装了JDBC，开发时只需要关注SQL语句本身，不需要花费精力去处理加载驱动、创建连接、创建statement
+                            前言代理模式定义：
+
+ 为其它对象提供一个代理对象，并由代理对象控制这个对象的访问。
+
+特点：
+
+很直接的，实现同一个接口或者继承同一个抽象类。
+代理对象控制对被代理对象的访问。
+
+通过这篇文章你将会学到：
+
+什么是静态代理？
+什么是动态代
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Mybatis/" class="post-category">
-                                    Mybatis
+                            <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-category">
+                                    设计模式
                                 </a>
                             
                             
@@ -1249,10 +1224,6 @@ Mybatis是一个半 ORM对象关系映射框架也叫持久层框架，它内部
                     
                     <a href="/tags/Java/">
                         <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">源码</span>
                     </a>
                     
                 </div>
@@ -1447,7 +1418,7 @@ Mybatis是一个半 ORM对象关系映射框架也叫持久层框架，它内部
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.8k</span>&nbsp;字
+                class="white-color">85.8k</span>&nbsp;字
             
             
             

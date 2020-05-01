@@ -473,14 +473,14 @@ ArrayL">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-15
+                    2020-04-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    2.5k
                 </div>
                 
 
@@ -782,7 +782,30 @@ ArrayList <span class="token operator">&lt;</span>Integer<span class="token oper
             l2<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token function">mergeTwoLists</span><span class="token punctuation">(</span>l1<span class="token punctuation">,</span> l2<span class="token punctuation">.</span>next<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">return</span> l2<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> ListNode <span class="token function">mergeTwoLists</span><span class="token punctuation">(</span>ListNode l1<span class="token punctuation">,</span> ListNode l2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ListNode dummy <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ListNode</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ListNode cur <span class="token operator">=</span> dummy<span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>l1<span class="token operator">!=</span>null<span class="token operator">&amp;&amp;</span>l2<span class="token operator">!=</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>l1<span class="token punctuation">.</span>val <span class="token operator">&lt;</span> l2<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                cur<span class="token punctuation">.</span>next <span class="token operator">=</span> l1<span class="token punctuation">;</span>
+                l1 <span class="token operator">=</span> l1<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+                cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+                cur<span class="token punctuation">.</span>next <span class="token operator">=</span> l2<span class="token punctuation">;</span>
+                l2 <span class="token operator">=</span> l2<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+                cur <span class="token operator">=</span> cur<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>l1<span class="token operator">==</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            cur<span class="token punctuation">.</span>next <span class="token operator">=</span> l2<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+            cur<span class="token punctuation">.</span>next <span class="token operator">=</span> l1<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> dummy<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="题目：102-二叉树的层序遍历"><a href="#题目：102-二叉树的层序遍历" class="headerlink" title="题目：102. 二叉树的层序遍历"></a>题目：<a href="https://leetcode-cn.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="noopener">102. 二叉树的层序遍历</a></h2><p><strong>解题思路：</strong></p>
 <ul>
 <li>BFS</li>
@@ -1696,7 +1719,7 @@ Mysql
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.8k</span>&nbsp;字
+                class="white-color">85.8k</span>&nbsp;字
             
             
             

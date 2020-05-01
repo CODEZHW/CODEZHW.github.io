@@ -430,12 +430,12 @@ Hash表是基于Map接口所实现的，这个实现类提供了Map所有的可�
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%BA%90%E7%A0%81/">
-                                <span class="chip bg-color">源码</span>
-                            </a>
-                        
                             <a href="/tags/HashMap/">
                                 <span class="chip bg-color">HashMap</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">源码</span>
                             </a>
                         
                     </div>
@@ -466,7 +466,7 @@ Hash表是基于Map接口所实现的，这个实现类提供了Map所有的可�
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-10
+                    2020-05-01
                 </div>
                 
 
@@ -570,7 +570,6 @@ more: less than 1 in ten million<span aria-hidden="true" class="line-numbers-row
     <span class="token keyword">return</span> <span class="token function">putVal</span><span class="token punctuation">(</span><span class="token function">hash</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-
 <span class="token keyword">final</span> V <span class="token function">putVal</span><span class="token punctuation">(</span><span class="token keyword">int</span> hash<span class="token punctuation">,</span> K key<span class="token punctuation">,</span> V value<span class="token punctuation">,</span> <span class="token keyword">boolean</span> onlyIfAbsent<span class="token punctuation">,</span>
                    <span class="token keyword">boolean</span> evict<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">//定义一些初始化的变量</span>
@@ -630,7 +629,7 @@ more: less than 1 in ten million<span aria-hidden="true" class="line-numbers-row
             <span class="token function">resize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">afterNodeInsertion</span><span class="token punctuation">(</span>evict<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> null<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>以上只是对了数组处于链表情况的put进行了分析，对树的插入我们后面再聊。</p>
 <p>再来看一下链表的扩容。</p>
 <h2 id="resize-方法"><a href="#resize-方法" class="headerlink" title="resize()方法"></a>resize()方法</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">final</span> Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">resize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -683,6 +682,7 @@ more: less than 1 in ten million<span aria-hidden="true" class="line-numbers-row
             Node<span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> e<span class="token punctuation">;</span>
             <span class="token comment" spellcheck="true">//遍历老数组中的每一个元素</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>e <span class="token operator">=</span> oldTab<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//便于垃圾回收</span>
                 oldTab<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> null<span class="token punctuation">;</span>
                 <span class="token comment" spellcheck="true">//如果当前元素只有一个（不是链表的结构），很简单直接挪到新数组对应位置</span>
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>next <span class="token operator">==</span> null<span class="token punctuation">)</span>
@@ -701,13 +701,13 @@ more: less than 1 in ten million<span aria-hidden="true" class="line-numbers-row
                         next <span class="token operator">=</span> e<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
                         <span class="token comment" spellcheck="true">//如果当前元素的hash值与旧数组容量做与运算结果为0，则扩容后索引的位置与旧数组索引的位置一致</span>
                         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>hash <span class="token operator">&amp;</span> oldCap<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                            <span class="token comment" spellcheck="true">//如果lotail为空，代表该节点为第一个节点</span>
+                            <span class="token comment" spellcheck="true">//如果lotail为空，代表该节点为第一个节点（即头节点）</span>
                             <span class="token keyword">if</span> <span class="token punctuation">(</span>loTail <span class="token operator">==</span> null<span class="token punctuation">)</span>
                                 loHead <span class="token operator">=</span> e<span class="token punctuation">;</span>
                             <span class="token keyword">else</span>
-                            <span class="token comment" spellcheck="true">//不为空，则添加节点在lotail后面</span>
+                            <span class="token comment" spellcheck="true">//不为空，则将元素挂到lo链表后</span>
                                 loTail<span class="token punctuation">.</span>next <span class="token operator">=</span> e<span class="token punctuation">;</span>
-                            <span class="token comment" spellcheck="true">//赋值</span>
+                            <span class="token comment" spellcheck="true">//将lo链表的尾节点赋值为遍历到的节点e</span>
                             loTail <span class="token operator">=</span> e<span class="token punctuation">;</span>
                         <span class="token punctuation">}</span>
                         <span class="token comment" spellcheck="true">//如果e的hash值与老表的容量进行与运算为1,则扩容后的索引位置为:老表的索引位置＋oldCap</span>
@@ -735,7 +735,7 @@ more: less than 1 in ten million<span aria-hidden="true" class="line-numbers-row
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> newTab<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>重难点在于：扩容后节点的重hash值为什么可能分布在 <code>原索引位置</code>与yuan<code>原索引 + oldCap 位置</code>？</strong></p>
 <p>我们再来复习一边没扩容之前计算下标的方法: <code>为什么数组容量会为2的幂次方数</code>，以及<code>(n - 1) &amp; hash</code></p>
 <p>这样求下标的原理。</p>
@@ -848,12 +848,12 @@ more: less than 1 in ten million<span aria-hidden="true" class="line-numbers-row
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%BA%90%E7%A0%81/">
-                                    <span class="chip bg-color">源码</span>
-                                </a>
-                            
                                 <a href="/tags/HashMap/">
                                     <span class="chip bg-color">HashMap</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">源码</span>
                                 </a>
                             
                         </div>
@@ -1581,7 +1581,7 @@ more: less than 1 in ten million<span aria-hidden="true" class="line-numbers-row
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.8k</span>&nbsp;字
+                class="white-color">85.8k</span>&nbsp;字
             
             
             

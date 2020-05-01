@@ -468,7 +468,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-22
+                    2020-04-25
                 </div>
                 
 
@@ -628,7 +628,6 @@
         <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token operator">==</span>null<span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> root<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-
         <span class="token keyword">if</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">></span> p<span class="token punctuation">.</span>val <span class="token operator">&amp;&amp;</span> root<span class="token punctuation">.</span>val <span class="token operator">></span> q<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token function">lowestCommonAncestor</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> p <span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">&lt;</span> p<span class="token punctuation">.</span>val <span class="token operator">&amp;&amp;</span> root<span class="token punctuation">.</span>val <span class="token operator">&lt;</span> q<span class="token punctuation">.</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -636,7 +635,7 @@
         <span class="token punctuation">}</span>
 
         <span class="token keyword">return</span> root<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="题目：1051-高度检查器"><a href="#题目：1051-高度检查器" class="headerlink" title="题目：1051. 高度检查器"></a>题目：<a href="https://leetcode-cn.com/problems/height-checker/" target="_blank" rel="noopener">1051. 高度检查器</a></h2><p>难度简单43收藏分享切换为英文关注反馈</p>
 <p>学校在拍年度纪念照时，一般要求学生按照 <strong>非递减</strong> 的高度顺序排列。</p>
 <p>请你返回能让所有学生以 <strong>非递减</strong> 高度排列的最小必要移动人数。</p>
@@ -683,7 +682,6 @@
 <span class="token comment" spellcheck="true">//桶排序的思想</span>
 <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">heightChecker</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> heights<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">int</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>bucket <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">101</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
         <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> item<span class="token operator">:</span> heights<span class="token punctuation">)</span><span class="token punctuation">{</span>
             bucket<span class="token punctuation">[</span>item<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -696,7 +694,7 @@
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="题目：941-有效的山脉数组"><a href="#题目：941-有效的山脉数组" class="headerlink" title="题目：941. 有效的山脉数组"></a>题目：<a href="https://leetcode-cn.com/problems/valid-mountain-array/" target="_blank" rel="noopener">941. 有效的山脉数组</a></h2><p>难度简单41收藏分享切换为英文关注反馈</p>
 <p>给定一个整数数组 <code>A</code>，如果它是有效的山脉数组就返回 <code>true</code>，否则返回 <code>false</code>。</p>
 <p>让我们回顾一下，如果 A 满足下述条件，那么它是一个山脉数组：</p>
@@ -909,29 +907,24 @@
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isValidBST</span><span class="token punctuation">(</span>TreeNode root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> Long<span class="token punctuation">.</span>MIN_VALUE<span class="token punctuation">,</span> Long<span class="token punctuation">.</span>MAX_VALUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-
     <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">helper</span><span class="token punctuation">(</span>TreeNode node<span class="token punctuation">,</span> <span class="token keyword">long</span> min<span class="token punctuation">,</span> <span class="token keyword">long</span> max<span class="token punctuation">)</span><span class="token punctuation">{</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>node <span class="token operator">==</span> null<span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-
         <span class="token keyword">if</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>val<span class="token operator">&lt;=</span>min<span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
         <span class="token keyword">if</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>val <span class="token operator">>=</span> max<span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-
         <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">helper</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>left<span class="token punctuation">,</span> min<span class="token punctuation">,</span> node<span class="token punctuation">.</span>val <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-
         <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">helper</span><span class="token punctuation">(</span>node<span class="token punctuation">.</span>right<span class="token punctuation">,</span> node<span class="token punctuation">.</span>val<span class="token punctuation">,</span> max<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-
         <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="题目：146-LRU缓存机制"><a href="#题目：146-LRU缓存机制" class="headerlink" title="题目：146. LRU缓存机制"></a>题目：<a href="https://leetcode-cn.com/problems/lru-cache/" target="_blank" rel="noopener">146. LRU缓存机制</a></h2><p>难度中等503收藏分享切换为英文关注反馈</p>
 <p>运用你所掌握的数据结构，设计和实现一个 <a href="https://baike.baidu.com/item/LRU" target="_blank" rel="noopener">LRU (最近最少使用) 缓存机制</a>。它应该支持以下操作： 获取数据 <code>get</code> 和 写入数据 <code>put</code> 。</p>
 <p>获取数据 <code>get(key)</code> - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。<br>写入数据 <code>put(key, value)</code> - 如果密钥已经存在，则变更其数据值；如果密钥不存在，则插入该组「密钥/数据值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p>
@@ -1740,12 +1733,12 @@ Hash表是基于Map接口所实现的，这个实现类提供了Map所有的可�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">源码</span>
-                    </a>
-                    
                     <a href="/tags/HashMap/">
                         <span class="chip bg-color">HashMap</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">源码</span>
                     </a>
                     
                 </div>
@@ -1940,7 +1933,7 @@ Hash表是基于Map接口所实现的，这个实现类提供了Map所有的可�
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">78.8k</span>&nbsp;字
+                class="white-color">85.8k</span>&nbsp;字
             
             
             
